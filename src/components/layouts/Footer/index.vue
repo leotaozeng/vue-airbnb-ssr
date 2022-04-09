@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-
+import { useRoute, useRouter } from 'vue-router';
 const router = useRouter();
+const route = useRoute();
+
+console.log(route.query);
 
 const pushWithQuery = (query: { id: number }) => {
   router.push({
-    name: 'Profile',
+    name: 'Home',
     query,
   });
 };
@@ -13,7 +15,9 @@ const pushWithQuery = (query: { id: number }) => {
 
 <template>
   <div>
-    <el-button @click="pushWithQuery({ id: 2 })">Go to Profile</el-button>
+    <el-button type="primary" @click="pushWithQuery({ id: 1 })">
+      Go to Home</el-button
+    >
   </div>
 </template>
 
