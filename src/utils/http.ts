@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const defaultsConfig = {
   baseURL: '',
-  timeout: 5000,
+  timeout: 5000
 };
 
 class Http {

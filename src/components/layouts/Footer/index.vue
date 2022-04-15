@@ -8,7 +8,7 @@ console.log(route.query);
 const pushWithQuery = (query: { id: number }) => {
   router.push({
     name: 'Home',
-    query,
+    query
   });
 };
 </script>

@@ -5,14 +5,14 @@ const routes = [
   {
     path: '/',
     component: () => import('@/layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('@/pages/Home/index.vue') }],
+    children: [{ path: '', component: () => import('@/pages/Home/index.vue') }]
   },
-  { path: '/profile', name: 'Profile', component: Profile },
+  { path: '/profile', name: 'Profile', component: Profile }
 ];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes
 });
 
 export default router;
