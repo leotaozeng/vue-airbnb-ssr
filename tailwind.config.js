@@ -3,12 +3,12 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: 'Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif',
-      },
+        sans: 'Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif'
+      }
     },
     colors: {
-      'primary-gray': '#484848',
-    },
+      'primary-gray': '#484848'
+    }
   },
-  plugins: [],
+  plugins: []
 };

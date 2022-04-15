@@ -9,27 +9,27 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
+      '@': path.resolve(__dirname, './src')
+    }
   },
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/assets/scss/element/index.scss" as *;`,
-      },
-    },
+        additionalData: `@use "@/assets/scss/element/index.scss" as *;`
+      }
+    }
   },
   plugins: [
     vue(),
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver()]
     }),
     Components({
       resolvers: [
         ElementPlusResolver({
-          importStyle: 'sass',
-        }),
-      ],
-    }),
-  ],
+          importStyle: 'sass'
+        })
+      ]
+    })
+  ]
 });
