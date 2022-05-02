@@ -16,7 +16,10 @@ const changeLanguage = (language: any) => {
 
 <template>
   <el-config-provider :locale="locale">
+    <!-- Header -->
     <Header @changeLanguage="changeLanguage" />
+
+    <!-- Content -->
     <router-view></router-view>
   </el-config-provider>
 </template>

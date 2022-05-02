@@ -22,6 +22,7 @@ export default class Database {
     }
 
     // * Open our database with the defined name and version
+    // * It returns openRequest object
     const openRequest: IDBOpenDBRequest = window.indexedDB.open(
       this.databaseName,
       this.databaseVersion
@@ -114,6 +115,38 @@ export default class Database {
 
     request.onerror = () => {
       console.error('数据删除失败', request.error);
+    };
+  }
+
+  // * Get an object in an object store
+  getItem(storeName: string, key: number | string) {
+    const request = this.database
+      .transaction([storeName], 'readwrite')
+      .objectStore(storeName)
+      .get(key);
+
+    request.onsuccess = () => {
+      console.log('查询数据成功', request.result);
+    };
+
+    request.onerror = () => {
+      console.error('查询数据失败', request.error);
+    };
+  }
+
+  // * Get an array of all the objects in an object store
+  getList(storeName: string) {
+    const request = this.database
+      .transaction([storeName], 'readwrite')
+      .objectStore(storeName)
+      .getAll();
+
+    request.onsuccess = () => {
+      console.log('查询所有数据成功', request.result);
+    };
+
+    request.onerror = () => {
+      console.error('查询所有数据失败', request.error);
     };
   }
 }

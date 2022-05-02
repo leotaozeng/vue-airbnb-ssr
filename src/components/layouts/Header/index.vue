@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import avatarUrl from '@/assets/images/avatar.jpeg';
 import logoUrl from '@/assets/images/logo.png';
-import { Language } from 'element-plus/lib/locale';
 import en from 'element-plus/lib/locale/lang/en';
 import zhCn from 'element-plus/lib/locale/lang/zh-cn';
 import { defineEmits } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-const emit = defineEmits<{
-  (event: 'changeLanguage', language: Language): void;
-}>();
+const emit = defineEmits<{ (event: 'changeLanguage', language: any): void }>();
 
 const { t } = useI18n();
 const handleSelect = (key: string, keyPath: string[]) => {
