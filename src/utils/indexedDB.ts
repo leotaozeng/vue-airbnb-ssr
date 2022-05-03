@@ -8,67 +8,69 @@ export default class Database {
     this.databaseVersion = databaseVersion || 1;
   }
 
-  // * Open a database
   public open(
     storeName: string,
     keyPath: string | string[],
     indexs?: string[]
   ) {
-    if (!window.indexedDB) {
-      console.log(
-        "Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available."
-      );
-      return;
-    }
-
-    // * Open our database with the defined name and version
-    // * It returns openRequest object
-    const openRequest: IDBOpenDBRequest = window.indexedDB.open(
-      this.databaseName,
-      this.databaseVersion
-    );
-
-    // * Database is ready, but its version is outdated
-    openRequest.onupgradeneeded = () => {
-      console.log('数据库升级成功');
-
-      this.database = openRequest.result;
-
-      if (!this.database.objectStoreNames.contains(storeName)) {
-        // * Create an object store in the database
-        const objectStore = this.database.createObjectStore(storeName, {
-          autoIncrement: true,
-          keyPath
-        });
-
-        if (indexs && indexs.length > 0) {
-          indexs.forEach((item: string) => {
-            objectStore.createIndex(item, item, { unique: false });
-          });
-        }
-
-        objectStore.transaction.oncomplete = () => {
-          console.log('创建 object store 成功');
-        };
+    return new Promise((resolve, reject) => {
+      if (!window.indexedDB) {
+        console.log(
+          "Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available."
+        );
+        reject('fail');
       }
-    };
 
-    // * Database is ready, there’s the “database object” in openRequest.result, we should use it for further calls
-    openRequest.onsuccess = () => {
-      console.info('数据库打开成功');
-      this.database = openRequest.result;
-    };
+      // * Open our database with the defined name and version
+      // * The call returns openRequest object
+      const openRequest: IDBOpenDBRequest = window.indexedDB.open(
+        this.databaseName,
+        this.databaseVersion
+      );
 
-    // * Opening a database failed
-    openRequest.onerror = (event) => {
-      console.error('数据库打开错误', openRequest.error);
-      console.log(event);
-    };
+      // * Database is ready, but its version is outdated
+      openRequest.onupgradeneeded = () => {
+        console.log('数据库升级成功');
+
+        this.database = openRequest.result;
+
+        if (!this.database.objectStoreNames.contains(storeName)) {
+          // * Create an object store in the database
+          const objectStore = this.database.createObjectStore(storeName, {
+            autoIncrement: true,
+            keyPath
+          });
+
+          if (indexs && indexs.length > 0) {
+            indexs.forEach((item: string) => {
+              objectStore.createIndex(item, item, { unique: false });
+            });
+          }
+
+          objectStore.transaction.oncomplete = () => {
+            console.log('创建 object store 成功');
+          };
+        }
+      };
+
+      // * Database is ready, there’s the “database object” in openRequest.result, we should use it for further calls
+      openRequest.onsuccess = () => {
+        console.info('打开数据库成功');
+        this.database = openRequest.result;
+        resolve('success');
+      };
+
+      // * Open a database failed
+      openRequest.onerror = () => {
+        console.error('打开数据库失败', openRequest.error);
+        reject(openRequest.error);
+      };
+    });
   }
 
-  // * Add data to the object store
+  // * Add data to an object store
   addItem(storeName: string, data: any) {
-    if (this.database) {
+    return new Promise((resolve, reject) => {
       const request = this.database
         .transaction([storeName], 'readwrite')
         .objectStore(storeName)
@@ -76,17 +78,19 @@ export default class Database {
 
       request.onsuccess = () => {
         console.log('数据写入成功', request.result);
+        resolve(request.result);
       };
 
       request.onerror = () => {
         console.error('数据写入失败', request.error);
+        reject(request.error);
       };
-    }
+    });
   }
 
-  // * Update data in the object store
+  // * Update data in an object store
   updateItem(storeName: string, data: any) {
-    if (this.database) {
+    return new Promise((resolve, reject) => {
       const request = this.database
         .transaction([storeName], 'readwrite')
         .objectStore(storeName)
@@ -94,59 +98,73 @@ export default class Database {
 
       request.onsuccess = () => {
         console.log('数据修改成功', request.result);
+        resolve(request.result);
       };
 
       request.onerror = () => {
         console.error('数据修改失败', request.error);
+        reject(request.error);
       };
-    }
+    });
   }
 
-  // * Remove data from the object store
+  // * Remove data from an object store
   removeItem(storeName: string, key: number | string) {
-    const request = this.database
-      .transaction([storeName], 'readwrite')
-      .objectStore(storeName)
-      .delete(key);
+    return new Promise((resolve, reject) => {
+      const request = this.database
+        .transaction([storeName], 'readwrite')
+        .objectStore(storeName)
+        .delete(key);
 
-    request.onsuccess = () => {
-      console.log('数据删除成功', request.result);
-    };
+      request.onsuccess = () => {
+        console.log('数据删除成功', request.result);
+        resolve(request.result);
+      };
 
-    request.onerror = () => {
-      console.error('数据删除失败', request.error);
-    };
+      request.onerror = () => {
+        console.error('数据删除失败', request.error);
+        reject(request.error);
+      };
+    });
   }
 
   // * Get an object in an object store
   getItem(storeName: string, key: number | string) {
-    const request = this.database
-      .transaction([storeName], 'readwrite')
-      .objectStore(storeName)
-      .get(key);
+    return new Promise((resolve, reject) => {
+      const request = this.database
+        .transaction([storeName])
+        .objectStore(storeName)
+        .get(key);
 
-    request.onsuccess = () => {
-      console.log('查询数据成功', request.result);
-    };
+      request.onsuccess = () => {
+        console.log('查询数据成功', request.result);
+        resolve(request.result);
+      };
 
-    request.onerror = () => {
-      console.error('查询数据失败', request.error);
-    };
+      request.onerror = () => {
+        console.error('查询数据失败', request.error);
+        reject(request.error);
+      };
+    });
   }
 
   // * Get an array of all the objects in an object store
   getList(storeName: string) {
-    const request = this.database
-      .transaction([storeName], 'readwrite')
-      .objectStore(storeName)
-      .getAll();
+    return new Promise((resolve, reject) => {
+      const request = this.database
+        .transaction([storeName])
+        .objectStore(storeName)
+        .getAll();
 
-    request.onsuccess = () => {
-      console.log('查询所有数据成功', request.result);
-    };
+      request.onsuccess = () => {
+        console.log('查询所有数据成功', request.result);
+        resolve(request.result);
+      };
 
-    request.onerror = () => {
-      console.error('查询所有数据失败', request.error);
-    };
+      request.onerror = () => {
+        console.error('查询所有数据失败', request.error);
+        reject(request.error);
+      };
+    });
   }
 }
