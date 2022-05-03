@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Header from '@/components/layouts/Header/HeaderIndex.vue';
+import Header from '@/layouts/components/Header/MainHeader.vue';
 import { ElConfigProvider } from 'element-plus';
 import en from 'element-plus/lib/locale/lang/en';
 import { ref } from 'vue';

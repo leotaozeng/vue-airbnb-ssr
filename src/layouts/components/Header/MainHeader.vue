@@ -10,7 +10,7 @@ const emit = defineEmits<{ (event: 'changeLanguage', language: any): void }>();
 
 const { t } = useI18n();
 const handleSelect = (key: string, keyPath: string[]) => {
-  if (keyPath[0] === 'language') {
+  if (keyPath[0] === 'language') { 
     if (key === 'zh') {
       emit('changeLanguage', zhCn);
     } else if (key === 'en') {
