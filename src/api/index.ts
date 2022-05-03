@@ -6,12 +6,12 @@ const airbnbDB = new IndexedDB('airbnb');
 export const getElephant = async () => {
   try {
     await airbnbDB.open('elephant', 'id', ['nose', 'ear']);
-    const result = await airbnbDB.getList('elephant');
+    const response = await airbnbDB.getList('elephant');
 
     return {
       code: '000000',
       message: '操作成功',
-      result,
+      result: response,
       success: true
     };
   } catch (error) {
