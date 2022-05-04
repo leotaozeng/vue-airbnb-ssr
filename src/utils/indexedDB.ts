@@ -12,7 +12,7 @@ export default class Database {
     storeName: string,
     keyPath: string | string[],
     indexs?: string[]
-  ) {
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       if (!window.indexedDB) {
         console.log(
@@ -29,9 +29,11 @@ export default class Database {
       );
 
       // * Database is ready, but its version is outdated
+      // * The upgradeneeded event also triggers when the database doesn’t yet exist (version 0)
       openRequest.onupgradeneeded = () => {
         console.log('数据库升级成功');
 
+        // * The result is an instance of an IDBDatabase
         this.database = openRequest.result;
 
         if (!this.database.objectStoreNames.contains(storeName)) {
@@ -43,7 +45,7 @@ export default class Database {
 
           if (indexs && indexs.length > 0) {
             indexs.forEach((item: string) => {
-              objectStore.createIndex(item, item, { unique: false });
+              objectStore.createIndex(item, item, { unique: true });
             });
           }
 
@@ -53,7 +55,8 @@ export default class Database {
         }
       };
 
-      // * Database is ready, there’s the “database object” in openRequest.result, we should use it for further calls
+      // * Database is ready, there’s the “database object” in openRequest.result
+      // * We should use it for further calls
       openRequest.onsuccess = () => {
         console.info('打开数据库成功');
         this.database = openRequest.result;
@@ -63,7 +66,7 @@ export default class Database {
       // * Open a database failed
       openRequest.onerror = () => {
         console.error('打开数据库失败', openRequest.error);
-        reject(openRequest.error);
+        reject('fail');
       };
     });
   }
@@ -132,13 +135,13 @@ export default class Database {
   getItem(storeName: string, key: number | string) {
     return new Promise((resolve, reject) => {
       const request = this.database
-        .transaction([storeName])
+        .transaction([storeName], 'readonly')
         .objectStore(storeName)
         .get(key);
 
       request.onsuccess = () => {
         console.log('查询数据成功', request.result);
-        resolve(request.result);
+        resolve(request.result as Result);
       };
 
       request.onerror = () => {
@@ -152,7 +155,7 @@ export default class Database {
   getList(storeName: string) {
     return new Promise((resolve, reject) => {
       const request = this.database
-        .transaction([storeName])
+        .transaction([storeName], 'readonly')
         .objectStore(storeName)
         .getAll();
 

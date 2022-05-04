@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { getElephant } from '@/api';
+import { getElephantAPI } from '@/api';
 
 async function fetchElephant() {
   try {
-    const response = await getElephant();
+    const response = await getElephantAPI();
     console.log(response);
   } catch (error) {
     console.error('fetchElephant Error', error);
   }
 }
 
-fetchElephant();
+// fetchElephant();
 </script>
 
 <template>

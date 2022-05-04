@@ -6,41 +6,46 @@ import zhCn from 'element-plus/lib/locale/lang/zh-cn';
 import { defineEmits } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const emit = defineEmits<{ (event: 'changeLanguage', language: any): void }>();
 
-const { t } = useI18n();
-const handleSelect = (key: string, keyPath: string[]) => {
-  if (keyPath[0] === 'language') { 
+function handleSelect(key: string, keyPath: string[]) {
+  if (keyPath[0] === 'language') {
     if (key === 'zh') {
       emit('changeLanguage', zhCn);
     } else if (key === 'en') {
       emit('changeLanguage', en);
     }
   }
-};
+}
 </script>
 
 <template>
-  <header class="relative flex justify-between items-center">
+  <header class="w-full relative flex justify-between items-center">
     <el-image :src="logoUrl" alt="logo" class="logo-container z-10" />
 
     <el-menu
       mode="horizontal"
       class="menu w-full h-full justify-end font-semibold"
       @select="handleSelect">
+      <!-- Trips -->
       <el-menu-item index="trips" class="menu-item">
         {{ t('menu.trips') }}
       </el-menu-item>
+
+      <!-- Browsing History -->
       <el-menu-item index="history" class="menu-item">
         {{ t('menu.history') }}
       </el-menu-item>
 
+      <!-- Language Selection -->
       <el-sub-menu index="language" class="submenu">
         <template #title>{{ t('menu.language') }}</template>
         <el-menu-item index="zh">{{ t('menu.chinese') }}</el-menu-item>
         <el-menu-item index="en">{{ t('menu.english') }}</el-menu-item>
       </el-sub-menu>
 
+      <!-- Avatar -->
       <el-menu-item index="avatar" class="menu-item">
         <el-avatar
           :size="28"
@@ -57,7 +62,6 @@ const handleSelect = (key: string, keyPath: string[]) => {
 
 <style lang="scss" scoped>
 header {
-  width: 100%;
   height: 81px;
 
   .logo-container {
