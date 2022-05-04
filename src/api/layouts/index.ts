@@ -1,16 +1,22 @@
 import IndexedDB from '@/utils/indexedDB';
+import { ElLoading } from 'element-plus';
+import 'element-plus/es/components/loading/style/css';
 
 const airbnbDB = new IndexedDB('airbnb');
 
 interface Result {
   id: number;
-  el: any;
   name: string;
   created: Date;
 }
 
 // * Mock接口：保存当前语言包
-export const saveLanguageAPI = async (language: any) => {
+export const saveLanguageAPI = async (language: string) => {
+  const loading = ElLoading.service({
+    lock: true,
+    background: 'rgba(0, 0, 0, 0.2)'
+  });
+
   try {
     await airbnbDB.open('language', 'id', ['name']);
     const result = (await airbnbDB.getItem('language', 1)) as Result;
@@ -19,15 +25,13 @@ export const saveLanguageAPI = async (language: any) => {
       // * 数据不存在，新增数据
       await airbnbDB.addItem('language', {
         created: new Date(),
-        el: language.el,
-        name: language.name
+        name: language
       });
     } else {
       // * 数据已存在，更新数据
       await airbnbDB.updateItem('language', {
         ...result,
-        el: language.el,
-        name: language.name
+        name: language
       });
     }
 
@@ -39,11 +43,20 @@ export const saveLanguageAPI = async (language: any) => {
     };
   } catch (error) {
     console.error('saveLanguageApi Error', error);
+  } finally {
+    setTimeout(() => {
+      loading.close();
+    }, 300);
   }
 };
 
 // * Mock接口：获取当前语言包
 export const getLanguageApi = async () => {
+  const loading = ElLoading.service({
+    lock: true,
+    background: 'rgba(0, 0, 0, 0.2)'
+  });
+
   try {
     await airbnbDB.open('language', 'id', ['name']);
     const result = (await airbnbDB.getItem('language', 1)) as Result;
@@ -56,5 +69,9 @@ export const getLanguageApi = async () => {
     };
   } catch (error) {
     console.error('getLanguageApi Error', error);
+  } finally {
+    setTimeout(() => {
+      loading.close();
+    }, 300);
   }
 };

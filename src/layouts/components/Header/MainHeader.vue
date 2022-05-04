@@ -1,23 +1,37 @@
 <script setup lang="ts">
+import { getLanguageApi, saveLanguageAPI } from '@/api/layouts';
 import avatarUrl from '@/assets/images/avatar.jpeg';
 import logoUrl from '@/assets/images/logo.png';
 import en from 'element-plus/lib/locale/lang/en';
 import zhCn from 'element-plus/lib/locale/lang/zh-cn';
-import { defineEmits } from 'vue';
+import { defineEmits, onBeforeMount } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 const emit = defineEmits<{ (event: 'changeLanguage', language: any): void }>();
 
-function handleSelect(key: string, keyPath: string[]) {
+async function handleSelect(key: string, keyPath: string[]) {
   if (keyPath[0] === 'language') {
     if (key === 'zh') {
       emit('changeLanguage', zhCn);
+      await saveLanguageAPI('zh');
     } else if (key === 'en') {
       emit('changeLanguage', en);
+      await saveLanguageAPI('en');
     }
   }
 }
+
+onBeforeMount(async () => {
+  const response = await getLanguageApi();
+  if (response && response.result) {
+    if (response.result.name === 'zh') {
+      emit('changeLanguage', zhCn);
+    } else if (response.result.name === 'en') {
+      emit('changeLanguage', en);
+    }
+  }
+});
 </script>
 
 <template>
