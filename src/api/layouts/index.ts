@@ -46,7 +46,7 @@ export const saveLanguageAPI = async (language: string) => {
   } finally {
     setTimeout(() => {
       loading.close();
-    }, 300);
+    }, 400);
   }
 };
 
@@ -72,6 +72,6 @@ export const getLanguageApi = async () => {
   } finally {
     setTimeout(() => {
       loading.close();
-    }, 300);
+    }, 400);
   }
 };
