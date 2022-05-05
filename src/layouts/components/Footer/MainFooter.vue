@@ -92,8 +92,9 @@ const footerMenu = reactive([
 </script>
 
 <template>
-  <el-footer class="w-full bg-white text-primary-gray p-0">
-    <div class="content">
+  <el-footer
+    class="w-full bg-white text-primary-gray p-0 border-t border-neutral-100">
+    <div class="content px-6 py-12">
       <!-- Menu -->
       <el-row>
         <el-col :span="6" v-for="menuItem in footerMenu" :key="menuItem.title">
@@ -104,7 +105,10 @@ const footerMenu = reactive([
 
           <!-- Submenus -->
           <ul class="mt-4">
-            <li v-for="submenuItem in menuItem.submenu" :key="submenuItem.name">
+            <li
+              v-for="submenuItem in menuItem.submenu"
+              :key="submenuItem.name"
+              class="mb-1">
               <a
                 class="text-sm text-muted"
                 :href="submenuItem.link"
@@ -116,7 +120,23 @@ const footerMenu = reactive([
         </el-col>
       </el-row>
 
-      <div class="copy-right">© 2022 Harry, Inc. All rights reserved.</div>
+      <!-- Copyright -->
+      <div class="mt-4 pt-4 border-t border-neutral-100">
+        <div class="copyright">
+          <p></p>
+          <div>
+            <p class="inline-block">© 2022 Aircnc, Inc. All rights reserved.</p>
+            <p class="inline-block ml-2">
+              条款 · 隐私政策 · 网站地图 · 全国旅游投诉渠道 12301
+            </p>
+          </div>
+        </div>
+
+        <div class="social-media">
+          <span><a href=""></a></span>
+          <span><a href=""></a></span>
+        </div>
+      </div>
     </div>
   </el-footer>
 </template>
@@ -125,8 +145,6 @@ const footerMenu = reactive([
 @import '../../../assets/scss/abstracts/mixins.scss';
 
 .el-footer {
-  border-top: 1px solid #ebebeb !important;
-
   .content {
     @include main-wrapper;
   }
