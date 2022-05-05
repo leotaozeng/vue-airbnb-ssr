@@ -5,5 +5,11 @@
     "language": "Language",
     "chinese": "Chinese",
     "english": "English"
+  },
+  "footer": {
+    "support": "Support",
+    "hosting": "Hosting",
+    "about": "About",
+    "discover": "Discover"
   }
 }

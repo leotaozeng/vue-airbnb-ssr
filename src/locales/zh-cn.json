@@ -5,5 +5,11 @@
     "language": "国际化切换",
     "chinese": "中文",
     "english": "英文"
+  },
+  "footer": {
+    "support": "客服支持",
+    "hosting": "出租",
+    "about": "爱彼迎",
+    "discover": "发现"
   }
 }
