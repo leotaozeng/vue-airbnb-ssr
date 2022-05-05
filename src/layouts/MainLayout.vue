@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Footer from '@/layouts/components/Footer/MainFooter.vue';
 import Header from '@/layouts/components/Header/MainHeader.vue';
 import { ElConfigProvider } from 'element-plus';
 import en from 'element-plus/lib/locale/lang/en';
@@ -16,13 +17,18 @@ async function changeLanguage(language: any) {
 
 <template>
   <el-config-provider :locale="locale">
-    <!-- Header -->
-    <Header @changeLanguage="changeLanguage" />
+    <el-container direction="vertical">
+      <!-- Header -->
+      <Header @changeLanguage="changeLanguage" />
 
-    <!-- Content -->
-    <main>
-      <router-view></router-view>
-    </main>
+      <!-- Content -->
+      <el-main>
+        <router-view></router-view>
+      </el-main>
+
+      <!-- Footer -->
+      <Footer />
+    </el-container>
   </el-config-provider>
 </template>
 

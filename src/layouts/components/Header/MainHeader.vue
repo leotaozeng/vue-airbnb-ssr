@@ -35,9 +35,21 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <header class="w-full relative flex justify-between items-center">
-    <el-image :src="logoUrl" alt="logo" class="logo-container z-10" />
+  <el-header
+    class="w-full relative flex justify-between items-center p-0"
+    height="81px">
+    <!-- Left -->
+    <h1 class="m-0 text-base">
+      <el-image :src="logoUrl" alt="logo" class="logo-container z-10">
+        <template #error>
+          <div class="image-slot">
+            <el-icon><icon-picture /></el-icon>
+          </div>
+        </template>
+      </el-image>
+    </h1>
 
+    <!-- Right -->
     <el-menu
       mode="horizontal"
       class="menu w-full h-full justify-end font-semibold"
@@ -71,13 +83,11 @@ onBeforeMount(async () => {
         </el-avatar>
       </el-menu-item>
     </el-menu>
-  </header>
+  </el-header>
 </template>
 
 <style lang="scss" scoped>
-header {
-  height: 81px;
-
+.el-header {
   .logo-container {
     position: absolute;
     left: 24px;
