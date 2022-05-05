@@ -1,4 +1,5 @@
 module.exports = {
+  important: true,
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {
@@ -7,7 +8,8 @@ module.exports = {
       }
     },
     colors: {
-      'primary-gray': '#484848'
+      'primary-gray': '#484848',
+      muted: '#767676'
     }
   },
   plugins: []
