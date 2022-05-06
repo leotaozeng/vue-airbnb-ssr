@@ -9,9 +9,11 @@
     }
   },
   "footer": {
-    "support": "客服支持",
-    "hosting": "出租",
-    "about": "爱彼迎",
-    "discover": "发现"
+    "menu": {
+      "support": "客服支持",
+      "hosting": "出租",
+      "about": "爱彼迎",
+      "discover": "发现"
+    }
   }
 }

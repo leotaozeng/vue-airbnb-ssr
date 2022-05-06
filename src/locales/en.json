@@ -9,9 +9,11 @@
     }
   },
   "footer": {
-    "support": "Support",
-    "hosting": "Hosting",
-    "about": "About",
-    "discover": "Discover"
+    "menu": {
+      "support": "Support",
+      "hosting": "Hosting",
+      "about": "About",
+      "discover": "Discover"
+    }
   }
 }

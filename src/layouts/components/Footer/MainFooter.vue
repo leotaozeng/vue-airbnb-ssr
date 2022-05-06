@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 const footerMenu = reactive([
   {
-    title: 'footer.about',
+    title: 'footer.menu.about',
     submenu: [
       {
         name: '工作机会',
@@ -26,7 +26,7 @@ const footerMenu = reactive([
     ]
   },
   {
-    title: 'footer.discover',
+    title: 'footer.menu.discover',
     submenu: [
       {
         name: '信任与安全',
@@ -51,7 +51,7 @@ const footerMenu = reactive([
     ]
   },
   {
-    title: 'footer.hosting',
+    title: 'footer.menu.hosting',
     submenu: [
       {
         name: '为什么要出租?',
@@ -76,7 +76,7 @@ const footerMenu = reactive([
     ]
   },
   {
-    title: 'footer.support',
+    title: 'footer.menu.support',
     submenu: [
       {
         name: '帮助',
