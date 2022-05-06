@@ -1,3 +1,4 @@
+import i18n from '@/i18n';
 import IndexedDB from '@/utils/indexedDB';
 import { ElLoading } from 'element-plus';
 import 'element-plus/es/components/loading/style/css';
@@ -14,6 +15,7 @@ interface Result {
 export const saveLanguageAPI = async (language: string) => {
   const loading = ElLoading.service({
     lock: true,
+    text: i18n.global.t('loading'),
     background: 'rgba(0, 0, 0, 0.2)'
   });
 
@@ -46,7 +48,7 @@ export const saveLanguageAPI = async (language: string) => {
   } finally {
     setTimeout(() => {
       loading.close();
-    }, 400);
+    }, 300);
   }
 };
 
@@ -54,6 +56,7 @@ export const saveLanguageAPI = async (language: string) => {
 export const getLanguageApi = async () => {
   const loading = ElLoading.service({
     lock: true,
+    text: i18n.global.t('loading'),
     background: 'rgba(0, 0, 0, 0.2)'
   });
 
@@ -72,6 +75,6 @@ export const getLanguageApi = async () => {
   } finally {
     setTimeout(() => {
       loading.close();
-    }, 400);
+    }, 300);
   }
 };

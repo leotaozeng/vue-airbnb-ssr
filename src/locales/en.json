@@ -33,5 +33,6 @@
       "help": "Help Center",
       "neighbors": "Report a neighborhood concern"
     }
-  }
+  },
+  "loading": "Loading"
 }
