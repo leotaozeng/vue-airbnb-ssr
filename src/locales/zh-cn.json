@@ -12,8 +12,26 @@
     "menu": {
       "support": "客服支持",
       "hosting": "出租",
-      "about": "爱彼迎",
+      "about": "爱此迎",
       "discover": "发现"
+    },
+    "submenu": {
+      "careers": "工作机会",
+      "news": "爱此迎新闻",
+      "policy": "政策",
+      "accessibility": "无障碍设施",
+      "trustAndSafe": "信任与安全",
+      "invite": "邀请好友",
+      "evection": "商务差旅",
+      "magzine": "爱此迎杂志",
+      "airbnborg": "Airbnb.org",
+      "tryHosting": "为什么要出租?",
+      "hospitality": "待客之道",
+      "responsibility": "房东义务",
+      "experiences": "开展体验",
+      "resources": "资源中心",
+      "help": "帮助",
+      "neighbors": "邻里支持"
     }
   }
 }

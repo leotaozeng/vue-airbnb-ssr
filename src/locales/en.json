@@ -13,7 +13,25 @@
       "support": "Support",
       "hosting": "Hosting",
       "about": "About",
-      "discover": "Discover"
+      "discover": "Discovery"
+    },
+    "submenu": {
+      "careers": "Careers",
+      "news": "News",
+      "policy": "Policy",
+      "accessibility": "Accessibility",
+      "trustAndSafe": "Trust And Safe",
+      "invite": "Invite Friends",
+      "evection": "Evection",
+      "magzine": "Airbnb Magzine",
+      "airbnborg": "Airbnb.org",
+      "tryHosting": "Try hosting",
+      "hospitality": "Hospitality",
+      "responsibility": "How to host responsibly",
+      "experiences": "Experiences",
+      "resources": "Explore hosting resources",
+      "help": "Help Center",
+      "neighbors": "Report a neighborhood concern"
     }
   }
 }
