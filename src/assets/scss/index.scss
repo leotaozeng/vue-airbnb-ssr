@@ -9,6 +9,10 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
+html, body, #app {
+  height: 100%;
+}
+
 .menu-popup-container {
   .el-menu {
     min-width: 115px;

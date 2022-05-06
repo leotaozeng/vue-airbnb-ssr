@@ -17,7 +17,7 @@ async function changeLanguage(language: any) {
 
 <template>
   <el-config-provider :locale="locale">
-    <el-container direction="vertical">
+    <el-container direction="vertical" class="h-full">
       <!-- Header -->
       <Header @changeLanguage="changeLanguage" />
 
