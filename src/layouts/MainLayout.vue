@@ -10,7 +10,12 @@ const { locale: localeLanguage } = useI18n({ useScope: 'global' });
 const locale = ref(en);
 
 async function changeLanguage(language: any) {
-  localeLanguage.value = language.name;
+  if (language.name === 'zh-cn') {
+    localeLanguage.value = 'zh-CN';
+  } else {
+    localeLanguage.value = language.name;
+  }
+
   locale.value = language;
 }
 </script>

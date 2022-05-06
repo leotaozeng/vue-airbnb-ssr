@@ -3,7 +3,7 @@ import { getLanguageApi, saveLanguageAPI } from '@/api/layouts';
 import avatarUrl from '@/assets/images/avatar.jpeg';
 import logoUrl from '@/assets/images/logo.png';
 import en from 'element-plus/lib/locale/lang/en';
-import zhCn from 'element-plus/lib/locale/lang/zh-cn';
+import zhCN from 'element-plus/lib/locale/lang/zh-CN';
 import { defineEmits, onBeforeMount } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -13,9 +13,9 @@ const emit = defineEmits<{ (event: 'changeLanguage', language: any): void }>();
 
 async function handleSelect(key: string, keyPath: string[]) {
   if (keyPath[0] === 'language') {
-    if (key === 'zh') {
-      emit('changeLanguage', zhCn);
-      await saveLanguageAPI('zh');
+    if (key === 'zh-CN') {
+      emit('changeLanguage', zhCN);
+      await saveLanguageAPI('zh-CN');
     } else if (key === 'en') {
       emit('changeLanguage', en);
       await saveLanguageAPI('en');
@@ -26,8 +26,8 @@ async function handleSelect(key: string, keyPath: string[]) {
 onBeforeMount(async () => {
   const response = await getLanguageApi();
   if (response && response.result) {
-    if (response.result.name === 'zh') {
-      emit('changeLanguage', zhCn);
+    if (response.result.name === 'zh-CN') {
+      emit('changeLanguage', zhCN);
     } else if (response.result.name === 'en') {
       emit('changeLanguage', en);
     }
@@ -53,7 +53,7 @@ onBeforeMount(async () => {
     <!-- Right -->
     <el-menu
       mode="horizontal"
-      class="menu w-full h-full justify-end font-semibold"
+      class="menu w-full h-full justify-end font-semibold border-neutral-150"
       @select="handleSelect">
       <!-- Trips -->
       <el-menu-item index="trips" class="menu-item">
@@ -72,7 +72,7 @@ onBeforeMount(async () => {
         popper-class="menu-popup-container"
         :popper-offset="-15">
         <template #title>{{ t('header.menu.language') }}</template>
-        <el-menu-item index="zh" v-if="localeLanguage !== 'zh-cn'">
+        <el-menu-item index="zh-CN" v-if="localeLanguage !== 'zh-CN'">
           {{ t('header.menu.chinese') }}
         </el-menu-item>
         <el-menu-item index="en" v-if="localeLanguage !== 'en'">

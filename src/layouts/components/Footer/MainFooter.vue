@@ -93,7 +93,7 @@ const footerMenu = reactive([
 
 <template>
   <el-footer
-    class="w-full bg-white text-primary-gray p-0 border-t border-neutral-100">
+    class="w-full h-fit bg-white text-primary-gray p-0 border-t border-neutral-150">
     <div class="content px-6 py-12">
       <!-- Menu -->
       <el-row>
@@ -121,7 +121,7 @@ const footerMenu = reactive([
       </el-row>
 
       <!-- Copyright -->
-      <div class="mt-4 pt-4 border-t border-neutral-100">
+      <div class="mt-4 pt-4 border-t border-neutral-150">
         <div class="copyright">
           <p></p>
           <div>
