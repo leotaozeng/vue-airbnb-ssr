@@ -8,19 +8,14 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: 'Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif'
+      },
+      colors: {
+        muted: '#767676',
+        'primary-gray': '#484848',
+        neutral: {
+          150: 'rgb(235 235 235)'
+        }
       }
-    },
-    colors: {
-      transparent: 'transparent',
-      current: 'currentColor',
-      black: colors.black,
-      white: colors.white,
-      gray: colors.gray,
-      emerald: colors.emerald,
-      indigo: colors.indigo,
-      yellow: colors.yellow,
-      muted: '#767676',
-      'primary-gray': '#484848'
     }
   },
   plugins: []
