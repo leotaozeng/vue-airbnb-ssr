@@ -8,19 +8,19 @@ const footerMenu = reactive([
     title: 'footer.menu.about',
     submenu: [
       {
-        name: '工作机会',
+        name: 'footer.submenu.careers',
         link: 'https://www.airbnb.cn/careers'
       },
       {
-        name: '爱彼迎新闻',
+        name: 'footer.submenu.news',
         link: 'https://www.airbnb.cn/press/news'
       },
       {
-        name: '政策',
+        name: 'footer.submenu.policy',
         link: 'https://www.airbnb.cn/policies'
       },
       {
-        name: '无障碍设施',
+        name: 'footer.submenu.accessibility',
         link: 'https://www.airbnb.cn/accessibility'
       }
     ]
@@ -29,23 +29,23 @@ const footerMenu = reactive([
     title: 'footer.menu.discover',
     submenu: [
       {
-        name: '信任与安全',
+        name: 'footer.submenu.trustAndSafe',
         link: 'https://www.airbnb.cn/trust'
       },
       {
-        name: '邀请好友',
+        name: 'footer.submenu.invite',
         link: 'https://www.airbnb.cn/invite?r=6'
       },
       {
-        name: '商务差旅',
+        name: 'footer.submenu.evection',
         link: 'https://www.airbnb.cn/work?s=footer'
       },
       {
-        name: '爱彼迎杂志',
+        name: 'footer.submenu.magzine',
         link: 'https://airbnbmag.com/'
       },
       {
-        name: 'Airbnb.org',
+        name: 'footer.submenu.airbnborg',
         link: 'https://www.airbnb.org/?locale=zh'
       }
     ]
@@ -54,23 +54,23 @@ const footerMenu = reactive([
     title: 'footer.menu.hosting',
     submenu: [
       {
-        name: '为什么要出租?',
+        name: 'footer.submenu.tryHosting',
         link: 'https://www.airbnb.cn/host/homes?from_footer=1'
       },
       {
-        name: '待客之道',
+        name: 'footer.submenu.hospitality',
         link: 'https://www.airbnb.cn/hospitality'
       },
       {
-        name: '房东义务',
+        name: 'footer.submenu.responsibility',
         link: 'https://www.airbnb.cn/help/responsible-hosting'
       },
       {
-        name: '开展体验',
+        name: 'footer.submenu.experiences',
         link: 'https://www.airbnb.cn/host/experiences?from_footer=1'
       },
       {
-        name: '资源中心',
+        name: 'footer.submenu.resources',
         link: 'https://www.airbnb.cn/resources?traffic_source=footer'
       }
     ]
@@ -79,11 +79,11 @@ const footerMenu = reactive([
     title: 'footer.menu.support',
     submenu: [
       {
-        name: '帮助',
+        name: 'footer.submenu.help',
         link: 'https://www.airbnb.cn/help?from=footer'
       },
       {
-        name: '邻里支持',
+        name: 'footer.submenu.neighbors',
         link: 'https://www.airbnb.cn/neighbors'
       }
     ]
@@ -107,13 +107,13 @@ const footerMenu = reactive([
           <ul class="mt-4">
             <li
               v-for="submenuItem in menuItem.submenu"
-              :key="submenuItem.name"
+              :key="t(submenuItem.name)"
               class="mb-1">
               <a
                 class="text-sm text-muted"
                 :href="submenuItem.link"
                 target="_blank">
-                {{ submenuItem.name }}
+                {{ t(submenuItem.name) }}
               </a>
             </li>
           </ul>
