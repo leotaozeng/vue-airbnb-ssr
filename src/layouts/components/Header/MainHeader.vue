@@ -56,19 +56,19 @@ onBeforeMount(async () => {
       @select="handleSelect">
       <!-- Trips -->
       <el-menu-item index="trips" class="menu-item">
-        {{ t('menu.trips') }}
+        {{ t('header.menu.trips') }}
       </el-menu-item>
 
       <!-- Browsing History -->
       <el-menu-item index="history" class="menu-item">
-        {{ t('menu.history') }}
+        {{ t('header.menu.history') }}
       </el-menu-item>
 
       <!-- Language Selection -->
       <el-sub-menu index="language" class="submenu">
-        <template #title>{{ t('menu.language') }}</template>
-        <el-menu-item index="zh">{{ t('menu.chinese') }}</el-menu-item>
-        <el-menu-item index="en">{{ t('menu.english') }}</el-menu-item>
+        <template #title>{{ t('header.menu.language') }}</template>
+        <el-menu-item index="zh">{{ t('header.menu.chinese') }}</el-menu-item>
+        <el-menu-item index="en">{{ t('header.menu.english') }}</el-menu-item>
       </el-sub-menu>
 
       <!-- Avatar -->

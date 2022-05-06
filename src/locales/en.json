@@ -1,10 +1,12 @@
 {
-  "menu": {
-    "trips": "Trips",
-    "history": "Browsing History",
-    "language": "Language",
-    "chinese": "Chinese",
-    "english": "English"
+  "header": {
+    "menu": {
+      "trips": "Trips",
+      "history": "Browsing History",
+      "language": "Language",
+      "chinese": "Chinese",
+      "english": "English"
+    }
   },
   "footer": {
     "support": "Support",
