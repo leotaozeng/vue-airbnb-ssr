@@ -8,3 +8,9 @@
 html {
   -webkit-font-smoothing: antialiased;
 }
+
+.menu-popup-container {
+  .el-menu {
+    min-width: 115px;
+  }
+}

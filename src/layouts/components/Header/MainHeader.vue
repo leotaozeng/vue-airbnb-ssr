@@ -7,6 +7,7 @@ import zhCn from 'element-plus/lib/locale/lang/zh-cn';
 import { defineEmits, onBeforeMount } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+const { locale: localeLanguage } = useI18n({ useScope: 'global' });
 const { t } = useI18n();
 const emit = defineEmits<{ (event: 'changeLanguage', language: any): void }>();
 
@@ -65,10 +66,18 @@ onBeforeMount(async () => {
       </el-menu-item>
 
       <!-- Language Selection -->
-      <el-sub-menu index="language" class="submenu">
+      <el-sub-menu
+        index="language"
+        class="submenu"
+        popper-class="menu-popup-container"
+        :popper-offset="-15">
         <template #title>{{ t('header.menu.language') }}</template>
-        <el-menu-item index="zh">{{ t('header.menu.chinese') }}</el-menu-item>
-        <el-menu-item index="en">{{ t('header.menu.english') }}</el-menu-item>
+        <el-menu-item index="zh" v-if="localeLanguage !== 'zh-cn'">
+          {{ t('header.menu.chinese') }}
+        </el-menu-item>
+        <el-menu-item index="en" v-if="localeLanguage !== 'en'">
+          {{ t('header.menu.english') }}
+        </el-menu-item>
       </el-sub-menu>
 
       <!-- Avatar -->
