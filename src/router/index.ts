@@ -5,13 +5,22 @@ const routes = [
     path: '/',
     component: () => import('@/layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('@/pages/Home/HomeIndex.vue') }
+      {
+        path: '',
+        name: 'Home',
+        component: () => import('@/pages/Home/AircncHome.vue')
+      },
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: () => import('@/pages/Profile/AircncProfile.vue')
+      }
     ]
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    component: () => import('@/pages/Profile/ProfileIndex.vue')
+    path: '/auth/login',
+    name: 'Login',
+    component: () => import('@/pages/Auth/AircncLogin.vue')
   }
 ];
 
