@@ -6,7 +6,9 @@ import en from 'element-plus/lib/locale/lang/en';
 import zhCN from 'element-plus/lib/locale/lang/zh-CN';
 import { defineEmits, onBeforeMount } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const { locale: localeLanguage } = useI18n({ useScope: 'global' });
 const { t } = useI18n();
 const emit = defineEmits<{ (event: 'changeLanguage', language: any): void }>();
@@ -20,6 +22,8 @@ async function handleSelect(key: string, keyPath: string[]) {
       emit('changeLanguage', en);
       await saveLanguageAPI('en');
     }
+  } else if (keyPath[0] === 'auth') {
+    router.push({ name: 'Login' });
   }
 }
 
@@ -72,9 +76,12 @@ onBeforeMount(async () => {
         popper-class="menu-popup-container"
         :popper-offset="-15">
         <template #title>{{ t('header.menu.language') }}</template>
+        <!-- Chinese -->
         <el-menu-item index="zh-CN" v-if="localeLanguage !== 'zh-CN'">
           {{ t('header.menu.chinese') }}
         </el-menu-item>
+
+        <!-- English -->
         <el-menu-item index="en" v-if="localeLanguage !== 'en'">
           {{ t('header.menu.english') }}
         </el-menu-item>
@@ -90,6 +97,11 @@ onBeforeMount(async () => {
           <img
             src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
         </el-avatar>
+      </el-menu-item>
+
+      <!-- Auth -->
+      <el-menu-item index="auth" class="menu-item">
+        {{ t('auth.signinTab') }} / {{ t('auth.signupTab') }}
       </el-menu-item>
     </el-menu>
   </el-header>
