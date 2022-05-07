@@ -34,5 +34,14 @@
       "neighbors": "邻里支持"
     }
   },
-  "loading": "加载中"
+  "loading": "加载中",
+  "require": "请输入{name}",
+  "auth": {
+    "signinBtn": "进入爱此迎",
+    "signupBtn": "立即注册",
+    "signinTab": "登录",
+    "signupTab": "注册",
+    "phone": "手机号",
+    "password": "密码"
+  }
 }

@@ -34,5 +34,14 @@
       "neighbors": "Report a neighborhood concern"
     }
   },
-  "loading": "Loading"
+  "loading": "Loading",
+  "require": "{name} is required",
+  "auth": {
+    "signinBtn": "Sign in",
+    "signupBtn": "Sign up",
+    "signinTab": "Sign in",
+    "signupTab": "Sign up",
+    "phone": "Phone number",
+    "password": "Password"
+  }
 }
