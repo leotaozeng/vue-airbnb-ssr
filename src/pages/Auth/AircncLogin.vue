@@ -1,41 +1,132 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import type { TabsPaneContext } from 'element-plus';
+import { Lock, UserFilled } from '@element-plus/icons-vue';
+import type { FormInstance, FormRules } from 'element-plus';
+import { reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-const activeName = ref('signin');
+interface IRuleForm {
+  phone: string;
+  password: string;
+}
 
-const handleClick = (tab: TabsPaneContext, event: Event) => {
-  console.log(tab, event);
-};
+const { t } = useI18n();
+
+const activeName = ref<string>('signin');
+const ruleFormRef = ref<FormInstance>();
+const ruleForm: IRuleForm = reactive({
+  phone: '',
+  password: ''
+});
+const rules = reactive<FormRules>({
+  phone: [
+    {
+      required: true,
+      message: t('require', { name: t('auth.phone') }),
+      trigger: 'blur'
+    },
+    {
+      min: 11,
+      max: 11,
+      message: '请输入正确的手机号码',
+      trigger: 'blur'
+    }
+  ],
+  password: [
+    {
+      required: true,
+      message: t('require', { name: t('auth.password') }),
+      trigger: 'blur'
+    }
+  ]
+});
+
+async function handleSubmitForm(formEl: FormInstance | undefined) {
+  if (!formEl) return;
+  await formEl.validate((valid, fields) => {
+    if (valid) {
+      console.log('submit!');
+    } else {
+      console.log('error submit!', fields);
+    }
+  });
+}
+
+function handleResetForm(formEl: FormInstance | undefined) {
+  if (!formEl) return;
+  formEl.resetFields();
+  console.log('reset!');
+}
 </script>
 
 <template>
   <div class="login w-screen h-screen flex flex-row">
-    <!-- Left -->
+    <!-- * Left -->
     <div class="left-part"></div>
 
-    <!-- Right -->
+    <!-- * Right -->
     <div class="right-part flex justify-center items-center">
       <div class="login-panel">
-        <!-- Tabs -->
+        <!-- * Tabs -->
         <el-tabs
           v-model="activeName"
-          class="demo-tabs"
-          @tab-click="handleClick">
+          @tab-click="handleResetForm(ruleFormRef)"
+          class="tabs">
           <el-tab-pane name="signin">
             <template #label>
-              <span class="tabs-label text-lg">登录</span>
+              <span class="tabs-label text-lg">{{ t('auth.signinTab') }}</span>
             </template>
           </el-tab-pane>
+
           <el-tab-pane name="signup">
             <template #label>
-              <span class="tabs-label text-lg">注册</span>
+              <span class="tabs-label text-lg">{{ t('auth.signupTab') }}</span>
             </template>
           </el-tab-pane>
         </el-tabs>
 
-        <!-- Form -->
-        <div class="form"></div>
+        <!-- * Form -->
+        <el-form
+          size="large"
+          ref="ruleFormRef"
+          class="mt-5"
+          :model="ruleForm"
+          :rules="rules">
+          <!-- * Phone Number -->
+          <el-form-item prop="phone">
+            <el-input
+              clearable
+              class="input"
+              :placeholder="t('auth.phone')"
+              :prefix-icon="UserFilled"
+              v-model="ruleForm.phone" />
+          </el-form-item>
+
+          <!-- * Password -->
+          <el-form-item prop="password">
+            <el-input
+              clearable
+              show-password
+              class="input"
+              :placeholder="t('auth.password')"
+              :prefix-icon="Lock"
+              v-model="ruleForm.password" />
+          </el-form-item>
+
+          <!-- * Submit Button -->
+          <el-form-item class="mt-16">
+            <el-button
+              round
+              type="primary"
+              class="w-full"
+              @click="handleSubmitForm(ruleFormRef)">
+              {{
+                activeName === 'signin'
+                  ? t('auth.signinBtn')
+                  : t('auth.signupBtn')
+              }}
+            </el-button>
+          </el-form-item>
+        </el-form>
       </div>
     </div>
   </div>
@@ -56,9 +147,27 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
       width: 250px;
     }
 
+    :deep(.el-tabs__nav-wrap) {
+      &::after {
+        display: none;
+      }
+    }
+
     :deep(.el-tabs__nav) {
       float: initial;
       text-align: center;
+    }
+
+    :deep(.el-tabs__item) {
+      height: 36px;
+    }
+
+    :deep(.input) {
+      .el-input__wrapper {
+        background-color: rgb(243 244 246);
+        border-radius: var(--el-border-radius-round);
+        box-shadow: none;
+      }
     }
   }
 }
