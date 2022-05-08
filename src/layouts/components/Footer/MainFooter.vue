@@ -110,7 +110,7 @@ const footerMenu = reactive([
               :key="t(submenuItem.name)"
               class="mb-1">
               <a
-                class="text-sm text-muted font-semibold"
+                class="text-sm text-muted font-semibold no-underline hover:underline"
                 :href="submenuItem.link"
                 target="_blank">
                 {{ t(submenuItem.name) }}
