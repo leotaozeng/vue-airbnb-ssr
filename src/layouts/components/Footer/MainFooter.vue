@@ -110,7 +110,7 @@ const footerMenu = reactive([
               :key="t(submenuItem.name)"
               class="mb-1">
               <a
-                class="text-sm text-muted"
+                class="text-sm text-muted font-semibold"
                 :href="submenuItem.link"
                 target="_blank">
                 {{ t(submenuItem.name) }}
@@ -122,19 +122,11 @@ const footerMenu = reactive([
 
       <!-- Copyright -->
       <div class="mt-4 pt-4 border-t border-neutral-150">
-        <div class="copyright">
-          <p></p>
-          <div>
-            <p class="inline-block">© 2022 Aircnc, Inc. All rights reserved.</p>
-            <p class="inline-block ml-2">
-              条款 · 隐私政策 · 网站地图 · 全国旅游投诉渠道 12301
-            </p>
-          </div>
-        </div>
-
-        <div class="social-media">
-          <span><a href=""></a></span>
-          <span><a href=""></a></span>
+        <div class="copyright text-sm text-muted text-center font-semibold">
+          <p class="inline-block">© 2022 Aircnc, Inc. All rights reserved.</p>
+          <p class="inline-block ml-2">
+            条款 · 隐私政策 · 网站地图 · 全国旅游投诉渠道 12301
+          </p>
         </div>
       </div>
     </div>
