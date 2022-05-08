@@ -1,22 +1,7 @@
-<script setup lang="ts">
-import { getElephantAPI } from '@/api';
-
-async function fetchElephant() {
-  try {
-    const response = await getElephantAPI();
-    console.log(response);
-  } catch (error) {
-    console.error('fetchElephant Error', error);
-  }
-}
-
-// fetchElephant();
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div>
-    <el-date-picker type="datetime" placeholder="Select date and time" />
-  </div>
+  <div></div>
 </template>
 
 <style lang="scss" scoped></style>

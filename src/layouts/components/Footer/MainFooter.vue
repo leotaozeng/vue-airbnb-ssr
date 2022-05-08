@@ -125,7 +125,28 @@ const footerMenu = reactive([
         <div class="copyright text-sm text-muted text-center font-semibold">
           <p class="inline-block">© 2022 Aircnc, Inc. All rights reserved.</p>
           <p class="inline-block ml-2">
-            条款 · 隐私政策 · 网站地图 · 全国旅游投诉渠道 12301
+            <a
+              href="https://www.airbnb.cn/terms"
+              target="_blank"
+              class="no-underline hover:underline">
+              条款
+            </a>
+            <span> · </span>
+            <a
+              href="https://www.airbnb.cn/terms/privacy_policy"
+              target="_blank"
+              class="no-underline hover:underline">
+              隐私政策
+            </a>
+            <span> · </span>
+            <a
+              href="https://www.airbnb.cn/sitemaps/v2"
+              target="_blank"
+              class="no-underline hover:underline">
+              网站地图
+            </a>
+            <span> · </span>
+            <span>全国旅游投诉渠道 12301</span>
           </p>
         </div>
       </div>
