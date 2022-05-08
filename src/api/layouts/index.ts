@@ -1,15 +1,16 @@
+import { airbnbDB } from '@/db';
+import languagesObjectStore from '@/db/objectStores/languages';
 import i18n from '@/i18n';
-import IndexedDB from '@/utils/indexedDB';
 import { ElLoading } from 'element-plus';
 import 'element-plus/es/components/loading/style/css';
-
-const airbnbDB = new IndexedDB('airbnb');
 
 interface Result {
   id: number;
   name: string;
   created: Date;
 }
+
+const storeName = Object.keys(languagesObjectStore)[0];
 
 // * Mock接口：保存当前语言包
 export const saveLanguageAPI = async (language: string) => {
@@ -20,18 +21,18 @@ export const saveLanguageAPI = async (language: string) => {
   });
 
   try {
-    await airbnbDB.open('language', 'id', ['name']);
-    const result = (await airbnbDB.getItem('language', 1)) as Result;
+    await airbnbDB.open(storeName, 'id', ['name']);
+    const result = (await airbnbDB.getItem(storeName, 1)) as Result;
 
     if (!result) {
       // * 数据不存在，新增数据
-      await airbnbDB.addItem('language', {
+      await airbnbDB.addItem(storeName, {
         created: new Date(),
         name: language
       });
     } else {
       // * 数据已存在，更新数据
-      await airbnbDB.updateItem('language', {
+      await airbnbDB.updateItem(storeName, {
         ...result,
         name: language
       });
@@ -61,8 +62,8 @@ export const getLanguageApi = async () => {
   });
 
   try {
-    await airbnbDB.open('language', 'id', ['name']);
-    const result = (await airbnbDB.getItem('language', 1)) as Result;
+    await airbnbDB.open(storeName, 'id', ['name']);
+    const result = (await airbnbDB.getItem(storeName, 1)) as Result;
 
     return {
       code: '000000',
