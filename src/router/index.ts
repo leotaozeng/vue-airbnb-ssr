@@ -1,32 +1,21 @@
+import { airbnbDB } from '@/db';
+import languagesObjectStore from '@/db/objectStores/languages';
+import usersObjectStore from '@/db/objectStores/users';
 import { createRouter, createWebHistory } from 'vue-router';
-
-const routes = [
-  {
-    path: '/',
-    component: () => import('@/layouts/MainLayout.vue'),
-    children: [
-      {
-        path: '',
-        name: 'Home',
-        component: () => import('@/pages/Home/AircncHome.vue')
-      },
-      {
-        path: 'profile',
-        name: 'Profile',
-        component: () => import('@/pages/Profile/AircncProfile.vue')
-      }
-    ]
-  },
-  {
-    path: '/auth/login',
-    name: 'Login',
-    component: () => import('@/pages/Auth/AircncLogin.vue')
-  }
-];
+import routes from './routes';
 
 const router = createRouter({
   history: createWebHistory(),
   routes
+});
+
+router.beforeEach(async (_to, _from, next) => {
+  const response = await airbnbDB.open({
+    ...languagesObjectStore,
+    ...usersObjectStore
+  });
+  console.log('初始化所有对象仓库', response);
+  next();
 });
 
 export default router;
