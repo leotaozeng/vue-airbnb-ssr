@@ -48,7 +48,7 @@ export default class Database {
 
             if (indexs && indexs.length > 0) {
               indexs.forEach((item: string) => {
-                objectStore.createIndex(item, item, { unique: true });
+                objectStore.createIndex(item, item, { unique: false });
               });
             }
 
