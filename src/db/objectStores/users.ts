@@ -1,11 +1,11 @@
 import TypeObjectStore from '../type';
 
-const webUser: TypeObjectStore = {
+const webUser = {
   keyPath: 'id',
   indexs: ['phone', 'password', 'status']
 };
 
-const usersObjectStore = {
+const usersObjectStore: TypeObjectStore = {
   users: webUser
 };
 

@@ -1,11 +1,11 @@
 import TypeObjectStore from '../type';
 
-const webLang: TypeObjectStore = {
+const webLang = {
   keyPath: 'id',
   indexs: ['name']
 };
 
-const languagesObjectStore = {
+const languagesObjectStore: TypeObjectStore = {
   languages: webLang
 };
 

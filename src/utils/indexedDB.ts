@@ -1,3 +1,5 @@
+import TypeObjectStore from '@/db/type';
+
 export default class Database {
   private databaseName: string; // * 数据库名称
   private databaseVersion: number; // * 数据库版本
@@ -8,11 +10,7 @@ export default class Database {
     this.databaseVersion = databaseVersion || 1;
   }
 
-  public open(
-    storeName: string,
-    keyPath: string | string[],
-    indexs?: string[]
-  ): Promise<string> {
+  public open(arrayStores: TypeObjectStore[]): Promise<string> {
     return new Promise((resolve, reject) => {
       if (!window.indexedDB) {
         console.log(
@@ -36,22 +34,28 @@ export default class Database {
         // * The result is an instance of an IDBDatabase
         this.database = openRequest.result;
 
-        if (!this.database.objectStoreNames.contains(storeName)) {
-          // * Create an object store in the database
-          const objectStore = this.database.createObjectStore(storeName, {
-            autoIncrement: true,
-            keyPath
-          });
-
-          if (indexs && indexs.length > 0) {
-            indexs.forEach((item: string) => {
-              objectStore.createIndex(item, item, { unique: true });
+        // * Combine an array of objects with an empty object to create a new single object
+        const objectStores = Object.assign({}, ...arrayStores);
+        for (const storeName in objectStores) {
+          // * Get each single object store
+          const { keyPath, indexs } = objectStores[storeName];
+          if (!this.database.objectStoreNames.contains(storeName)) {
+            // * Create an object store in the database
+            const objectStore = this.database.createObjectStore(storeName, {
+              autoIncrement: true,
+              keyPath
             });
-          }
 
-          objectStore.transaction.oncomplete = () => {
-            console.log('创建 object store 成功');
-          };
+            if (indexs && indexs.length > 0) {
+              indexs.forEach((item: string) => {
+                objectStore.createIndex(item, item, { unique: true });
+              });
+            }
+
+            objectStore.transaction.oncomplete = () => {
+              console.log('创建 object store 成功');
+            };
+          }
         }
       };
 

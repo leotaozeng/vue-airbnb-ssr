@@ -10,10 +10,10 @@ const router = createRouter({
 });
 
 router.beforeEach(async (_to, _from, next) => {
-  const response = await airbnbDB.open({
-    ...languagesObjectStore,
-    ...usersObjectStore
-  });
+  const response = await airbnbDB.open([
+    languagesObjectStore,
+    usersObjectStore
+  ]);
   console.log('初始化所有对象仓库', response);
   next();
 });
