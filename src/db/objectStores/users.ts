@@ -1,7 +1,7 @@
 import TypeObjectStore from '../type';
 
 const webUser = {
-  keyPath: 'id',
+  keyPath: 'userId',
   indexs: ['phone', 'password', 'status']
 };
 

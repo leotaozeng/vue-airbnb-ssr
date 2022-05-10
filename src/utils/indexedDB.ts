@@ -82,7 +82,10 @@ export default class Database {
       const request = this.database
         .transaction([storeName], 'readwrite')
         .objectStore(storeName)
-        .add(data);
+        .add({
+          ...data,
+          createTime: new Date().getTime()
+        });
 
       request.onsuccess = () => {
         console.log('数据写入成功', request.result);
@@ -102,7 +105,10 @@ export default class Database {
       const request = this.database
         .transaction([storeName], 'readwrite')
         .objectStore(storeName)
-        .put(data);
+        .put({
+          ...data,
+          updateTime: new Date().getTime()
+        });
 
       request.onsuccess = () => {
         console.log('数据修改成功', request.result);
