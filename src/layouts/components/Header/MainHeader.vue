@@ -107,7 +107,10 @@ onBeforeMount(async () => {
       </el-sub-menu>
 
       <!-- Auth -->
-      <el-menu-item v-if="status === '0'" index="auth" class="menu-item">
+      <el-menu-item
+        v-if="status === '0' || !status"
+        index="auth"
+        class="menu-item">
         {{ t('auth.signinTab') }} / {{ t('auth.signupTab') }}
       </el-menu-item>
 
