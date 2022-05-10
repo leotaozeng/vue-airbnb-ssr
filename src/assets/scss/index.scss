@@ -19,4 +19,10 @@ body,
   .el-menu {
     min-width: 115px;
   }
+
+  &.avatar {
+    .el-menu {
+      min-width: 95px;
+    }
+  }
 }

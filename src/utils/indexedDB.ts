@@ -88,7 +88,7 @@ export default class Database {
         });
 
       request.onsuccess = () => {
-        console.log('数据写入成功', request.result);
+        console.log('数据写入成功', request);
         resolve(request.result);
       };
 

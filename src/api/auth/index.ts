@@ -30,17 +30,14 @@ export const userSignUpAPI = async (params: any) => {
       const token = new Date().getTime();
       document.cookie = `token=${token}`;
 
-      await airbnbDB.addItem(storeName, {
-        status: 1,
-        token,
-        ...params
-      });
+      const user = { status: 1, token, ...params };
+      await airbnbDB.addItem(storeName, user);
 
       return {
         code: '000000',
         message: '注册成功',
         success: true,
-        result: null
+        result: user
       };
     } else {
       // * 存在相同手机号
@@ -92,17 +89,14 @@ export const userSignInAPI = async (params: any) => {
       const token = new Date().getTime();
       document.cookie = `token=${token}`;
 
-      await airbnbDB.updateItem(storeName, {
-        status: 1,
-        token,
-        ...params
-      });
+      const user = { status: 1, token, ...params };
+      await airbnbDB.updateItem(storeName, user);
 
       return {
         code: '000000',
         message: '登录成功',
         success: true,
-        result: null
+        result: user
       };
     }
   } catch (error) {
