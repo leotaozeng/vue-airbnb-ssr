@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import { userSignInAPI, userSignUpAPI } from '@/api/auth';
 import { Lock, UserFilled } from '@element-plus/icons-vue';
-import type { FormInstance, FormRules } from 'element-plus';
+import { ElMessage, FormInstance, FormRules } from 'element-plus';
+import 'element-plus/es/components/message/style/css';
 import { reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 
 interface IRuleForm {
   phone: string;
@@ -10,13 +13,12 @@ interface IRuleForm {
 }
 
 const { t } = useI18n();
+const router = useRouter();
 
 const activeName = ref<string>('signin');
 const ruleFormRef = ref<FormInstance>();
-const ruleForm: IRuleForm = reactive({
-  phone: '',
-  password: ''
-});
+
+const ruleForm = reactive<IRuleForm>({ phone: '', password: '' });
 const rules = reactive<FormRules>({
   phone: [
     {
@@ -42,11 +44,32 @@ const rules = reactive<FormRules>({
 
 async function handleSubmitForm(formEl: FormInstance | undefined) {
   if (!formEl) return;
-  await formEl.validate((valid, fields) => {
+  await formEl.validate(async (valid, fields) => {
     if (valid) {
-      console.log('submit!');
+      const response =
+        activeName.value === 'signup'
+          ? await userSignUpAPI(ruleForm)
+          : await userSignInAPI(ruleForm);
+
+      if (response && response.success) {
+        ElMessage({
+          showClose: true,
+          message: response.message,
+          type: 'success'
+        });
+        router.push({ name: 'Home' });
+        return;
+      }
+
+      if (response && !response.success) {
+        ElMessage({
+          showClose: true,
+          message: response.message,
+          type: 'error'
+        });
+      }
     } else {
-      console.log('error submit!', fields);
+      console.error('Error submit', fields);
     }
   });
 }
