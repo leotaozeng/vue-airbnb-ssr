@@ -39,6 +39,7 @@
   "auth": {
     "signinBtn": "Sign in",
     "signupBtn": "Sign up",
+    "signoutBtn": "Sign out",
     "signinTab": "Sign in",
     "signupTab": "Sign up",
     "phone": "Phone number",

@@ -39,6 +39,7 @@
   "auth": {
     "signinBtn": "进入爱此迎",
     "signupBtn": "立即注册",
+    "signoutBtn": "退出",
     "signinTab": "登录",
     "signupTab": "注册",
     "phone": "手机号",
