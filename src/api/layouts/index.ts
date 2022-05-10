@@ -21,7 +21,6 @@ export const saveLanguageAPI = async (language: string) => {
   });
 
   try {
-    await airbnbDB.open(storeName, 'id', ['name']);
     const result = (await airbnbDB.getItem(storeName, 1)) as Result;
 
     if (!result) {
@@ -45,7 +44,7 @@ export const saveLanguageAPI = async (language: string) => {
       success: true
     };
   } catch (error) {
-    console.error('saveLanguageApi Error', error);
+    console.error('saveLanguageAPI Error', error);
   } finally {
     setTimeout(() => {
       loading.close();
@@ -54,7 +53,7 @@ export const saveLanguageAPI = async (language: string) => {
 };
 
 // * Mock接口：获取当前语言包
-export const getLanguageApi = async () => {
+export const getLanguageAPI = async () => {
   const loading = ElLoading.service({
     lock: true,
     text: i18n.global.t('loading'),
@@ -62,7 +61,6 @@ export const getLanguageApi = async () => {
   });
 
   try {
-    await airbnbDB.open(storeName, 'id', ['name']);
     const result = (await airbnbDB.getItem(storeName, 1)) as Result;
 
     return {
@@ -72,7 +70,7 @@ export const getLanguageApi = async () => {
       success: true
     };
   } catch (error) {
-    console.error('getLanguageApi Error', error);
+    console.error('getLanguageAPI Error', error);
   } finally {
     setTimeout(() => {
       loading.close();
