@@ -36,14 +36,15 @@ export default class Database {
 
         // * Combine an array of objects with an empty object to create a new single object
         const objectStores = Object.assign({}, ...arrayStores);
+        // * 初始化多个 object store 对象仓库
         for (const storeName in objectStores) {
           // * Get each single object store
           const { keyPath, indexs } = objectStores[storeName];
           if (!this.database.objectStoreNames.contains(storeName)) {
             // * Create an object store in the database
             const objectStore = this.database.createObjectStore(storeName, {
-              autoIncrement: true,
-              keyPath
+              keyPath,
+              autoIncrement: true
             });
 
             if (indexs && indexs.length > 0) {

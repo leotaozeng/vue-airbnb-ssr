@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getLanguageApi, saveLanguageAPI } from '@/api/layouts';
+import { getLanguageAPI, saveLanguageAPI } from '@/api/layouts';
 import avatarUrl from '@/assets/images/avatar.jpeg';
 import logoUrl from '@/assets/images/logo.png';
 import en from 'element-plus/lib/locale/lang/en';
@@ -28,7 +28,7 @@ async function handleSelect(key: string, keyPath: string[]) {
 }
 
 onBeforeMount(async () => {
-  const response = await getLanguageApi();
+  const response = await getLanguageAPI();
   if (response && response.result) {
     if (response.result.name === 'zh-CN') {
       emit('changeLanguage', zhCN);

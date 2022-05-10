@@ -10,6 +10,7 @@ const router = createRouter({
 });
 
 router.beforeEach(async (_to, _from, next) => {
+  // * 初始化所有对象仓库
   const response = await airbnbDB.open([
     languagesObjectStore,
     usersObjectStore
