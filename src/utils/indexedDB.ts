@@ -105,10 +105,7 @@ export default class Database {
       const request = this.database
         .transaction([storeName], 'readwrite')
         .objectStore(storeName)
-        .put({
-          ...data,
-          updateTime: new Date().getTime()
-        });
+        .put(data);
 
       request.onsuccess = () => {
         console.log('数据修改成功', request.result);

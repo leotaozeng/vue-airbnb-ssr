@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { userSignOutAPI } from '@/api/auth';
 import { getLanguageAPI, saveLanguageAPI } from '@/api/layouts';
 import avatarUrl from '@/assets/images/avatar.jpeg';
 import logoUrl from '@/assets/images/logo.png';
+import { ElMessage } from 'element-plus';
+import 'element-plus/es/components/message/style/css';
 import en from 'element-plus/lib/locale/lang/en';
 import zhCN from 'element-plus/lib/locale/lang/zh-CN';
 import { defineEmits, onBeforeMount, ref } from 'vue';
@@ -12,7 +15,7 @@ const router = useRouter();
 const { locale: localeLanguage } = useI18n({ useScope: 'global' });
 const { t } = useI18n();
 const emit = defineEmits<{ (event: 'changeLanguage', language: any): void }>();
-const status = ref(localStorage.getItem('userStatus'));
+const status = ref<string | null>(localStorage.getItem('userStatus'));
 
 async function handleSelect(key: string, keyPath: string[]) {
   if (keyPath[0] === 'language') {
@@ -25,6 +28,21 @@ async function handleSelect(key: string, keyPath: string[]) {
     }
   } else if (keyPath[0] === 'auth') {
     router.push({ name: 'Login' });
+  } else if (keyPath[0] === 'avatar') {
+    if (key === 'signout') {
+      const response = await userSignOutAPI();
+
+      if (response && response.success) {
+        localStorage.setItem('userStatus', '0');
+        status.value = '0';
+        ElMessage({
+          showClose: true,
+          message: response.message,
+          type: 'success'
+        });
+        router.push({ name: 'Home' });
+      }
+    }
   }
 }
 
@@ -88,12 +106,17 @@ onBeforeMount(async () => {
         </el-menu-item>
       </el-sub-menu>
 
+      <!-- Auth -->
+      <el-menu-item v-if="status === '0'" index="auth" class="menu-item">
+        {{ t('auth.signinTab') }} / {{ t('auth.signupTab') }}
+      </el-menu-item>
+
       <!-- Avatar -->
       <el-sub-menu
         v-if="status === '1'"
         index="avatar"
         class="submenu"
-        popper-class="avatar menu-popup-container"
+        popper-class="menu-popup-container"
         :popper-offset="-15">
         <template #title>
           <el-avatar
@@ -107,11 +130,6 @@ onBeforeMount(async () => {
         </template>
         <el-menu-item index="signout"> {{ t('auth.signoutBtn') }}</el-menu-item>
       </el-sub-menu>
-
-      <!-- Auth -->
-      <el-menu-item v-else index="auth" class="menu-item">
-        {{ t('auth.signinTab') }} / {{ t('auth.signupTab') }}
-      </el-menu-item>
     </el-menu>
   </el-header>
 </template>

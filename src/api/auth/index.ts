@@ -9,8 +9,10 @@
 import { airbnbDB } from '@/db';
 import usersObjectStore from '@/db/objectStores/users';
 import i18n from '@/i18n';
-import { ElLoading } from 'element-plus';
+import { getCookie } from '@/utils/util';
+import { ElLoading, ElMessage } from 'element-plus';
 import 'element-plus/es/components/loading/style/css';
+import 'element-plus/es/components/message/style/css';
 
 const storeName = Object.keys(usersObjectStore)[0];
 
@@ -27,17 +29,20 @@ export const userSignUpAPI = async (params: any) => {
     const result = users.find((user) => user.phone === params.phone);
 
     if (!result) {
-      const token = new Date().getTime();
+      const token = new Date().getTime().toString();
       document.cookie = `token=${token}`;
 
-      const user = { status: 1, token, ...params };
-      await airbnbDB.addItem(storeName, user);
+      await airbnbDB.addItem(storeName, {
+        ...params,
+        status: 1,
+        token
+      });
 
       return {
         code: '000000',
         message: '注册成功',
         success: true,
-        result: user
+        result: null
       };
     } else {
       // * 存在相同手机号
@@ -49,7 +54,12 @@ export const userSignUpAPI = async (params: any) => {
       };
     }
   } catch (error) {
-    console.error('userSignUpAPI Error', error);
+    console.error(error);
+    ElMessage({
+      showClose: true,
+      message: `数据库查询出现异常: ${error}`,
+      type: 'error'
+    });
   } finally {
     setTimeout(() => {
       loading.close();
@@ -86,21 +96,29 @@ export const userSignInAPI = async (params: any) => {
         result: null
       };
     } else {
-      const token = new Date().getTime();
+      const token = new Date().getTime().toString();
       document.cookie = `token=${token}`;
 
-      const user = { status: 1, token, ...params };
-      await airbnbDB.updateItem(storeName, user);
+      await airbnbDB.updateItem(storeName, {
+        ...result,
+        status: 1,
+        token
+      });
 
       return {
         code: '000000',
         message: '登录成功',
         success: true,
-        result: user
+        result: null
       };
     }
   } catch (error) {
-    console.error('userSignInAPI Error', error);
+    console.error(error);
+    ElMessage({
+      showClose: true,
+      message: `数据库查询出现异常: ${error}`,
+      type: 'error'
+    });
   } finally {
     setTimeout(() => {
       loading.close();
@@ -109,4 +127,42 @@ export const userSignInAPI = async (params: any) => {
 };
 
 // * Mock接口：用户登出
-export const userSignOutAPI = async () => {};
+export const userSignOutAPI = async () => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: i18n.global.t('loading'),
+    background: 'rgba(0, 0, 0, 0.2)'
+  });
+
+  try {
+    const users = (await airbnbDB.getList(storeName)) as any[];
+    const token = getCookie('token');
+    const result = users.find((user) => user.token.includes(token));
+
+    if (result) {
+      await airbnbDB.updateItem(storeName, {
+        ...result,
+        status: 0,
+        token: null
+      });
+
+      return {
+        code: '000000',
+        message: '退出成功',
+        success: true,
+        result: null
+      };
+    }
+  } catch (error) {
+    console.error(error);
+    ElMessage({
+      showClose: true,
+      message: `数据库查询出现异常: ${error}`,
+      type: 'error'
+    });
+  } finally {
+    setTimeout(() => {
+      loading.close();
+    }, 300);
+  }
+};

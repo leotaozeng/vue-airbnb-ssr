@@ -52,7 +52,7 @@ async function handleSubmitForm(formEl: FormInstance | undefined) {
           : await userSignInAPI(ruleForm);
 
       if (response && response.success) {
-        localStorage.setItem('userStatus', response.result.status);
+        localStorage.setItem('userStatus', '1');
         ElMessage({
           showClose: true,
           message: response.message,
