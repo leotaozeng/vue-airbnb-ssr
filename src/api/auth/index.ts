@@ -27,14 +27,18 @@ export const userSignUpAPI = async (params: any) => {
     const result = users.find((user) => user.phone === params.phone);
 
     if (!result) {
+      const token = new Date().getTime();
+      document.cookie = `token=${token}`;
+
       await airbnbDB.addItem(storeName, {
-        status: 0,
+        status: 1,
+        token,
         ...params
       });
 
       return {
         code: '000000',
-        message: '操作成功',
+        message: '注册成功',
         success: true,
         result: null
       };
@@ -86,7 +90,7 @@ export const userSignInAPI = async (params: any) => {
       };
     } else {
       const token = new Date().getTime();
-      document.cookie = `oken=${token}`;
+      document.cookie = `token=${token}`;
 
       await airbnbDB.updateItem(storeName, {
         status: 1,
@@ -96,7 +100,7 @@ export const userSignInAPI = async (params: any) => {
 
       return {
         code: '000000',
-        message: '操作成功',
+        message: '登录成功',
         success: true,
         result: null
       };
