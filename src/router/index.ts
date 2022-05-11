@@ -13,12 +13,12 @@ const router = createRouter({
 });
 
 router.beforeEach(async (_to, _from, next) => {
-  const locale = useLocaleStore();
-
   // * 初始化所有对象仓库
   await airbnbDB.open([languagesObjectStore, usersObjectStore]);
 
+  const locale = useLocaleStore();
   const language = await getLanguageAPI();
+
   if (language && language.result) {
     const { name } = language.result;
     locale.setLanguage(name);

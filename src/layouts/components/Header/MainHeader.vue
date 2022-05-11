@@ -19,9 +19,9 @@ const status = ref<string | null>(localStorage.getItem('userStatus'));
 
 async function handleSelect(key: string, keyPath: string[]) {
   if (keyPath[0] === 'language') {
-    if (key === 'zh-CN') {
+    if (key === 'zh-cn') {
       emit('changeLanguage', zhCN);
-      await saveLanguageAPI('zh-CN');
+      await saveLanguageAPI('zh-cn');
     } else if (key === 'en') {
       emit('changeLanguage', en);
       await saveLanguageAPI('en');
@@ -85,7 +85,7 @@ async function handleSelect(key: string, keyPath: string[]) {
         :popper-offset="-15">
         <template #title>{{ t('header.menu.language') }}</template>
         <!-- Chinese -->
-        <el-menu-item index="zh-CN" v-if="localeLanguage !== 'zh-CN'">
+        <el-menu-item index="zh-cn" v-if="localeLanguage !== 'zh-cn'">
           {{ t('header.menu.chinese') }}
         </el-menu-item>
 
