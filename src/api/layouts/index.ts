@@ -1,13 +1,14 @@
 import { airbnbDB } from '@/db';
 import languagesObjectStore from '@/db/objectStores/languages';
 import i18n from '@/i18n';
-import { ElLoading } from 'element-plus';
+import { ElLoading, ElMessage } from 'element-plus';
 import 'element-plus/es/components/loading/style/css';
+import 'element-plus/es/components/message/style/css';
 
 interface Result {
   id: number;
   name: string;
-  created: Date;
+  created: number;
 }
 
 const storeName = Object.keys(languagesObjectStore)[0];
@@ -25,16 +26,10 @@ export const saveLanguageAPI = async (language: string) => {
 
     if (!result) {
       // * 数据不存在，新增数据
-      await airbnbDB.addItem(storeName, {
-        created: new Date(),
-        name: language
-      });
+      await airbnbDB.addItem(storeName, { name: language });
     } else {
       // * 数据已存在，更新数据
-      await airbnbDB.updateItem(storeName, {
-        ...result,
-        name: language
-      });
+      await airbnbDB.updateItem(storeName, { ...result, name: language });
     }
 
     return {
@@ -44,7 +39,12 @@ export const saveLanguageAPI = async (language: string) => {
       success: true
     };
   } catch (error) {
-    console.error('saveLanguageAPI Error', error);
+    console.error(error);
+    ElMessage({
+      showClose: true,
+      message: `数据库查询出现异常: ${error}`,
+      type: 'error'
+    });
   } finally {
     setTimeout(() => {
       loading.close();
@@ -54,12 +54,6 @@ export const saveLanguageAPI = async (language: string) => {
 
 // * Mock接口：获取当前语言包
 export const getLanguageAPI = async () => {
-  const loading = ElLoading.service({
-    lock: true,
-    text: i18n.global.t('loading'),
-    background: 'rgba(0, 0, 0, 0.2)'
-  });
-
   try {
     const result = (await airbnbDB.getItem(storeName, 1)) as Result;
 
@@ -70,10 +64,11 @@ export const getLanguageAPI = async () => {
       success: true
     };
   } catch (error) {
-    console.error('getLanguageAPI Error', error);
-  } finally {
-    setTimeout(() => {
-      loading.close();
-    }, 300);
+    console.error(error);
+    ElMessage({
+      showClose: true,
+      message: `数据库查询出现异常: ${error}`,
+      type: 'error'
+    });
   }
 };

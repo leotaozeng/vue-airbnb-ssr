@@ -1,6 +1,9 @@
+import { getLanguageAPI } from '@/api/layouts';
 import { airbnbDB } from '@/db';
 import languagesObjectStore from '@/db/objectStores/languages';
 import usersObjectStore from '@/db/objectStores/users';
+import i18n from '@/i18n';
+import { useLocaleStore } from '@/stores/locale';
 import { createRouter, createWebHistory } from 'vue-router';
 import routes from './routes';
 
@@ -10,12 +13,18 @@ const router = createRouter({
 });
 
 router.beforeEach(async (_to, _from, next) => {
+  const locale = useLocaleStore();
+
   // * 初始化所有对象仓库
-  const response = await airbnbDB.open([
-    languagesObjectStore,
-    usersObjectStore
-  ]);
-  console.log('初始化所有对象仓库', response);
+  await airbnbDB.open([languagesObjectStore, usersObjectStore]);
+
+  const language = await getLanguageAPI();
+  if (language && language.result) {
+    const { name } = language.result;
+    locale.setLanguage(name);
+    i18n.global.locale = name;
+  }
+
   next();
 });
 

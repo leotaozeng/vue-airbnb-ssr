@@ -84,7 +84,7 @@ export default class Database {
         .objectStore(storeName)
         .add({
           ...data,
-          createTime: new Date().getTime()
+          created: new Date().getTime()
         });
 
       request.onsuccess = () => {
