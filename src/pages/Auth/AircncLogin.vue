@@ -114,7 +114,9 @@ function handleResetForm(formEl: FormInstance | undefined) {
           ref="ruleFormRef"
           class="mt-5"
           :model="ruleForm"
-          :rules="rules">
+          :rules="rules"
+          @submit.prevent="handleSubmitForm(ruleFormRef)"
+          @keyup.enter="handleSubmitForm(ruleFormRef)">
           <!-- * Phone Number -->
           <el-form-item prop="phone">
             <el-input
@@ -138,11 +140,7 @@ function handleResetForm(formEl: FormInstance | undefined) {
 
           <!-- * Submit Button -->
           <el-form-item class="mt-16">
-            <el-button
-              round
-              type="primary"
-              class="w-full"
-              @click="handleSubmitForm(ruleFormRef)">
+            <el-button round type="primary" class="w-full" native-type="submit">
               {{
                 activeName === 'signin'
                   ? t('auth.signinBtn')

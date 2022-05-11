@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { userSignOutAPI } from '@/api/auth';
-import { getLanguageAPI, saveLanguageAPI } from '@/api/layouts';
+import { saveLanguageAPI } from '@/api/layouts';
 import avatarUrl from '@/assets/images/avatar.jpeg';
 import logoUrl from '@/assets/images/logo.png';
 import { ElMessage } from 'element-plus';
 import 'element-plus/es/components/message/style/css';
 import en from 'element-plus/lib/locale/lang/en';
 import zhCN from 'element-plus/lib/locale/lang/zh-CN';
-import { defineEmits, onBeforeMount, ref } from 'vue';
+import { defineEmits, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 
@@ -45,17 +45,6 @@ async function handleSelect(key: string, keyPath: string[]) {
     }
   }
 }
-
-onBeforeMount(async () => {
-  const response = await getLanguageAPI();
-  if (response && response.result) {
-    if (response.result.name === 'zh-CN') {
-      emit('changeLanguage', zhCN);
-    } else if (response.result.name === 'en') {
-      emit('changeLanguage', en);
-    }
-  }
-});
 </script>
 
 <template>
