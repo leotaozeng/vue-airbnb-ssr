@@ -1,30 +1,30 @@
 <script setup lang="ts">
 import { userSignOutAPI } from '@/api/auth';
-import { saveLanguageAPI } from '@/api/layouts';
 import avatarUrl from '@/assets/images/avatar.jpeg';
 import logoUrl from '@/assets/images/logo.png';
+import { useLocaleStore } from '@/stores/locale';
 import { ElMessage } from 'element-plus';
 import 'element-plus/es/components/message/style/css';
 import en from 'element-plus/lib/locale/lang/en';
 import zhCN from 'element-plus/lib/locale/lang/zh-CN';
-import { defineEmits, ref } from 'vue';
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 
+const { setLanguage } = useLocaleStore();
 const router = useRouter();
 const { locale: localeLanguage } = useI18n({ useScope: 'global' });
 const { t } = useI18n();
-const emit = defineEmits<{ (event: 'changeLanguage', language: any): void }>();
 const status = ref<string | null>(localStorage.getItem('userStatus'));
 
 async function handleSelect(key: string, keyPath: string[]) {
   if (keyPath[0] === 'language') {
     if (key === 'zh-cn') {
-      emit('changeLanguage', zhCN);
-      await saveLanguageAPI('zh-cn');
+      setLanguage(zhCN);
+      localeLanguage.value = 'zh-cn';
     } else if (key === 'en') {
-      emit('changeLanguage', en);
-      await saveLanguageAPI('en');
+      setLanguage(en);
+      localeLanguage.value = 'en';
     }
   } else if (keyPath[0] === 'auth') {
     router.push({ name: 'Login' });

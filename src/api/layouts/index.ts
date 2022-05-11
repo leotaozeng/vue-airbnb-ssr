@@ -7,14 +7,15 @@ import 'element-plus/es/components/message/style/css';
 
 interface Result {
   id: number;
-  name: string;
   created: number;
+  locale: any;
+  name: string;
 }
 
 const storeName = Object.keys(languagesObjectStore)[0];
 
 // * Mock接口：保存当前语言包
-export const saveLanguageAPI = async (language: string) => {
+export const saveLanguageAPI = async (locale: any) => {
   const loading = ElLoading.service({
     lock: true,
     text: i18n.global.t('loading'),
@@ -26,10 +27,17 @@ export const saveLanguageAPI = async (language: string) => {
 
     if (!result) {
       // * 数据不存在，新增数据
-      await airbnbDB.addItem(storeName, { name: language });
+      await airbnbDB.addItem(storeName, {
+        locale,
+        name: locale.name
+      });
     } else {
       // * 数据已存在，更新数据
-      await airbnbDB.updateItem(storeName, { ...result, name: language });
+      await airbnbDB.updateItem(storeName, {
+        ...result,
+        locale,
+        name: locale.name
+      });
     }
 
     return {

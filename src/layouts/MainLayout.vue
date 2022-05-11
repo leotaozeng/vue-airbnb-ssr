@@ -1,27 +1,17 @@
 <script setup lang="ts">
 import Footer from '@/layouts/components/Footer/MainFooter.vue';
 import Header from '@/layouts/components/Header/MainHeader.vue';
+import { useLocaleStore } from '@/stores/locale';
 import { ElConfigProvider } from 'element-plus';
-import en from 'element-plus/lib/locale/lang/en';
-import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 
-const { locale: localeLanguage } = useI18n({ useScope: 'global' });
-const locale = ref(en);
-
-async function changeLanguage(language: any) {
-  console.log(language);
-
-  localeLanguage.value = language.name;
-  locale.value = language;
-}
+const { locale } = useLocaleStore();
 </script>
 
 <template>
   <el-config-provider :locale="locale">
     <el-container direction="vertical" class="h-full">
       <!-- Header -->
-      <Header @changeLanguage="changeLanguage" />
+      <Header />
 
       <!-- Content -->
       <el-main>
