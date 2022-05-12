@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { userSignInAPI, userSignUpAPI } from '@/api/auth';
+import { useAuthStore } from '@/stores/auth';
 import { Lock, UserFilled } from '@element-plus/icons-vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
 import 'element-plus/es/components/message/style/css';
@@ -12,6 +13,7 @@ interface IRuleForm {
   password: string;
 }
 
+const authStore = useAuthStore();
 const { t } = useI18n();
 const router = useRouter();
 
@@ -51,13 +53,17 @@ async function handleSubmitForm(formEl: FormInstance | undefined) {
           ? await userSignUpAPI(ruleForm)
           : await userSignInAPI(ruleForm);
 
-      if (response && response.success) {
-        localStorage.setItem('userStatus', '1');
+      if (response && response.success && response.result) {
+        const { message, result } = response;
+        const { status } = result;
+
+        authStore.setLoggedIn(status);
         ElMessage({
-          showClose: true,
-          message: response.message,
-          type: 'success'
+          message,
+          type: 'success',
+          showClose: true
         });
+
         router.push({ name: 'Home' });
         return;
       }

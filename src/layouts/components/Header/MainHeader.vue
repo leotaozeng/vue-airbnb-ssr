@@ -2,28 +2,28 @@
 import { userSignOutAPI } from '@/api/auth';
 import avatarUrl from '@/assets/images/avatar.jpeg';
 import logoUrl from '@/assets/images/logo.png';
+import { useAuthStore } from '@/stores/auth';
 import { useLocaleStore } from '@/stores/locale';
 import { ElMessage } from 'element-plus';
 import 'element-plus/es/components/message/style/css';
 import en from 'element-plus/lib/locale/lang/en';
 import zhCN from 'element-plus/lib/locale/lang/zh-CN';
-import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 
-const { setLanguage } = useLocaleStore();
+const authStore = useAuthStore();
+const localeStore = useLocaleStore();
 const router = useRouter();
 const { locale: localeLanguage } = useI18n({ useScope: 'global' });
 const { t } = useI18n();
-const status = ref<string | null>(localStorage.getItem('userStatus'));
 
 async function handleSelect(key: string, keyPath: string[]) {
   if (keyPath[0] === 'language') {
     if (key === 'zh-cn') {
-      setLanguage(zhCN);
+      localeStore.setLanguage(zhCN);
       localeLanguage.value = 'zh-cn';
     } else if (key === 'en') {
-      setLanguage(en);
+      localeStore.setLanguage(en);
       localeLanguage.value = 'en';
     }
   } else if (keyPath[0] === 'auth') {
@@ -31,15 +31,17 @@ async function handleSelect(key: string, keyPath: string[]) {
   } else if (keyPath[0] === 'avatar') {
     if (key === 'signout') {
       const response = await userSignOutAPI();
+      if (response && response.success && response.result) {
+        const { message, result } = response;
+        const { status } = result;
 
-      if (response && response.success) {
-        localStorage.setItem('userStatus', '0');
-        status.value = '0';
+        authStore.setLoggedIn(status);
         ElMessage({
-          showClose: true,
-          message: response.message,
-          type: 'success'
+          message,
+          type: 'success',
+          showClose: true
         });
+
         router.push({ name: 'Home' });
       }
     }
@@ -97,7 +99,7 @@ async function handleSelect(key: string, keyPath: string[]) {
 
       <!-- Auth -->
       <el-menu-item
-        v-if="status === '0' || !status"
+        v-if="authStore.loggedIn === 0"
         index="auth"
         class="menu-item">
         {{ t('auth.signinTab') }} / {{ t('auth.signupTab') }}
@@ -105,7 +107,7 @@ async function handleSelect(key: string, keyPath: string[]) {
 
       <!-- Avatar -->
       <el-sub-menu
-        v-if="status === '1'"
+        v-else
         index="avatar"
         class="submenu"
         popper-class="menu-popup-container"

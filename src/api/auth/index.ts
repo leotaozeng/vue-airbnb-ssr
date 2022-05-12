@@ -42,7 +42,9 @@ export const userSignUpAPI = async (params: any) => {
         code: '000000',
         message: '注册成功',
         success: true,
-        result: null
+        result: {
+          status: 1
+        }
       };
     } else {
       // * 存在相同手机号
@@ -109,7 +111,9 @@ export const userSignInAPI = async (params: any) => {
         code: '000000',
         message: '登录成功',
         success: true,
-        result: null
+        result: {
+          status: 1
+        }
       };
     }
   } catch (error) {
@@ -150,7 +154,9 @@ export const userSignOutAPI = async () => {
         code: '000000',
         message: '退出成功',
         success: true,
-        result: null
+        result: {
+          status: 0
+        }
       };
     }
   } catch (error) {

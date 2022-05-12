@@ -2,11 +2,11 @@ import { defineStore } from 'pinia';
 
 export const useAuthStore = defineStore('AuthStore', {
   state: () => ({
-    counter: 0
+    loggedIn: 0 // * 登录状态
   }),
   actions: {
-    increment() {
-      this.counter++;
+    setLoggedIn(status: number) {
+      this.loggedIn = status;
     }
   }
 });
