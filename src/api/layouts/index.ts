@@ -61,7 +61,7 @@ export const saveLanguageAPI = async (locale: any) => {
 };
 
 // * Mock接口：获取当前语言包
-export const getLanguageAPI = async () => {
+export const fetchLanguageAPI = async () => {
   try {
     const result = (await airbnbDB.getItem(storeName, 1)) as Result;
 

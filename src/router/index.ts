@@ -15,8 +15,8 @@ router.beforeEach(async (_to, _from, next) => {
   await airbnbDB.open([languagesObjectStore, usersObjectStore]);
 
   // * 初始化语言
-  const { getLanguage } = useLocaleStore();
-  getLanguage();
+  const localeStore = useLocaleStore();
+  localeStore.getLanguage();
 
   next();
 });

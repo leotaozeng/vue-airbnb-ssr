@@ -4,11 +4,11 @@ import Header from '@/layouts/components/Header/MainHeader.vue';
 import { useLocaleStore } from '@/stores/locale';
 import { ElConfigProvider } from 'element-plus';
 
-const { locale } = useLocaleStore();
+const localeStore = useLocaleStore();
 </script>
 
 <template>
-  <el-config-provider :locale="locale">
+  <el-config-provider :locale="localeStore.locale">
     <el-container direction="vertical" class="h-full">
       <!-- Header -->
       <Header />
