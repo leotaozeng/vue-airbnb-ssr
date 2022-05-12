@@ -6,6 +6,9 @@
     "start": "yarn dev  --host",
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "dev-ssr": "node server",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --outDir dist/server --ssr src/entry-server.js ",
     "preview": "vite preview --host",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "format": "prettier .  --write"
@@ -13,6 +16,7 @@
   "dependencies": {
     "axios": "^0.26.1",
     "element-plus": "^2.1.8",
+    "express": "^4.18.1",
     "normalize-scss": "^7.0.1",
     "pinia": "^2.0.14",
     "vue": "^3.2.25",
