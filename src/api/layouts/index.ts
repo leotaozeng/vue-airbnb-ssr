@@ -2,8 +2,6 @@ import { airbnbDB } from '@/db';
 import languagesObjectStore from '@/db/objectStores/languages';
 import i18n from '@/i18n';
 import { ElLoading, ElMessage } from 'element-plus';
-import 'element-plus/es/components/loading/style/css';
-import 'element-plus/es/components/message/style/css';
 
 interface Result {
   id: number;

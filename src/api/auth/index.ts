@@ -11,8 +11,6 @@ import usersObjectStore from '@/db/objectStores/users';
 import i18n from '@/i18n';
 import { getCookie } from '@/utils/util';
 import { ElLoading, ElMessage } from 'element-plus';
-import 'element-plus/es/components/loading/style/css';
-import 'element-plus/es/components/message/style/css';
 
 const storeName = Object.keys(usersObjectStore)[0];
 

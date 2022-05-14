@@ -4,8 +4,8 @@ import avatarUrl from '@/assets/images/avatar.jpeg';
 import logoUrl from '@/assets/images/logo.png';
 import { useAuthStore } from '@/stores/auth';
 import { useLocaleStore } from '@/stores/locale';
+import { Picture as IconPicture } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
-import 'element-plus/es/components/message/style/css';
 import en from 'element-plus/lib/locale/lang/en';
 import zhCN from 'element-plus/lib/locale/lang/zh-CN';
 import { useI18n } from 'vue-i18n';
@@ -20,11 +20,11 @@ const { t } = useI18n();
 async function handleSelect(key: string, keyPath: string[]) {
   if (keyPath[0] === 'language') {
     if (key === 'zh-cn') {
-      localeStore.setLanguage(zhCN);
       localeLanguage.value = 'zh-cn';
+      localeStore.setLanguage(zhCN);
     } else if (key === 'en') {
-      localeStore.setLanguage(en);
       localeLanguage.value = 'en';
+      localeStore.setLanguage(en);
     }
   } else if (keyPath[0] === 'auth') {
     router.push({ name: 'Login' });
@@ -58,7 +58,9 @@ async function handleSelect(key: string, keyPath: string[]) {
       <el-image :src="logoUrl" alt="logo" class="logo-container z-10">
         <template #error>
           <div class="image-slot">
-            <el-icon><icon-picture /></el-icon>
+            <el-icon>
+              <icon-picture />
+            </el-icon>
           </div>
         </template>
       </el-image>
@@ -87,13 +89,18 @@ async function handleSelect(key: string, keyPath: string[]) {
         :popper-offset="-15">
         <template #title>{{ t('header.menu.language') }}</template>
         <!-- Chinese -->
-        <el-menu-item index="zh-cn" v-if="localeLanguage !== 'zh-cn'">
+        <el-menu-item index="zh-cn" v-show="localeLanguage !== 'zh-cn'">
           {{ t('header.menu.chinese') }}
         </el-menu-item>
 
         <!-- English -->
-        <el-menu-item index="en" v-if="localeLanguage !== 'en'">
+        <el-menu-item index="en" v-show="localeLanguage !== 'en'">
           {{ t('header.menu.english') }}
+        </el-menu-item>
+
+        <!-- Spanish -->
+        <el-menu-item index="spanish" v-show="localeLanguage !== 'spanish'">
+          {{ t('header.menu.spanish') }}
         </el-menu-item>
       </el-sub-menu>
 
@@ -136,6 +143,21 @@ async function handleSelect(key: string, keyPath: string[]) {
     top: 50%;
     transform: translate3d(0, -50%, 0);
     width: 162px;
+
+    .image-slot {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 80px;
+      background: var(--el-fill-color-light);
+      color: var(--el-text-color-secondary);
+      font-size: 30px;
+
+      .el-icon {
+        font-size: 30px;
+      }
+    }
   }
 
   .menu {
