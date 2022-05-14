@@ -7,6 +7,9 @@ import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    port: 80
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')
@@ -15,21 +18,20 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/assets/scss/element/index.scss" as *;`
+        additionalData: '@use "@/assets/scss/element/index.scss" as *;'
       }
     }
   },
   plugins: [
     vue(),
     AutoImport({
-      resolvers: [ElementPlusResolver()]
+      imports: ['vue', 'vue-router', 'vue-i18n', 'pinia'],
+      resolvers: [ElementPlusResolver({ ssr: true })]
     }),
     Components({
-      resolvers: [
-        ElementPlusResolver({
-          importStyle: 'sass'
-        })
-      ]
+      dirs: ['src/pages', 'src/components', 'src/layouts'],
+      resolvers: [ElementPlusResolver({ importStyle: 'sass', ssr: true })],
+      directoryAsNamespace: true
     })
   ]
 });
