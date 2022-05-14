@@ -3,7 +3,6 @@ import { userSignInAPI, userSignUpAPI } from '@/api/auth';
 import { useAuthStore } from '@/stores/auth';
 import { Lock, UserFilled } from '@element-plus/icons-vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
-import 'element-plus/es/components/message/style/css';
 import { reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';

@@ -43,15 +43,16 @@ async function createServer() {
       const appHtml = await render(url);
 
       // * 5. Inject the app-rendered HTML into the template.
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml);
+      const html = template.replace(`<!--app-html-->`, appHtml);
 
       // * 6. Send the rendered HTML back.
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
       if (e instanceof Error) {
         // * If an error is caught, let Vite fix the stracktrace so it maps back to your actual source code.
-        vite.ssrFixStacktrace(e);
-        next(e);
+        vite && vite.ssrFixStacktrace(e);
+        console.log(e.stack);
+        res.status(500).end(e.stack);
       }
     }
   });
