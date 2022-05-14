@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'normalize-scss';
-@include normalize();
-
 html {
   -webkit-font-smoothing: antialiased;
 }
