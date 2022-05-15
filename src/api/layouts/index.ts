@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { airbnbDB } from '@/db';
 import languagesObjectStore from '@/db/objectStores/languages';
 import i18n from '@/i18n';

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { IResult } from '@/api/interface';
 import TypeObjectStore from '@/db/type';
 
 export default class Database {
@@ -149,7 +151,7 @@ export default class Database {
 
       request.onsuccess = () => {
         console.log('查询数据成功', request.result);
-        resolve(request.result as Result);
+        resolve(request.result as IResult);
       };
 
       request.onerror = () => {

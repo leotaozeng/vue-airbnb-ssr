@@ -4,7 +4,6 @@ import avatarUrl from '@/assets/images/avatar.jpeg';
 import logoUrl from '@/assets/images/logo.png';
 import { useAuthStore } from '@/stores/auth';
 import { useLocaleStore } from '@/stores/locale';
-import { Picture as IconPicture } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import en from 'element-plus/lib/locale/lang/en';
 import zhCN from 'element-plus/lib/locale/lang/zh-CN';
@@ -59,7 +58,7 @@ async function handleSelect(key: string, keyPath: string[]) {
         <template #error>
           <div class="image-slot">
             <el-icon>
-              <icon-picture />
+              <i-ep-picture />
             </el-icon>
           </div>
         </template>

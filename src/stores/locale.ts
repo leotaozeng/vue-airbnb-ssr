@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { fetchLanguageAPI, saveLanguageAPI } from '@/api/layouts';
 import i18n from '@/i18n';
 import en from 'element-plus/lib/locale/lang/en';
