@@ -5,10 +5,10 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AircncHome: typeof import('./pages/Home/AircncHome.vue')['default']
+    AircncLogin: typeof import('./pages/Auth/AircncLogin.vue')['default']
     AircncNotFound: typeof import('./pages/AircncNotFound.vue')['default']
-    AuthAircncLogin: typeof import('./pages/Auth/AircncLogin.vue')['default']
-    ComponentsFooterMainFooter: typeof import('./layouts/components/Footer/MainFooter.vue')['default']
-    ComponentsHeaderMainHeader: typeof import('./layouts/components/Header/MainHeader.vue')['default']
+    AircncProfile: typeof import('./pages/Profile/AircncProfile.vue')['default']
     ElAvatar: typeof import('element-plus/lib')['ElAvatar']
     ElCol: typeof import('element-plus/lib')['ElCol']
     ElContainer: typeof import('element-plus/lib')['ElContainer']
@@ -21,10 +21,10 @@ declare module '@vue/runtime-core' {
     ElMenuItem: typeof import('element-plus/lib')['ElMenuItem']
     ElRow: typeof import('element-plus/lib')['ElRow']
     ElSubMenu: typeof import('element-plus/lib')['ElSubMenu']
-    HomeAircncHome: typeof import('./pages/Home/AircncHome.vue')['default']
     IEpPicture: typeof import('~icons/ep/picture')['default']
+    MainFooter: typeof import('./layouts/components/Footer/MainFooter.vue')['default']
+    MainHeader: typeof import('./layouts/components/Header/MainHeader.vue')['default']
     MainLayout: typeof import('./layouts/MainLayout.vue')['default']
-    ProfileAircncProfile: typeof import('./pages/Profile/AircncProfile.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

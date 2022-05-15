@@ -49,7 +49,6 @@ export default defineConfig({
         // * 自动注册图标组件
         IconsResolver({ enabledCollections: ['ep'] })
       ],
-      directoryAsNamespace: true,
       dts: path.resolve(pathSrc, 'components.d.ts')
     }),
     Icons({
