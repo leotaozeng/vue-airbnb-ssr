@@ -14,7 +14,7 @@ const localeStore = useLocaleStore();
       <Header />
 
       <!-- Content -->
-      <el-main>
+      <el-main class="p-0 flex-none">
         <router-view></router-view>
       </el-main>
 

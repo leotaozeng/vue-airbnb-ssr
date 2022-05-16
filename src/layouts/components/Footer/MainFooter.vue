@@ -155,7 +155,7 @@ const footerMenu = reactive([
 </template>
 
 <style lang="scss" scoped>
-@import '../../../assets/scss/abstracts/mixins.scss';
+@import '@/assets/scss/abstracts/mixins.scss';
 
 .el-footer {
   .content {
