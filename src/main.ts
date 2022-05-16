@@ -4,7 +4,7 @@ import { createPinia } from 'pinia';
 import { createSSRApp } from 'vue';
 import App from './App.vue';
 import i18n from './i18n';
-import router from './router';
+import { createSSRRouter } from './router';
 
 // * SSR requires a fresh app instance per request, therefore we export a function
 // * that creates a fresh app instance. If using Vuex, we'd also be creating a fresh store here.
@@ -12,6 +12,7 @@ import router from './router';
 export function createApp() {
   const app = createSSRApp(App);
   const pinia = createPinia();
+  const router = createSSRRouter();
 
   app.use(i18n);
   app.use(pinia);

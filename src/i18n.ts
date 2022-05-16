@@ -10,4 +10,5 @@ const i18n = createI18n({
     'zh-cn': zhCN
   }
 });
+
 export default i18n;
