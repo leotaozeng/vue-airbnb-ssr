@@ -10,7 +10,7 @@ import Inspect from 'vite-plugin-inspect';
 
 const pathSrc = path.resolve(__dirname, 'src');
 
-// https://vitejs.dev/config/
+// * https://vitejs.dev/config/
 export default defineConfig({
   server: {
     port: 80
