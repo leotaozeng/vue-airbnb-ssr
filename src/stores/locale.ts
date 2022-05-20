@@ -4,16 +4,16 @@ import i18n from '@/i18n';
 import en from 'element-plus/lib/locale/lang/en';
 import { defineStore } from 'pinia';
 
-export const useLocaleStore = defineStore('LocaleStore', {
+export const useLocaleStore = defineStore('locale', {
   state: () => ({
     locale: en
   }),
   getters: {},
   actions: {
     async getLanguage() {
-      const language = await fetchLanguageAPI();
-      if (language && language.result) {
-        const { locale, name } = language.result;
+      const response = await fetchLanguageAPI();
+      if (response && response.result) {
+        const { locale, name } = response.result;
         this.locale = locale;
         i18n.global.locale = name;
       }

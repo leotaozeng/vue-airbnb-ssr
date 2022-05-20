@@ -10,13 +10,14 @@ import { createSSRRouter } from './router';
 // * If using Vuex, we'd also be creating a fresh store here.
 // * exports env-agnostic (universal) app code
 export function createApp() {
-  const app = createSSRApp(App);
+  // * create router and store instances
   const pinia = createPinia();
   const router = createSSRRouter();
+  const app = createSSRApp(App);
 
   app.use(i18n);
-  app.use(pinia);
   app.use(router);
+  app.use(pinia);
 
-  return { app, router };
+  return { app, router, pinia };
 }

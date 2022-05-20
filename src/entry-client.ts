@@ -4,8 +4,15 @@ import languagesObjectStore from './db/objectStores/languages';
 import usersObjectStore from './db/objectStores/users';
 import { createApp } from './main';
 import { useLocaleStore } from './stores/locale';
+import { useRoomsStore } from './stores/rooms';
 
-const { app, router } = createApp();
+const { app, router, pinia } = createApp();
+
+// * 初始化 Pinia
+// * 注意：__INITIAL_STATE__需要在 src/types/shims-global.d.ts中定义
+if (window.__INITIAL_STATE__) {
+  pinia.state.value = JSON.parse(window.__INITIAL_STATE__);
+}
 
 router.beforeEach(async (_to, _from, next) => {
   // * 初始化所有对象仓库
@@ -14,6 +21,10 @@ router.beforeEach(async (_to, _from, next) => {
   // * 初始化语言
   const localeStore = useLocaleStore();
   localeStore.getLanguage();
+
+  // * 初始化房屋列表
+  const roomsStore = useRoomsStore();
+  roomsStore.getRoomList();
 
   next();
 });
