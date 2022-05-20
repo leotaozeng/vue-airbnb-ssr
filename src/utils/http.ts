@@ -18,11 +18,11 @@ class Http {
   private httpInterceptorsRequest() {
     Http.axiosInstance.interceptors.request.use(
       (config: AxiosRequestConfig) => {
-        // Do something before request is sent
+        // * Do something before request is sent
         return config;
       },
       (error) => {
-        // Do something with request error
+        // * Do something with request error
         return Promise.reject(error);
       }
     );
@@ -33,28 +33,26 @@ class Http {
   private httpInterceptorsResponse() {
     Http.axiosInstance.interceptors.response.use(
       (response: AxiosResponse) => {
-        // Any status code that lie within the range of 2xx cause this function to trigger
-        // Do something with response data
+        // * Any status code that lie within the range of 2xx cause this function to trigger
+        // * Do something with response data
         return response;
       },
       (error) => {
-        // Any status codes that falls outside the range of 2xx cause this function to trigger
-        // Do something with response error
+        // * Any status codes that falls outside the range of 2xx cause this function to trigger
+        // * Do something with response error
         return Promise.reject(error);
       }
     );
   }
 
-  public get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    return Http.axiosInstance
-      .get(url, config)
-      .then((response) => response.data);
+  public async get(url: string, config?: AxiosRequestConfig) {
+    const response = await Http.axiosInstance.get(url, config);
+    return response.data;
   }
 
-  public post<T>(url: string, config: AxiosRequestConfig): Promise<T> {
-    return Http.axiosInstance
-      .post(url, config)
-      .then((response) => response.data);
+  public async post(url: string, config: AxiosRequestConfig) {
+    const response = await Http.axiosInstance.post(url, config);
+    return response.data;
   }
 }
 

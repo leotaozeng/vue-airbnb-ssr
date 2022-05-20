@@ -2,9 +2,10 @@
 import { useRoomsStore } from '@/stores/rooms';
 
 const roomsStore = useRoomsStore();
+const emit = defineEmits<{ (e: 'changePage', currentPage: number): void }>();
 
 function handleCurrentChange(val: number) {
-  console.log(`current page: ${val}`);
+  emit('changePage', val);
 }
 </script>
 

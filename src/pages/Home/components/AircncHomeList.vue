@@ -2,6 +2,10 @@
 import { useRoomsStore } from '@/stores/rooms';
 
 const roomsStore = useRoomsStore();
+
+function handleChangePage(currentPage: number) {
+  roomsStore.getRoomList(currentPage);
+}
 </script>
 
 <template>
@@ -13,7 +17,7 @@ const roomsStore = useRoomsStore();
         :key="item.id"
         :span="8"
         class="pb-3">
-        <img :src="item.pictureUrl" />
+        <img :src="item.pictureUrl" v-if="item.pictureUrl" />
         <div class="pt-2">
           <p>{{ item.title }}</p>
           <p>{{ item.price }}</p>
@@ -22,7 +26,7 @@ const roomsStore = useRoomsStore();
     </el-row>
 
     <!-- * Pagination -->
-    <aircnc-pagination />
+    <aircnc-pagination @change-page="handleChangePage" />
   </div>
 </template>
 

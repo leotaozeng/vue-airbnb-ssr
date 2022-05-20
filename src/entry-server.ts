@@ -7,7 +7,6 @@ export async function render(url: string, manifest: any) {
   try {
     const { app, router, pinia } = createApp();
     const state = JSON.stringify(pinia.state.value);
-    console.log('pinia:', pinia);
 
     // * set the router to the desired URL before rendering
     await router.push(url);
@@ -18,8 +17,6 @@ export async function render(url: string, manifest: any) {
         return Object.values(record.components);
       }
     );
-
-    console.log('Matched Components', matchedComponents);
 
     // * call `asyncData()` on all matched route components
     await Promise.all(
