@@ -45,7 +45,7 @@ class Http {
     );
   }
 
-  public get<T>(url: string, config: AxiosRequestConfig): Promise<T> {
+  public get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
     return Http.axiosInstance
       .get(url, config)
       .then((response) => response.data);
