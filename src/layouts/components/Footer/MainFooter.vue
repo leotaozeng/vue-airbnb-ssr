@@ -93,13 +93,13 @@ const footerMenu = reactive([
 
 <template>
   <el-footer
-    class="w-full h-fit bg-white text-primary-gray p-0 border-t border-neutral-150">
+    class="w-full h-fit bg-white text-gray-dark p-0 border-t border-neutral-150">
     <div class="content px-6 py-12">
       <!-- Menu -->
       <el-row>
         <el-col :span="6" v-for="menuItem in footerMenu" :key="menuItem.title">
           <!-- Title -->
-          <h4 class="text-sm text-primary-gray font-extrabold">
+          <h4 class="text-sm text-gray-dark font-extrabold">
             {{ t(menuItem.title) }}
           </h4>
 
@@ -110,7 +110,7 @@ const footerMenu = reactive([
               :key="t(submenuItem.name)"
               class="mb-1">
               <a
-                class="text-sm text-muted font-semibold no-underline hover:underline"
+                class="text-sm text-gray-muted font-semibold no-underline hover:underline"
                 :href="submenuItem.link"
                 target="_blank">
                 {{ t(submenuItem.name) }}
@@ -122,7 +122,7 @@ const footerMenu = reactive([
 
       <!-- Copyright -->
       <div class="mt-4 pt-4 border-t border-neutral-150">
-        <div class="copyright text-sm text-muted text-center font-semibold">
+        <div class="copyright text-sm text-gray-muted text-center font-semibold">
           <p class="inline-block">© 2022 Aircnc, Inc. All rights reserved.</p>
           <p class="inline-block ml-2">
             <a

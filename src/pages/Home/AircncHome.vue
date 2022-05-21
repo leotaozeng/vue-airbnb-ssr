@@ -1,14 +1,4 @@
-<script lang="ts">
-import { useRoomsStore } from '@/stores/rooms';
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const roomsStore = useRoomsStore();
-    return { roomsStore };
-  }
-});
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <div class="home w-full">
@@ -17,8 +7,8 @@ export default defineComponent({
 
     <!-- * Content -->
     <div class="content px-6">
-      <h2 class="title text-2xl">title</h2>
-      <h3 class="subtitle text-base">subtitle</h3>
+      <h2 class="title text-2xl mt-6">title</h2>
+      <h3 class="subtitle text-base mt-1.5 mb-6">subtitle</h3>
       <aircnc-home-list />
     </div>
   </div>
@@ -35,6 +25,10 @@ export default defineComponent({
 
   .content {
     @include main-wrapper;
+
+    .title {
+      font-size: 22px;
+    }
   }
 }
 </style>

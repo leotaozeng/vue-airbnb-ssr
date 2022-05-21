@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useRoomsStore } from '@/stores/rooms';
 
 const roomsStore = useRoomsStore();

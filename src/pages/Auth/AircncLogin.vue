@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import useForm from '@/composables/auth/useForm';
 import { Lock, UserFilled } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';

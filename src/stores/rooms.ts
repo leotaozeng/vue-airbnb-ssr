@@ -22,17 +22,23 @@ export const useRoomsStore = defineStore('rooms', {
   }),
   getters: {},
   actions: {
-    async getRoomList(currentPage: number) {
+    async getRoomList(
+      currentPage?: number,
+      pageSize?: number,
+      cityCode?: string
+    ) {
       try {
         const response = await fetchRoomList({
-          pageNo: currentPage,
-          pageSize: this.pageSize,
-          cityCode: this.cityCode
+          pageNo: currentPage || this.currentPage,
+          pageSize: pageSize || this.pageSize,
+          cityCode: cityCode || this.cityCode
         });
 
         if (response && response.result) {
-          const { orders, pageNo, total } = response.result;
+          const { orders, pageNo, total, cityCode } = response.result;
+
           this.rooms = orders.data;
+          this.cityCode = cityCode;
           this.currentPage = pageNo;
           this.total = total;
         }
