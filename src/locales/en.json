@@ -45,5 +45,9 @@
     "signupTab": "Sign up",
     "phone": "Phone number",
     "password": "Password"
+  },
+  "home": {
+    "title": "New Year's Eve Discounts Housing Resource",
+    "subtitle": "Quality housing resource，Under 5 fold"
   }
 }

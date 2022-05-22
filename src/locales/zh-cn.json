@@ -45,5 +45,9 @@
     "signupTab": "注册",
     "phone": "手机号",
     "password": "密码"
+  },
+  "home": {
+    "title": "春季特惠房源",
+    "subtitle": "品质房源，低至 5 折"
   }
 }

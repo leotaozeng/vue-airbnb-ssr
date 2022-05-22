@@ -1,4 +1,8 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+</script>
 
 <template>
   <div class="home w-full">
@@ -6,9 +10,11 @@
     <div class="banner"></div>
 
     <!-- * Content -->
-    <div class="content px-6">
-      <h2 class="title text-2xl mt-6">title</h2>
-      <h3 class="subtitle text-base mt-1.5 mb-6">subtitle</h3>
+    <div class="content px-6 my-10">
+      <div class="mb-6 pb-2">
+        <h2 class="title font-semibold">{{ t('home.title') }}</h2>
+        <h3 class="subtitle text-base mt-3">{{ t('home.subtitle') }}</h3>
+      </div>
       <aircnc-home-list />
     </div>
   </div>
@@ -28,6 +34,7 @@
 
     .title {
       font-size: 22px;
+      line-height: 26px;
     }
   }
 }
