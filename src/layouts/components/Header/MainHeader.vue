@@ -53,17 +53,19 @@ async function handleSelect(key: string, keyPath: string[]) {
     class="w-full relative flex justify-between items-center p-0"
     height="81px">
     <!-- Left -->
-    <h1 class="m-0 text-base">
-      <el-image :src="logoUrl" alt="logo" class="logo-container z-10">
-        <template #error>
-          <div class="image-slot">
-            <el-icon>
-              <i-ep-picture />
-            </el-icon>
-          </div>
-        </template>
-      </el-image>
-    </h1>
+    <router-link :to="{ name: 'Home' }">
+      <h1 class="m-0 text-base">
+        <el-image :src="logoUrl" alt="logo" class="logo-container z-10">
+          <template #error>
+            <div class="image-slot">
+              <el-icon>
+                <i-ep-picture />
+              </el-icon>
+            </div>
+          </template>
+        </el-image>
+      </h1>
+    </router-link>
 
     <!-- Right -->
     <el-menu
