@@ -1,39 +1,41 @@
 <script lang="ts" setup>
 import { useRoomsStore } from '@/stores/rooms';
 import type { TabsPaneContext } from 'element-plus';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const roomsStore = useRoomsStore();
 const cities = [
   {
-    name: '杭州',
+    name: 'home.city.hz',
     code: 'hz'
   },
   {
-    name: '上海',
+    name: 'home.city.sh',
     code: 'sh'
   },
   {
-    name: '南京',
+    name: 'home.city.nj',
     code: 'nj'
   },
   {
-    name: '成都',
+    name: 'home.city.cd',
     code: 'cd'
   },
   {
-    name: '重庆',
+    name: 'home.city.cq',
     code: 'cq'
   },
   {
-    name: '北京',
+    name: 'home.city.bj',
     code: 'bj'
   },
   {
-    name: '苏州',
+    name: 'home.city.sz',
     code: 'sz'
   },
   {
-    name: '广州',
+    name: 'home.city.gz',
     code: 'gz'
   }
 ];
@@ -51,8 +53,8 @@ const handleClickCity = (tab: TabsPaneContext) => {
     @tab-click="handleClickCity">
     <el-tab-pane
       v-for="city in cities"
-      :key="city.name"
-      :label="city.name"
+      :key="city.code"
+      :label="t(city.name)"
       :name="city.code"
       :lazy="true">
       <el-row :gutter="16">

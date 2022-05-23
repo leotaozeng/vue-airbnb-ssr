@@ -122,7 +122,8 @@ const footerMenu = reactive([
 
       <!-- Copyright -->
       <div class="mt-4 pt-4 border-t border-neutral-150">
-        <div class="copyright text-sm text-gray-muted text-center font-semibold">
+        <div
+          class="copyright text-sm text-gray-muted text-center font-semibold">
           <p class="inline-block">© 2022 Aircnc, Inc. All rights reserved.</p>
           <p class="inline-block ml-2">
             <a

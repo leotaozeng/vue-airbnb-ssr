@@ -48,6 +48,16 @@
   },
   "home": {
     "title": "New Year's Eve Discounts Housing Resource",
-    "subtitle": "Quality housing resource，Under 5 fold"
+    "subtitle": "Quality housing resource，Under 5 fold",
+    "city": {
+      "hz": "Hangzhou",
+      "sh": "Shanghai",
+      "nj": "Nanjing",
+      "cd": "Chengdu",
+      "cq": "Chongqing",
+      "bj": "Beijing",
+      "sz": "Suzhou",
+      "gz": "Guangzhou"
+    }
   }
 }
