@@ -35,14 +35,6 @@ const cities = [
   {
     name: '广州',
     code: 'gz'
-  },
-  {
-    name: '长沙',
-    code: 'cs'
-  },
-  {
-    name: '西安',
-    code: 'xa'
   }
 ];
 
@@ -66,17 +58,21 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
           :key="item.id"
           :span="8"
           class="home pb-3">
-          <router-link
-            v-if="item.pictureUrl"
-            :to="{ name: 'RoomDetails', params: { id: item.id } }"
-            class="rounded overflow-hidden">
-            <img class="picture object-cover" :src="item.pictureUrl" />
-          </router-link>
+          <div v-if="item">
+            <router-link
+              v-if="item.pictureUrl"
+              :to="{ name: 'RoomDetails', params: { id: item.id } }"
+              class="rounded overflow-hidden">
+              <img
+                class="picture object-cover rounded"
+                :src="item.pictureUrl" />
+            </router-link>
 
-          <div class="info pt-2 text-gray-dark font-heiti">
-            <p class="title line-clamp-2 font-extrabold">{{ item.title }}</p>
-            <div class="mt-0.5">
-              <span class="font-semibold">￥{{ item.price }}</span>
+            <div class="info pt-2 text-gray-dark font-heiti">
+              <p class="title line-clamp-2 font-extrabold">{{ item.title }}</p>
+              <div class="mt-0.5">
+                <span class="font-semibold">￥{{ item.price }}</span>
+              </div>
             </div>
           </div>
         </el-col>
@@ -92,13 +88,49 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
   }
 
   :deep(.el-tabs__nav-wrap) {
+    padding: 0px 14px;
+    margin: 0px -14px;
+
     &::after {
       display: none;
     }
-  }
 
-  :deep(.el-tabs__nav-scroll) {
-    padding-bottom: 24px;
+    .el-tabs__nav-prev,
+    .el-tabs__nav-next {
+      top: 50%;
+      transform: translate3d(0, calc(-50% - 12px), 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: white;
+      box-shadow: rgb(0 0 0 / 14%) 0px 1px 1px 1px;
+      z-index: 10;
+      font-size: 16px;
+      color: #484848;
+
+      &.is-disabled {
+        display: none;
+      }
+    }
+
+    .el-tabs__nav-prev {
+      left: 1px;
+    }
+
+    .el-tabs__nav-next {
+      right: 1px;
+    }
+
+    .el-tabs__nav-next.is-disabled ~ .el-tabs__nav-wrap::after {
+      color: red;
+    }
+
+    .el-tabs__nav-scroll {
+      padding-bottom: 24px;
+    }
   }
 
   :deep(.el-tabs__active-bar) {
@@ -119,12 +151,21 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
     box-shadow: 0px 1px 2px rgb(0 0 0 / 15%);
     color: #484848;
     background-color: white;
+    transition: box-shadow 0.5s;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
 
     &.is-active {
       color: #ffffff;
       background: #00848a;
       box-shadow: 0px 7px 14px rgb(0 132 138 / 15%);
       border: solid 0.5px #00848a;
+    }
+
+    &:not(.is-active):hover {
+      box-shadow: 0px 3px 6px rgb(0 0 0 / 15%);
     }
   }
 

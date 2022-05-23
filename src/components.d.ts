@@ -6,12 +6,12 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AircncHome: typeof import('./pages/Home/AircncHome.vue')['default']
-    AircncHomeList: typeof import('./pages/Home/components/AircncHomeList.vue')['default']
-    AircncHomeTabs: typeof import('./pages/Home/components/AircncHomeTabs.vue')['default']
+    AircncHomeList: typeof import('./pages/Home/AircncHomeList.vue')['default']
+    AircncHomeTabs: typeof import('./pages/Home/AircncHomeTabs.vue')['default']
     AircncLogin: typeof import('./pages/Auth/AircncLogin.vue')['default']
-    AircncNotFound: typeof import('./pages/AircncNotFound.vue')['default']
+    AircncNotFound: typeof import('./pages/NotFound/AircncNotFound.vue')['default']
     AircncPagination: typeof import('./components/Pagination/AircncPagination.vue')['default']
-    AircncProfile: typeof import('./pages/Profile/AircncProfile.vue')['default']
+    AircncRoomDetails: typeof import('./pages/RoomDetails/AircncRoomDetails.vue')['default']
     ElAvatar: typeof import('element-plus/lib')['ElAvatar']
     ElCol: typeof import('element-plus/lib')['ElCol']
     ElConfigProvider: typeof import('element-plus/lib')['ElConfigProvider']
