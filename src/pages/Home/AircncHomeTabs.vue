@@ -38,14 +38,17 @@ const cities = [
   }
 ];
 
-const handleClick = (tab: TabsPaneContext, event: Event) => {
-  console.log(tab.props, event);
+const handleClickCity = (tab: TabsPaneContext) => {
   roomsStore.getRoomList(1, 6, tab.props.name as string);
 };
 </script>
 
 <template>
-  <el-tabs class="tabs" v-model="roomsStore.cityCode" @tab-click="handleClick">
+  <!-- * 城市筛选 -->
+  <el-tabs
+    class="tabs"
+    v-model="roomsStore.cityCode"
+    @tab-click="handleClickCity">
     <el-tab-pane
       v-for="city in cities"
       :key="city.name"

@@ -11,9 +11,9 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/pages/Home/AircncHome.vue')
       },
       {
-        path: 'profile',
-        name: 'Profile',
-        component: () => import('@/pages/Profile/AircncProfile.vue')
+        path: 'rooms/details/:id',
+        name: 'RoomDetails',
+        component: () => import('@/pages/RoomDetails/AircncRoomDetails.vue')
       }
     ]
   },
@@ -28,7 +28,7 @@ const routes: RouteRecordRaw[] = [
 routes.push({
   path: '/:catchAll(.*)',
   name: 'NotFound',
-  component: () => import('@/pages/AircncNotFound.vue')
+  component: () => import('@/pages/NotFound/AircncNotFound.vue')
 });
 
 export default routes;
