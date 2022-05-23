@@ -61,21 +61,19 @@ const handleClickCity = (tab: TabsPaneContext) => {
           :key="item.id"
           :span="8"
           class="home pb-3">
-          <div v-if="item">
-            <router-link
-              v-if="item.pictureUrl"
-              :to="{ name: 'RoomDetails', params: { id: item.id } }"
-              class="rounded overflow-hidden">
-              <img
-                class="picture object-cover rounded"
-                :src="item.pictureUrl" />
-            </router-link>
+          <router-link
+            v-if="item.pictureUrl"
+            :to="{ name: 'RoomDetails', params: { id: item.id } }"
+            class="rounded overflow-hidden">
+            <img class="picture object-cover rounded" :src="item.pictureUrl" />
+          </router-link>
 
-            <div class="info pt-2 text-gray-dark font-heiti">
-              <p class="title line-clamp-2 font-extrabold">{{ item.title }}</p>
-              <div class="mt-0.5">
-                <span class="font-semibold">￥{{ item.price }}</span>
-              </div>
+          <div
+            v-if="item.title && item.price"
+            class="info pt-2 text-gray-dark font-heiti">
+            <p class="title line-clamp-2 font-extrabold">{{ item.title }}</p>
+            <div class="mt-0.5">
+              <span class="font-semibold">￥{{ item.price }}</span>
             </div>
           </div>
         </el-col>
