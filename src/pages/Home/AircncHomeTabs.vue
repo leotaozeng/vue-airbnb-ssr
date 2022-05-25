@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { useRoomsStore } from '@/stores/rooms';
 import type { TabsPaneContext } from 'element-plus';
-import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 const roomsStore = useRoomsStore();

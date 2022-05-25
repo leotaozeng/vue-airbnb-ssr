@@ -31,7 +31,7 @@ const { t } = useI18n();
   }
 
   .content {
-    @include main-wrapper;
+    @include primary-wrapper;
 
     .title {
       font-size: 22px;

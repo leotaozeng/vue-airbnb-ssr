@@ -160,7 +160,7 @@ const footerMenu = reactive([
 
 .el-footer {
   .content {
-    @include main-wrapper;
+    @include primary-wrapper;
   }
 }
 </style>

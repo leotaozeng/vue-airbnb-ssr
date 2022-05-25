@@ -1,4 +1,10 @@
-@mixin main-wrapper {
+@mixin primary-wrapper {
   max-width: 1080px;
   margin: 0 auto;
+}
+
+@mixin secondary-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 80px;
 }
