@@ -5,3 +5,13 @@ export interface IResult {
   success: boolean;
   result: any | null;
 }
+
+export interface IRoomListParams {
+  pageNo: number;
+  pageSize: number;
+  cityCode: string;
+}
+
+export interface IRoomDetailsParams {
+  id: string;
+}

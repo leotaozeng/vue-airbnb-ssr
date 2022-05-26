@@ -1,4 +1,4 @@
-import { fetchRoomList } from '@/api';
+import { fetchRoomDetails, fetchRoomList } from '@/api/rooms';
 import { ElMessage } from 'element-plus';
 import { defineStore } from 'pinia';
 
@@ -15,10 +15,31 @@ export const useRoomsStore = defineStore('rooms', {
         title: ''
       }
     ],
+    roomDetails: {
+      imgs: [],
+      title: '',
+      info: {
+        room: 0,
+        bed: 0,
+        toilet: 0,
+        liveNumber: 0,
+        remarks: 0,
+        metro: false,
+        parking: false,
+        luggage: false,
+        goodOwner: false
+      },
+      owner: {
+        avatar: '',
+        name: '',
+        introduce: '',
+        certify: false
+      }
+    },
+    cityCode: 'hz',
     currentPage: 1,
     pageSize: 6,
-    total: 0,
-    cityCode: 'hz'
+    total: 0
   }),
   getters: {},
   actions: {
@@ -34,21 +55,37 @@ export const useRoomsStore = defineStore('rooms', {
           cityCode: cityCode || this.cityCode
         });
 
-        if (response && response.result) {
+        if (response.success && response.result) {
           const { orders, pageNo, total, cityCode } = response.result;
-
           this.rooms = orders.data;
           this.cityCode = cityCode;
           this.currentPage = pageNo;
           this.total = total;
         }
       } catch (error) {
-        console.error(error);
         ElMessage({
           showClose: true,
           message: '获取 room list 出现异常',
           type: 'error'
         });
+        console.error(error);
+      }
+    },
+    async getRoomDetails(id: string) {
+      try {
+        const response = await fetchRoomDetails({ id });
+
+        if (response.success && response.result) {
+          console.log(response.result);
+          this.roomDetails = response.result;
+        }
+      } catch (error) {
+        ElMessage({
+          showClose: true,
+          message: '获取 room details 出现异常',
+          type: 'error'
+        });
+        console.error(error);
       }
     }
   }
