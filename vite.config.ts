@@ -12,6 +12,15 @@ const pathSrc = path.resolve(__dirname, 'src');
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    proxy: {
+      '/proxy': {
+        target: 'http://110.42.184.111',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/proxy/, '')
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': pathSrc

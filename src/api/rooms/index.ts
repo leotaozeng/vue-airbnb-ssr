@@ -4,13 +4,13 @@ import { IResult, IRoomDetailsParams, IRoomListParams } from '../interface';
 
 // 真实接口
 export function fetchRoomList(params: IRoomListParams): Promise<IResult> {
-  return http.get('http://110.42.184.111/api/room/room/getRoomList', {
+  return http.get('/proxy/api/room/room/getRoomList', {
     params
   });
 }
 
 export function fetchRoomDetails(params: IRoomDetailsParams): Promise<IResult> {
-  return http.get('http://110.42.184.111/api/room/room/getRoomDetail', {
+  return http.get('/proxy/api/room/room/getRoomDetail', {
     params
   });
 }
