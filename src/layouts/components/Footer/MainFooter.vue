@@ -1,7 +1,4 @@
-<script setup lang="ts">
-import { reactive } from 'vue';
-import { useI18n } from 'vue-i18n';
-
+<script lang="ts" setup>
 const { t } = useI18n();
 const footerMenu = reactive([
   {

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { userSignOutAPI } from '@/api/auth';
 import avatarUrl from '@/assets/images/avatar.jpeg';
 import logoUrl from '@/assets/images/logo.png';
@@ -7,14 +7,30 @@ import { useLocaleStore } from '@/stores/locale';
 import { ElMessage } from 'element-plus';
 import en from 'element-plus/lib/locale/lang/en';
 import zhCN from 'element-plus/lib/locale/lang/zh-CN';
-import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
 
+const { locale: localeLanguage } = useI18n();
+const { t } = useI18n();
+const router = useRouter();
+const route = useRoute();
+const routes = ['Home'];
 const authStore = useAuthStore();
 const localeStore = useLocaleStore();
-const router = useRouter();
-const { locale: localeLanguage } = useI18n({ useScope: 'global' });
-const { t } = useI18n();
+
+const isHeaderIndependent = computed(() => {
+  return !routes.includes(route.name as string);
+});
+const headerClassObject = computed(() => {
+  return {
+    relative: isHeaderIndependent.value,
+    absolute: !isHeaderIndependent.value
+  };
+});
+const menuClassObject = computed(() => {
+  return {
+    'border-b': isHeaderIndependent.value,
+    'border-b-0': !isHeaderIndependent.value
+  };
+});
 
 async function handleSelect(key: string, keyPath: string[]) {
   if (keyPath[0] === 'language') {
@@ -50,7 +66,8 @@ async function handleSelect(key: string, keyPath: string[]) {
 
 <template>
   <el-header
-    class="w-full relative flex justify-between items-center p-0"
+    class="w-full flex justify-between items-center p-0"
+    :class="headerClassObject"
     height="81px">
     <!-- Left -->
     <router-link :to="{ name: 'Home' }">
@@ -70,7 +87,11 @@ async function handleSelect(key: string, keyPath: string[]) {
     <!-- Right -->
     <el-menu
       mode="horizontal"
-      class="menu w-full h-full justify-end font-semibold border-neutral-150"
+      background-color="transparent"
+      class="menu w-full h-full justify-end font-semibold"
+      :class="menuClassObject"
+      :text-color="!isHeaderIndependent ? 'white' : ''"
+      :ellipsis="false"
       @select="handleSelect">
       <!-- Trips -->
       <el-menu-item index="trips" class="menu-item">
@@ -163,14 +184,21 @@ async function handleSelect(key: string, keyPath: string[]) {
 
   .menu {
     padding: 0 24px;
+    border-color: #ebebeb;
 
     .menu-item {
       padding: 0 12px;
+
+      &:hover,
+      &:focus {
+        background-color: transparent;
+      }
     }
 
     .submenu {
       :deep(.el-sub-menu__title) {
         padding: 0 12px;
+        background-color: transparent !important;
       }
     }
   }

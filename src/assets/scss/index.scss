@@ -8,8 +8,15 @@
     url('../fonts/Airmojix/Airmojix-Regular.woff2') format('woff2');
 }
 
+/* Hide scrollbar for IE, Edge and Firefox */
 html {
   -webkit-font-smoothing: antialiased;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 html,
@@ -22,14 +29,4 @@ body,
   .el-menu {
     min-width: 115px;
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
