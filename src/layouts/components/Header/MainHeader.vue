@@ -28,7 +28,8 @@ const headerClassObject = computed(() => {
 const menuClassObject = computed(() => {
   return {
     'border-b': isHeaderIndependent.value,
-    'border-b-0': !isHeaderIndependent.value
+    'border-b-0': !isHeaderIndependent.value,
+    'show-white-text': !isHeaderIndependent.value
   };
 });
 
@@ -90,7 +91,6 @@ async function handleSelect(key: string, keyPath: string[]) {
       background-color="transparent"
       class="menu w-full h-full justify-end font-semibold"
       :class="menuClassObject"
-      :text-color="!isHeaderIndependent ? 'white' : ''"
       :ellipsis="false"
       @select="handleSelect">
       <!-- Trips -->
@@ -185,6 +185,18 @@ async function handleSelect(key: string, keyPath: string[]) {
   .menu {
     padding: 0 24px;
     border-color: #ebebeb;
+
+    &.show-white-text {
+      .menu-item {
+        color: white;
+      }
+
+      .submenu {
+        :deep(.el-sub-menu__title) {
+          color: white;
+        }
+      }
+    }
 
     .menu-item {
       padding: 0 12px;
