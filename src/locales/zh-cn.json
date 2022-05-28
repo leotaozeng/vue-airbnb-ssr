@@ -1,7 +1,7 @@
 {
   "header": {
     "menu": {
-      "trips": "房源订单中心",
+      "reservationCenter": "房源订单中心",
       "history": "历史足迹",
       "language": "国际化切换",
       "chinese": "简体中文",
