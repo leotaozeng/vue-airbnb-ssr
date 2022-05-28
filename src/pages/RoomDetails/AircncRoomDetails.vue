@@ -178,8 +178,8 @@ onBeforeMount(() => {
         </section>
       </div>
 
-      <div class="form-container w-1/3 border border-solid border-zinc-200">
-        <div class="pt-4 px-6">
+      <div class="form-container w-1/3">
+        <div class="border border-solid border-zinc-200 pt-4 px-6">
           <!-- Price -->
           <div>
             <span class="price">
@@ -235,7 +235,7 @@ onBeforeMount(() => {
             </el-form-item>
 
             <!-- Submit Button -->
-            <el-form-item class="mt-16">
+            <el-form-item class="mt-6">
               <el-button type="danger" class="w-full">
                 {{ t('rooms.reserve') }}
               </el-button>

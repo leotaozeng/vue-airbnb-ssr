@@ -72,7 +72,9 @@ const handleClickCity = (tab: TabsPaneContext) => {
           <div
             v-if="item.title && item.price"
             class="info pt-2 text-gray-dark font-heiti">
-            <p class="title line-clamp-2 font-extrabold">{{ item.title }}</p>
+            <router-link :to="{ name: 'RoomDetails', params: { id: item.id } }">
+              <p class="title line-clamp-2 font-extrabold">{{ item.title }}</p>
+            </router-link>
             <div class="mt-0.5">
               <span class="font-semibold">￥{{ item.price }}</span>
             </div>

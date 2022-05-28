@@ -29,4 +29,10 @@ body,
   .el-menu {
     min-width: 115px;
   }
+
+  .el-menu-item {
+    &:hover {
+      background-color: transparent !important;
+    }
+  }
 }
