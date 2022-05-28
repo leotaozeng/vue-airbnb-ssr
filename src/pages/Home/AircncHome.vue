@@ -25,7 +25,7 @@ const { t } = useI18n();
 .home {
   .banner {
     height: 530px;
-    background: url('@/assets/images/banner.jpeg') no-repeat center/100%;
+    background: url('@/assets/images/banner.jpeg') no-repeat center/cover;
   }
 
   .content {
