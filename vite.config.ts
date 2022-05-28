@@ -7,6 +7,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
 import Inspect from 'vite-plugin-inspect';
+import svgLoader from 'vite-svg-loader';
 
 const pathSrc = path.resolve(__dirname, 'src');
 
@@ -35,6 +36,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    svgLoader(),
     AutoImport({
       imports: ['vue', 'vue-router', 'vue-i18n', 'pinia'],
       resolvers: [
