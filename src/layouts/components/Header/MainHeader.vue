@@ -93,9 +93,9 @@ async function handleSelect(key: string, keyPath: string[]) {
       :class="menuClassObject"
       :ellipsis="false"
       @select="handleSelect">
-      <!-- Trips -->
-      <el-menu-item index="trips" class="menu-item">
-        {{ t('header.menu.trips') }}
+      <!-- Reservation Center -->
+      <el-menu-item index="reservationCenter" class="menu-item">
+        {{ t('header.menu.reservationCenter') }}
       </el-menu-item>
 
       <!-- Browsing History -->
