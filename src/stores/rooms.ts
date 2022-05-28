@@ -34,7 +34,8 @@ export const useRoomsStore = defineStore('rooms', {
         name: '',
         introduce: '',
         certify: false
-      }
+      },
+      price: 0
     },
     cityCode: 'hz',
     currentPage: 1,

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import ArrowRight from '@/assets/images/arrow-right.svg';
 import useForm from '@/composables/auth/useForm';
 import { useRoomsStore } from '@/stores/rooms';
 
@@ -6,8 +7,39 @@ const roomsStore = useRoomsStore();
 const route = useRoute();
 
 const { t } = useI18n();
-const { activeName, ruleFormRef, ruleForm, rules, handleSubmitForm } =
-  useForm();
+const { ruleFormRef } = useForm();
+
+const ruleForm = reactive({
+  date: '',
+  region: ''
+});
+
+const discounts = [
+  {
+    title: '春季特惠 8 折',
+    description: '在 3月1日至5月31日 期间入住，可享受原房费的 8 折优惠。'
+  },
+  {
+    title: '夏季特惠 8 折',
+    description: '在 3月1日至5月31日 期间入住，可享受原房费的 8 折优惠。'
+  },
+  {
+    title: '早鸟特惠 8 折',
+    description: '在 3月1日至5月31日 期间入住，可享受原房费的 8 折优惠。'
+  },
+  {
+    title: '月租优惠 7 折',
+    description: '在 3月1日至5月31日 期间入住，可享受原房费的 8 折优惠。'
+  },
+  {
+    title: '周租优惠 7.5 折',
+    description: '在 3月1日至5月31日 期间入住，可享受原房费的 8 折优惠。'
+  },
+  {
+    title: '连住优惠 满 2 天 8 折',
+    description: '在 3月1日至5月31日 期间入住，可享受原房费的 8 折优惠。'
+  }
+];
 
 onBeforeMount(() => {
   roomsStore.getRoomDetails(route.params.id as string);
@@ -16,24 +48,26 @@ onBeforeMount(() => {
 
 <template>
   <div v-if="roomsStore.roomDetails">
+    <!-- Carousel -->
     <div v-if="roomsStore.roomDetails.imgs.length > 0" class="slide-container">
       <el-carousel
-        class="slide py-4"
+        class="slide pt-4 pb-12"
         type="card"
         indicator-position="none"
-        height="406px"
-        :autoplay="false">
+        height="590px">
         <el-carousel-item
           class="slide-item rounded-md"
           v-for="img in roomsStore.roomDetails.imgs"
           :key="img">
-          <el-image :src="img" class="w-full" />
+          <el-image :src="img" class="w-full h-full" fit="cover" />
         </el-carousel-item>
       </el-carousel>
     </div>
 
-    <div class="room-details flex">
-      <div class="details">
+    <!-- Details -->
+    <div class="details flex">
+      <!-- Room Details -->
+      <div class="room-details">
         <section
           v-if="roomsStore.roomDetails.info && roomsStore.roomDetails.title">
           <!-- Title -->
@@ -124,10 +158,10 @@ onBeforeMount(() => {
 
               <p class="font-semibold text-sm text-gray-dark">
                 <span v-if="roomsStore.roomDetails.owner.certify">
-                  已验证身份 ·
+                  已验证身份
                 </span>
                 <span v-if="roomsStore.roomDetails.info.goodOwner">
-                  超赞房东
+                  · 超赞房东
                 </span>
               </p>
             </div>
@@ -144,40 +178,70 @@ onBeforeMount(() => {
         </section>
       </div>
 
-      <div class="form w-1/3">
-        <!-- * Form -->
-        <el-form
-          size="large"
-          ref="ruleFormRef"
-          class="mt-5"
-          :model="ruleForm"
-          :rules="rules"
-          @keyup.enter.self="handleSubmitForm(ruleFormRef)">
-          <!-- * Phone Number -->
-          <el-form-item prop="phone">
-            <el-input
-              clearable
-              class="input"
-              :placeholder="t('auth.phone')"
-              v-model="ruleForm.phone" />
-          </el-form-item>
+      <div class="form-container w-1/3 border border-solid border-zinc-200">
+        <div class="pt-4 px-6">
+          <!-- Price -->
+          <div>
+            <span class="price">
+              <span class="text-gray-dark font-extrabold"
+                >￥{{ roomsStore.roomDetails.price }}</span
+              >
+            </span>
+            <span class="text-gray-dark text-xs font-semibold">/晚</span>
+          </div>
 
-          <!-- * Submit Button -->
-          <el-form-item class="mt-16">
-            <el-button
-              round
-              type="primary"
-              class="w-full"
-              native-type="submit"
-              @click.prevent="handleSubmitForm(ruleFormRef)">
-              {{
-                activeName === 'signin'
-                  ? t('auth.signinBtn')
-                  : t('auth.signupBtn')
-              }}
-            </el-button>
-          </el-form-item>
-        </el-form>
+          <!-- Discounts -->
+          <ul class="mt-px">
+            <li
+              v-for="discount in discounts"
+              :key="discount.title"
+              class="inline-flex items-center mr-2">
+              <span class="mr-1">
+                <el-icon color="#bbbbbb"><i-ep-circle-check-filled /></el-icon>
+              </span>
+              <span class="text-xs text-gray-muted">{{ discount.title }}</span>
+            </li>
+          </ul>
+
+          <div class="line my-4"></div>
+
+          <!-- Form -->
+          <el-form
+            size="large"
+            ref="ruleFormRef"
+            class="mt-5"
+            label-position="top"
+            :model="ruleForm">
+            <!-- Date Range -->
+            <el-form-item class="form-item" :label="t('rooms.date')">
+              <el-date-picker
+                v-model="ruleForm.date"
+                type="daterange"
+                range-separator="To"
+                :start-placeholder="t('rooms.startDate')"
+                :end-placeholder="t('rooms.endDate')">
+                <template #range-separator>
+                  <arrow-right />
+                </template>
+              </el-date-picker>
+            </el-form-item>
+
+            <!-- Guests -->
+            <el-form-item class="form-item" :label="t('rooms.guests')">
+              <el-select v-model="ruleForm.region">
+                <el-option label="Zone one" value="shanghai" />
+                <el-option label="Zone two" value="beijing" />
+              </el-select>
+            </el-form-item>
+
+            <!-- Submit Button -->
+            <el-form-item class="mt-16">
+              <el-button type="danger" class="w-full">
+                {{ t('rooms.reserve') }}
+              </el-button>
+            </el-form-item>
+          </el-form>
+        </div>
       </div>
     </div>
   </div>
@@ -193,24 +257,44 @@ onBeforeMount(() => {
   }
 }
 
-.room-details {
+.details {
   @include secondary-wrapper;
-
-  .details {
-    width: 58.333333333333336%;
-  }
-
-  .form {
-    margin-left: 8.333333333333332%;
-  }
-
-  .title {
-    font-size: 32px;
-    line-height: 1.125em;
-  }
 
   .line {
     border-bottom: 1px solid #ebebeb;
+  }
+
+  .room-details {
+    width: 58.333333333333336%;
+
+    .title {
+      font-size: 32px;
+      line-height: 1.125em;
+    }
+  }
+
+  .form-container {
+    margin-left: 8.333333333333332%;
+
+    .price {
+      font-size: 18px;
+      line-height: 1.44444em;
+
+      > span {
+        font-size: 22px;
+      }
+    }
+
+    .form-item {
+      :deep(.el-form-item__label) {
+        margin: 0;
+        height: auto;
+        color: #484848;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1.33333em;
+      }
+    }
   }
 }
 </style>
