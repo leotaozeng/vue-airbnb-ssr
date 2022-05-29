@@ -1,3 +1,4 @@
+import vueI18n from '@intlify/vite-plugin-vue-i18n';
 import vue from '@vitejs/plugin-vue';
 import * as path from 'path';
 import AutoImport from 'unplugin-auto-import/vite';
@@ -24,7 +25,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': pathSrc
+      '@': pathSrc,
+      'vue-i18n': 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js'
     }
   },
   css: {
@@ -36,6 +38,9 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    vueI18n({
+      include: path.resolve(__dirname, 'src/locales/**')
+    }),
     svgLoader(),
     AutoImport({
       imports: ['vue', 'vue-router', 'vue-i18n', 'pinia'],

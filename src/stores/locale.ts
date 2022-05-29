@@ -15,7 +15,7 @@ export const useLocaleStore = defineStore('locale', {
       if (response && response.result) {
         const { locale, name } = response.result;
         this.locale = locale;
-        i18n.global.locale = name;
+        i18n.global.locale.value = name;
       }
     },
     async setLanguage(locale: any) {
