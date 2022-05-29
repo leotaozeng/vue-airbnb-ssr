@@ -16,7 +16,9 @@ const {
 <template>
   <div class="login w-screen h-screen flex flex-row">
     <!-- * Left -->
-    <div class="left-part"></div>
+    <div class="left-part">
+      <router-link :to="{ name: 'Home' }" class="block w-full h-full" />
+    </div>
 
     <!-- * Right -->
     <div class="right-part flex justify-center items-center">
