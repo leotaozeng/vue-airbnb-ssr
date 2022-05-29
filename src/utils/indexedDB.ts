@@ -3,9 +3,9 @@ import { IResult } from '@/api/interface';
 import TypeObjectStore from '@/db/type';
 
 export default class Database {
-  private databaseName: string; // * 数据库名称
-  private databaseVersion: number; // * 数据库版本
-  private database!: IDBDatabase; // * 数据库对象
+  private databaseName: string; // 数据库名称
+  private databaseVersion: number; // 数据库版本
+  private database!: IDBDatabase; // 数据库对象
 
   constructor(databaseName: string, databaseVersion?: number) {
     this.databaseName = databaseName;
@@ -21,29 +21,29 @@ export default class Database {
         reject('fail');
       }
 
-      // * Open our database with the defined name and version
-      // * The call returns openRequest object
+      // Open our database with the defined name and version
+      // The call returns openRequest object
       const openRequest: IDBOpenDBRequest = window.indexedDB.open(
         this.databaseName,
         this.databaseVersion
       );
 
-      // * Database is ready, but its version is outdated
-      // * The upgradeneeded event also triggers when the database doesn’t yet exist (version 0)
+      // Database is ready, but its version is outdated
+      // The upgradeneeded event also triggers when the database doesn’t yet exist (version 0)
       openRequest.onupgradeneeded = () => {
         console.log('数据库升级成功');
 
-        // * The result is an instance of an IDBDatabase
+        // The result is an instance of an IDBDatabase
         this.database = openRequest.result;
 
-        // * Combine an array of objects with an empty object to create a new single object
+        // Combine an array of objects with an empty object to create a new single object
         const objectStores = Object.assign({}, ...arrayStores);
-        // * 初始化多个 object store 对象仓库
+        // 初始化多个 object store 对象仓库
         for (const storeName in objectStores) {
-          // * Get each single object store
+          // Get each single object store
           const { keyPath, indexs } = objectStores[storeName];
           if (!this.database.objectStoreNames.contains(storeName)) {
-            // * Create an object store in the database
+            // Create an object store in the database
             const objectStore = this.database.createObjectStore(storeName, {
               keyPath,
               autoIncrement: true
@@ -62,15 +62,15 @@ export default class Database {
         }
       };
 
-      // * Database is ready, there’s the “database object” in openRequest.result
-      // * We should use it for further calls
+      // Database is ready, there’s the “database object” in openRequest.result
+      // We should use it for further calls
       openRequest.onsuccess = () => {
         console.info('打开数据库成功');
         this.database = openRequest.result;
         resolve('success');
       };
 
-      // * Open a database failed
+      // Open a database failed
       openRequest.onerror = () => {
         console.error('打开数据库失败', openRequest.error);
         reject('fail');
@@ -78,7 +78,7 @@ export default class Database {
     });
   }
 
-  // * Add data to an object store
+  // Add data to an object store
   addItem(storeName: string, data: any) {
     return new Promise((resolve, reject) => {
       const request = this.database
@@ -101,7 +101,7 @@ export default class Database {
     });
   }
 
-  // * Update data in an object store
+  // Update data in an object store
   updateItem(storeName: string, data: any) {
     return new Promise((resolve, reject) => {
       const request = this.database
@@ -121,7 +121,7 @@ export default class Database {
     });
   }
 
-  // * Remove data from an object store
+  // Remove data from an object store
   removeItem(storeName: string, key: number | string) {
     return new Promise((resolve, reject) => {
       const request = this.database
@@ -141,7 +141,7 @@ export default class Database {
     });
   }
 
-  // * Get an object in an object store
+  // Get an object in an object store
   getItem(storeName: string, key: number | string) {
     return new Promise((resolve, reject) => {
       const request = this.database
@@ -161,7 +161,7 @@ export default class Database {
     });
   }
 
-  // * Get an array of all the objects in an object store
+  // Get an array of all the objects in an object store
   getList(storeName: string) {
     return new Promise((resolve, reject) => {
       const request = this.database

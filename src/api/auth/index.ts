@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// * code: '000000' 表示 '操作成功'
-// * code: '000001' 表示 '手机号已存在'
-// * code: '000002' 表示 '手机号不存在'
-// * code: '000003' 表示 '密码不正确'
-// * code: '000004' 表示 '其他异常'
-// * code: '000005' 表示 '登录过期'
+// code: '000000' 表示 '操作成功'
+// code: '000001' 表示 '手机号已存在'
+// code: '000002' 表示 '手机号不存在'
+// code: '000003' 表示 '密码不正确'
+// code: '000004' 表示 '其他异常'
+// code: '000005' 表示 '登录过期'
 
 import { airbnbDB } from '@/db';
 import usersObjectStore from '@/db/objectStores/users';
@@ -14,7 +14,7 @@ import { ElLoading, ElMessage } from 'element-plus';
 
 const storeName = Object.keys(usersObjectStore)[0];
 
-// * Mock接口：用户注册
+// Mock接口：用户注册
 export const userSignUpAPI = async (params: any) => {
   const loading = ElLoading.service({
     lock: true,
@@ -45,7 +45,7 @@ export const userSignUpAPI = async (params: any) => {
         }
       };
     } else {
-      // * 存在相同手机号
+      // 存在相同手机号
       return {
         code: '000001',
         message: '手机号已存在',
@@ -67,7 +67,7 @@ export const userSignUpAPI = async (params: any) => {
   }
 };
 
-// * Mock接口：用户登录
+// Mock接口：用户登录
 export const userSignInAPI = async (params: any) => {
   const loading = ElLoading.service({
     lock: true,
@@ -80,7 +80,7 @@ export const userSignInAPI = async (params: any) => {
     const result = users.find((user) => user.phone === params.phone);
 
     if (!result) {
-      // * 用户输入的手机号不存在
+      // 用户输入的手机号不存在
       return {
         code: '000002',
         message: '手机号不存在',
@@ -88,7 +88,7 @@ export const userSignInAPI = async (params: any) => {
         result: null
       };
     } else if (result.password !== params.password) {
-      // * 用户输入的密码不正确
+      // 用户输入的密码不正确
       return {
         code: '000003',
         message: '密码不正确',
@@ -128,7 +128,7 @@ export const userSignInAPI = async (params: any) => {
   }
 };
 
-// * Mock接口：用户登出
+// Mock接口：用户登出
 export const userSignOutAPI = async () => {
   const loading = ElLoading.service({
     lock: true,

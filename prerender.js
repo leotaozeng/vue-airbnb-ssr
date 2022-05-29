@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-// * Pre-render the app into static HTML. run `yarn generate` and then `dist/static` can be served as a static site.
+// Pre-render the app into static HTML. run `yarn generate` and then `dist/static` can be served as a static site.
 const fs = require('fs');
 const path = require('path');
 
@@ -21,11 +21,12 @@ const routesToPrerender = fs
 (async () => {
   // pre-render each route...
   for (const url of routesToPrerender) {
-    const [appHtml, preloadLinks] = await render(url, manifest);
+    const [appHtml, preloadLinks, state] = await render(url, manifest);
 
     const html = template
       .replace(`<!--preload-links-->`, preloadLinks)
-      .replace(`<!--app-html-->`, appHtml);
+      .replace(`<!--app-html-->`, appHtml)
+      .replace('<!--pinia-state-->', state);
 
     const filePath = `dist/static${url === '/' ? '/index' : url}.html`;
     fs.writeFileSync(toAbsolute(filePath), html);

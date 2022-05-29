@@ -4,7 +4,7 @@ import { defineStore } from 'pinia';
 
 export const useRoomsStore = defineStore('rooms', {
   state: () => ({
-    // * all these properties will have their type inferred automatically
+    // all these properties will have their type inferred automatically
     rooms: [
       {
         cityCode: '',

@@ -1,4 +1,4 @@
-// * renders the app using the framework's SSR API
+// renders the app using the framework's SSR API
 import { basename } from 'path';
 import { renderToString } from 'vue/server-renderer';
 import { createApp } from './main';
@@ -8,7 +8,7 @@ export async function render(url: string, manifest: any) {
     const { app, router, pinia } = createApp();
     const state = JSON.stringify(pinia.state.value);
 
-    // * set the router to the desired URL before rendering
+    // set the router to the desired URL before rendering
     await router.push(url);
     await router.isReady();
 
@@ -18,7 +18,7 @@ export async function render(url: string, manifest: any) {
       }
     );
 
-    // * call `asyncData()` on all matched route components
+    // call `asyncData()` on all matched route components
     await Promise.all(
       matchedComponents.map((component) => {
         if (component.asyncData) {
@@ -30,8 +30,8 @@ export async function render(url: string, manifest: any) {
       })
     );
 
-    // * passing SSR context object which will be available via useSSRContext() @vitejs/plugin-vue injects code into a component's setup() that registers itself on ctx.modules.
-    // * After the render, ctx.modules would contain all the components that have been instantiated during this render call.
+    // passing SSR context object which will be available via useSSRContext() @vitejs/plugin-vue injects code into a component's setup() that registers itself on ctx.modules.
+    // After the render, ctx.modules would contain all the components that have been instantiated during this render call.
     const renderCtx: { modules?: string[] } = {};
     const renderedHtml = await renderToString(app, renderCtx);
 
