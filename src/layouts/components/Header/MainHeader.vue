@@ -110,6 +110,7 @@ async function handleSelect(key: string, keyPath: string[]) {
         popper-class="menu-popup-container"
         :popper-offset="-15">
         <template #title>{{ t('header.menu.language') }}</template>
+
         <!-- Chinese -->
         <el-menu-item index="zh-cn" v-show="localeLanguage !== 'zh-cn'">
           {{ t('header.menu.chinese') }}
@@ -151,6 +152,7 @@ async function handleSelect(key: string, keyPath: string[]) {
               src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
           </el-avatar>
         </template>
+
         <el-menu-item index="signout"> {{ t('auth.signoutBtn') }}</el-menu-item>
       </el-sub-menu>
     </el-menu>
