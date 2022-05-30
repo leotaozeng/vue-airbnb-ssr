@@ -1,6 +1,5 @@
 import '@/assets/scss/index.scss';
-import { ID_INJECTION_KEY } from 'element-plus';
-import 'element-plus/dist/index.css';
+import 'element-plus/theme-chalk/index.css';
 import { createPinia } from 'pinia';
 import { createSSRApp } from 'vue';
 import App from './App.vue';
@@ -19,11 +18,6 @@ export function createApp() {
   app.use(i18n);
   app.use(router);
   app.use(pinia);
-
-  app.provide(ID_INJECTION_KEY, {
-    prefix: 100,
-    current: 0
-  });
 
   return { app, router, pinia };
 }

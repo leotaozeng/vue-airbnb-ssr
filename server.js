@@ -64,12 +64,12 @@ async function createServer() {
       }
 
       // 4. render the app HTML. This assumes entry-server.js's exported `render` function calls appropriate framework SSR APIs, ReactDOMServer.renderToString()
-      const [appHtml, preloadLinks, state] = await render(url, manifest);
+      const [renderedHTML, preloadLinks, state] = await render(url, manifest);
 
       // 5. Inject the app-rendered HTML into the template.
       const html = template
         .replace(`<!--preload-links-->`, preloadLinks)
-        .replace(`<!--app-html-->`, appHtml)
+        .replace(`<!--app-html-->`, renderedHTML)
         .replace('<!--pinia-state-->', state);
 
       // 6. Send the rendered HTML back.
