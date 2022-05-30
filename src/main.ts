@@ -1,5 +1,5 @@
 import '@/assets/scss/index.scss';
-import 'element-plus/dist/index.css';
+import 'element-plus/theme-chalk/index.css';
 import { createPinia } from 'pinia';
 import { createSSRApp } from 'vue';
 import App from './App.vue';
