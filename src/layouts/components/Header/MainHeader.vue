@@ -94,7 +94,10 @@ async function handleSelect(key: string, keyPath: string[]) {
       :ellipsis="false"
       @select="handleSelect">
       <!-- Reservation Center -->
-      <el-menu-item index="reservationCenter" class="menu-item">
+      <el-menu-item
+        v-if="authStore.loggedIn === 1"
+        index="reservationCenter"
+        class="menu-item">
         {{ t('header.menu.reservationCenter') }}
       </el-menu-item>
 

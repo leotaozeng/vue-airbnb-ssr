@@ -13,7 +13,7 @@ interface Result {
 
 const storeName = Object.keys(languagesObjectStore)[0];
 
-// * Mock接口：保存当前语言包
+// Mock接口：保存当前语言包
 export const saveLanguageAPI = async (locale: any) => {
   const loading = ElLoading.service({
     lock: true,
@@ -25,13 +25,13 @@ export const saveLanguageAPI = async (locale: any) => {
     const result = (await airbnbDB.getItem(storeName, 1)) as Result;
 
     if (!result) {
-      // * 数据不存在，新增数据
+      // 数据不存在，新增数据
       await airbnbDB.addItem(storeName, {
         locale,
         name: locale.name
       });
     } else {
-      // * 数据已存在，更新数据
+      // 数据已存在，更新数据
       await airbnbDB.updateItem(storeName, {
         ...result,
         locale,
@@ -59,7 +59,7 @@ export const saveLanguageAPI = async (locale: any) => {
   }
 };
 
-// * Mock接口：获取当前语言包
+// Mock接口：获取当前语言包
 export const fetchLanguageAPI = async () => {
   try {
     const result = (await airbnbDB.getItem(storeName, 1)) as Result;

@@ -1,4 +1,4 @@
-// * mounts the app to a DOM element
+// mounts the app to a DOM element
 import { airbnbDB } from './db';
 import languagesObjectStore from './db/objectStores/languages';
 import usersObjectStore from './db/objectStores/users';
@@ -8,28 +8,28 @@ import { useRoomsStore } from './stores/rooms';
 
 const { app, router, pinia } = createApp();
 
-// * 初始化 Pinia
-// * 注意：__INITIAL_STATE__需要在 src/types/shims-global.d.ts中定义
+// 初始化 Pinia
+// 注意：__INITIAL_STATE__需要在 src/types/shims-global.d.ts中定义
 if (window.__INITIAL_STATE__) {
   pinia.state.value = JSON.parse(window.__INITIAL_STATE__);
 }
 
 router.beforeEach(async (_to, _from, next) => {
-  // * 初始化所有对象仓库
+  // 初始化所有对象仓库
   await airbnbDB.open([languagesObjectStore, usersObjectStore]);
 
-  // * 初始化语言
+  // 初始化语言
   const localeStore = useLocaleStore();
   localeStore.getLanguage();
 
-  // * 初始化房屋列表
+  // 初始化房屋列表
   const roomsStore = useRoomsStore();
   roomsStore.getRoomList();
 
   next();
 });
 
-// * wait until router is ready before mounting to ensure hydration match
+// wait until router is ready before mounting to ensure hydration match
 router.isReady().then(() => {
   app.mount('#app');
 });
