@@ -8,14 +8,19 @@ import { ElMessage } from 'element-plus';
 import en from 'element-plus/lib/locale/lang/en';
 import zhCN from 'element-plus/lib/locale/lang/zh-CN';
 
-const { locale: localeLanguage } = useI18n();
-const { t } = useI18n();
-const router = useRouter();
-const route = useRoute();
-const routes = ['Home'];
+// Pinia
 const authStore = useAuthStore();
 const localeStore = useLocaleStore();
 
+// I18n
+const { t, locale: localeLanguage } = useI18n();
+
+// Router
+const router = useRouter();
+const route = useRoute();
+const routes = ['Home'];
+
+const buttonRef = ref();
 const isHeaderIndependent = computed(() => {
   return !routes.includes(route.name as string);
 });
@@ -32,6 +37,10 @@ const menuClassObject = computed(() => {
     'show-white-text': !isHeaderIndependent.value
   };
 });
+
+const ReservationsPoppover = defineAsyncComponent(
+  () => import('@/pages/Reservations/AircncReservationsPopover.vue')
+);
 
 async function handleSelect(key: string, keyPath: string[]) {
   if (keyPath[0] === 'language') {
@@ -61,6 +70,8 @@ async function handleSelect(key: string, keyPath: string[]) {
         router.push({ name: 'Home' });
       }
     }
+  } else if (keyPath[0] === 'reservationCenter') {
+    console.log('reservationCenter');
   }
 }
 </script>
@@ -69,6 +80,7 @@ async function handleSelect(key: string, keyPath: string[]) {
   <el-header
     class="w-full flex justify-between items-center p-0"
     :class="headerClassObject"
+    ref="headerEl"
     height="81px">
     <!-- Left -->
     <router-link :to="{ name: 'Home' }">
@@ -90,14 +102,12 @@ async function handleSelect(key: string, keyPath: string[]) {
       mode="horizontal"
       background-color="transparent"
       class="menu w-full h-full justify-end font-semibold"
+      :active-text-color="!isHeaderIndependent ? '#ffffff' : '#303133'"
       :class="menuClassObject"
       :ellipsis="false"
       @select="handleSelect">
       <!-- Reservation Center -->
-      <el-menu-item
-        v-if="authStore.loggedIn === 1"
-        index="reservationCenter"
-        class="menu-item">
+      <el-menu-item index="reservationCenter" class="menu-item" ref="buttonRef">
         {{ t('header.menu.reservationCenter') }}
       </el-menu-item>
 
@@ -159,6 +169,13 @@ async function handleSelect(key: string, keyPath: string[]) {
         <el-menu-item index="signout"> {{ t('auth.signoutBtn') }}</el-menu-item>
       </el-sub-menu>
     </el-menu>
+
+    <Suspense>
+      <template #default>
+        <reservations-poppover :virtualRef="buttonRef" />
+      </template>
+      <template #fallback>Loading...</template>
+    </Suspense>
   </el-header>
 </template>
 
@@ -209,6 +226,10 @@ async function handleSelect(key: string, keyPath: string[]) {
       &:hover,
       &:focus {
         background-color: transparent;
+      }
+
+      &:hover {
+        border-bottom: 2px solid white;
       }
     }
 

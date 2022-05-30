@@ -14,6 +14,11 @@ const routes: RouteRecordRaw[] = [
         path: 'rooms/details/:id',
         name: 'RoomDetails',
         component: () => import('@/pages/RoomDetails/AircncRoomDetails.vue')
+      },
+      {
+        path: 'reservation-center',
+        name: 'Reservations',
+        component: () => import('@/pages/Reservations/AircncReservations.vue')
       }
     ]
   },
