@@ -1,7 +1,7 @@
 import TypeObjectStore from '../type';
 
 const webLang = {
-  keyPath: 'id',
+  keyPath: 'langId',
   indexs: ['name']
 };
 

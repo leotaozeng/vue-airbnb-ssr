@@ -1,6 +1,7 @@
 // mounts the app to a DOM element
 import { airbnbDB } from './db';
 import languagesObjectStore from './db/objectStores/languages';
+import reservationsObjectStore from './db/objectStores/reservations';
 import usersObjectStore from './db/objectStores/users';
 import { createApp } from './main';
 import { useLocaleStore } from './stores/locale';
@@ -16,7 +17,11 @@ if (window.__INITIAL_STATE__) {
 
 router.beforeEach(async (_to, _from, next) => {
   // 初始化所有对象仓库
-  await airbnbDB.open([languagesObjectStore, usersObjectStore]);
+  await airbnbDB.open([
+    languagesObjectStore,
+    usersObjectStore,
+    reservationsObjectStore
+  ]);
 
   // 初始化语言
   const localeStore = useLocaleStore();
