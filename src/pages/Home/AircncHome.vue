@@ -1,21 +1,28 @@
 <script lang="ts" setup>
 const { t } = useI18n();
+const buttonRef = ref();
 </script>
 
 <template>
   <div class="home w-full">
-    <!-- * Banner -->
     <div class="banner"></div>
-
-    <!-- * Content -->
     <div class="content px-6 my-10">
-      <div class="mb-10">
-        <h2 class="title font-semibold">{{ t('home.title') }}</h2>
-        <h3 class="subtitle text-base mt-3">{{ t('home.subtitle') }}</h3>
-      </div>
-
+      <h2 class="title font-semibold">{{ t('home.title') }}</h2>
+      <h3 class="subtitle text-base mt-3 mb-10">{{ t('home.subtitle') }}</h3>
       <aircnc-home-list />
     </div>
+
+    <el-button ref="buttonRef">Click me</el-button>
+
+    <!-- Popover -->
+    <el-popover
+      :virtual-ref="buttonRef"
+      :teleported="false"
+      trigger="click"
+      title="With title"
+      virtual-triggering>
+      <span> Some content </span>
+    </el-popover>
   </div>
 </template>
 
