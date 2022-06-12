@@ -29,7 +29,7 @@ export async function render(
   // which we can then use to determine what files need to be preloaded for this
   // request.
   const preloadLinks = renderPreloadLinks(ctx.modules, manifest);
-  return [renderedHTML, preloadLinks, state];
+  return [renderedHTML, state, preloadLinks];
 }
 
 function renderPreloadLinks(
