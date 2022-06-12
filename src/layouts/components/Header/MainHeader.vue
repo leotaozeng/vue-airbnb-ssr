@@ -84,7 +84,6 @@ async function handleSelect(key: string, keyPath: string[]) {
     class="w-full flex justify-between items-center p-0"
     :class="headerClassObject"
     height="81px">
-    <!-- Right -->
     <el-menu
       mode="horizontal"
       background-color="transparent"
@@ -187,7 +186,7 @@ async function handleSelect(key: string, keyPath: string[]) {
       :show-arrow="false"
       :teleported="false"
       :offset="-2"
-      transition="''"
+      transition=""
       trigger="click"
       virtual-triggering>
       <Suspense>
