@@ -1,20 +1,20 @@
 <script lang="ts" setup>
-interface Props {
-  virtualRef: any;
-}
-
-const props = defineProps<Props>();
 const { t } = useI18n();
+const count = ref(0);
+
+function fetchApi() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      count.value = 6;
+      resolve(true);
+    }, 5000);
+  });
+}
+await fetchApi();
 </script>
 
 <template>
-  <el-popover
-    :virtual-ref="props.virtualRef"
-    trigger="click"
-    :title="t('header.menu.reservationCenter')"
-    virtual-triggering
-    :teleported="false">
-  </el-popover>
+  <div>abc</div>
 </template>
 
 <style lang="scss" scoped></style>

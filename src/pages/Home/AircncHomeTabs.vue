@@ -39,50 +39,58 @@ const cities = [
   }
 ];
 
-const handleClickCity = (tab: TabsPaneContext) => {
-  roomsStore.getRoomList(1, 6, tab.props.name as string);
-};
+function handleClickCity(tab: TabsPaneContext) {
+  roomsStore.getRooms(1, 6, tab.props.name as string);
+}
 </script>
 
 <template>
-  <!-- * 城市筛选 -->
-  <el-tabs
-    class="tabs"
-    v-model="roomsStore.cityCode"
-    @tab-click="handleClickCity">
-    <el-tab-pane
-      v-for="city in cities"
-      :key="city.code"
-      :label="t(city.name)"
-      :name="city.code"
-      :lazy="true">
-      <el-row :gutter="16">
-        <el-col
-          v-for="item in roomsStore.rooms"
-          :key="item.id"
-          :span="8"
-          class="home pb-3">
-          <router-link
-            v-if="item.pictureUrl"
-            :to="{ name: 'RoomDetails', params: { id: item.id } }"
-            class="rounded overflow-hidden">
-            <img class="picture object-cover rounded" :src="item.pictureUrl" />
-          </router-link>
-
-          <div
-            v-if="item.title && item.price"
-            class="info pt-2 text-gray-dark font-heiti">
-            <router-link :to="{ name: 'RoomDetails', params: { id: item.id } }">
-              <p class="title line-clamp-2 font-extrabold">{{ item.title }}</p>
-            </router-link>
-            <div class="mt-0.5">
-              <span class="font-semibold">￥{{ item.price }}</span>
+  <div>
+    <el-tabs
+      class="tabs"
+      v-model="roomsStore.cityCode"
+      @tab-click="handleClickCity">
+      <el-tab-pane
+        v-for="city in cities"
+        :key="city.code"
+        :label="t(city.name)"
+        :name="city.code"
+        :lazy="true">
+        <el-row :gutter="16">
+          <el-col
+            v-for="item in roomsStore.rooms"
+            :key="item.id"
+            :span="8"
+            class="home pb-3">
+            <div v-if="item.pictureUrl">
+              <router-link
+                :to="{ name: 'RoomDetails', params: { id: item.id } }"
+                class="rounded overflow-hidden">
+                <el-image
+                  class="picture rounded"
+                  :src="item.pictureUrl"
+                  fit="cover" />
+              </router-link>
             </div>
-          </div>
-        </el-col>
-      </el-row>
-    </el-tab-pane>
-  </el-tabs>
+
+            <div
+              v-show="item.title && item.price"
+              class="info pt-2 text-gray-dark font-heiti">
+              <router-link
+                :to="{ name: 'RoomDetails', params: { id: item.id } }">
+                <p class="title line-clamp-2 font-extrabold">
+                  {{ item.title }}
+                </p>
+              </router-link>
+              <div class="mt-0.5">
+                <span class="font-semibold">￥{{ item.price }}</span>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+      </el-tab-pane>
+    </el-tabs>
+  </div>
 </template>
 
 <style lang="scss" scoped>

@@ -4,6 +4,7 @@ import avatarUrl from '@/assets/images/avatar.jpeg';
 import logoUrl from '@/assets/images/logo.png';
 import { useAuthStore } from '@/stores/auth';
 import { useLocaleStore } from '@/stores/locale';
+import { useReservationsStore } from '@/stores/reservations';
 import { ElMessage } from 'element-plus';
 import en from 'element-plus/lib/locale/lang/en';
 import zhCN from 'element-plus/lib/locale/lang/zh-CN';
@@ -11,6 +12,7 @@ import zhCN from 'element-plus/lib/locale/lang/zh-CN';
 // Pinia
 const authStore = useAuthStore();
 const localeStore = useLocaleStore();
+const reservationsStore = useReservationsStore();
 
 // I18n
 const { t, locale: localeLanguage } = useI18n();
@@ -71,7 +73,7 @@ async function handleSelect(key: string, keyPath: string[]) {
       }
     }
   } else if (keyPath[0] === 'reservationCenter') {
-    console.log('reservationCenter');
+    reservationsStore.showReservationsPopover();
   }
 }
 </script>
@@ -82,21 +84,6 @@ async function handleSelect(key: string, keyPath: string[]) {
     :class="headerClassObject"
     ref="headerEl"
     height="81px">
-    <!-- Left -->
-    <router-link :to="{ name: 'Home' }">
-      <h1 class="m-0 text-base">
-        <el-image :src="logoUrl" alt="logo" class="logo-container z-10">
-          <template #error>
-            <div class="image-slot">
-              <el-icon>
-                <i-ep-picture />
-              </el-icon>
-            </div>
-          </template>
-        </el-image>
-      </h1>
-    </router-link>
-
     <!-- Right -->
     <el-menu
       mode="horizontal"
@@ -106,6 +93,25 @@ async function handleSelect(key: string, keyPath: string[]) {
       :class="menuClassObject"
       :ellipsis="false"
       @select="handleSelect">
+      <!-- Logo -->
+      <el-menu-item index="lgoo" class="menu-item logo p-0">
+        <router-link :to="{ name: 'Home' }">
+          <h1 class="m-0 text-base">
+            <el-image :src="logoUrl" alt="logo" class="logo-container z-10">
+              <template #error>
+                <div class="image-slot">
+                  <el-icon>
+                    <i-ep-picture />
+                  </el-icon>
+                </div>
+              </template>
+            </el-image>
+          </h1>
+        </router-link>
+      </el-menu-item>
+
+      <div class="flex-grow" />
+
       <!-- Reservation Center -->
       <el-menu-item index="reservationCenter" class="menu-item" ref="buttonRef">
         {{ t('header.menu.reservationCenter') }}
@@ -169,41 +175,11 @@ async function handleSelect(key: string, keyPath: string[]) {
         <el-menu-item index="signout"> {{ t('auth.signoutBtn') }}</el-menu-item>
       </el-sub-menu>
     </el-menu>
-
-    <Suspense>
-      <template #default>
-        <reservations-poppover :virtualRef="buttonRef" />
-      </template>
-      <template #fallback>Loading...</template>
-    </Suspense>
   </el-header>
 </template>
 
 <style lang="scss" scoped>
 .el-header {
-  .logo-container {
-    position: absolute;
-    left: 24px;
-    top: 50%;
-    transform: translate3d(0, -50%, 0);
-    width: 162px;
-
-    .image-slot {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 80px;
-      background: var(--el-fill-color-light);
-      color: var(--el-text-color-secondary);
-      font-size: 30px;
-
-      .el-icon {
-        font-size: 30px;
-      }
-    }
-  }
-
   .menu {
     padding: 0 24px;
     border-color: #ebebeb;
@@ -228,8 +204,12 @@ async function handleSelect(key: string, keyPath: string[]) {
         background-color: transparent;
       }
 
-      &:hover {
+      &:not(.logo):hover {
         border-bottom: 2px solid white;
+      }
+
+      &.logo.is-active {
+        border: none;
       }
     }
 
@@ -239,10 +219,29 @@ async function handleSelect(key: string, keyPath: string[]) {
         background-color: transparent !important;
       }
     }
-  }
 
-  .avatar-container {
-    box-shadow: rgb(235 235 235) 0px 0px 0px 2px !important;
+    .logo-container {
+      width: 162px;
+
+      .image-slot {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 80px;
+        background: var(--el-fill-color-light);
+        color: var(--el-text-color-secondary);
+        font-size: 30px;
+
+        .el-icon {
+          font-size: 30px;
+        }
+      }
+    }
+
+    .avatar-container {
+      box-shadow: rgb(235 235 235) 0px 0px 0px 2px !important;
+    }
   }
 }
 </style>
