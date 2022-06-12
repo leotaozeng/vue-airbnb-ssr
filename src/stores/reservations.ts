@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 
 export const useReservationsStore = defineStore('reservations', {
   state: () => ({
-    popoverVisible: false // 登录状态
+    popoverVisible: false
   }),
   actions: {
     showReservationsPopover() {

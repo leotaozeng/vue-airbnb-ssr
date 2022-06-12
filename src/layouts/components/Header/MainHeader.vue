@@ -5,7 +5,7 @@ import logoUrl from '@/assets/images/logo.png';
 import { useAuthStore } from '@/stores/auth';
 import { useLocaleStore } from '@/stores/locale';
 import { useReservationsStore } from '@/stores/reservations';
-import { ElMessage } from 'element-plus';
+import { ClickOutside as vClickOutside, ElMessage } from 'element-plus';
 import en from 'element-plus/lib/locale/lang/en';
 import zhCN from 'element-plus/lib/locale/lang/zh-CN';
 
@@ -23,6 +23,7 @@ const route = useRoute();
 const routes = ['Home'];
 
 const buttonRef = ref();
+
 const isHeaderIndependent = computed(() => {
   return !routes.includes(route.name as string);
 });
@@ -82,7 +83,6 @@ async function handleSelect(key: string, keyPath: string[]) {
   <el-header
     class="w-full flex justify-between items-center p-0"
     :class="headerClassObject"
-    ref="headerEl"
     height="81px">
     <!-- Right -->
     <el-menu
@@ -113,7 +113,11 @@ async function handleSelect(key: string, keyPath: string[]) {
       <div class="flex-grow" />
 
       <!-- Reservation Center -->
-      <el-menu-item index="reservationCenter" class="menu-item" ref="buttonRef">
+      <el-menu-item
+        index="reservationCenter"
+        class="menu-item"
+        ref="buttonRef"
+        v-click-outside="reservationsStore.hideReservationsPopover">
         {{ t('header.menu.reservationCenter') }}
       </el-menu-item>
 
@@ -175,6 +179,25 @@ async function handleSelect(key: string, keyPath: string[]) {
         <el-menu-item index="signout"> {{ t('auth.signoutBtn') }}</el-menu-item>
       </el-sub-menu>
     </el-menu>
+
+    <el-popover
+      v-if="reservationsStore.popoverVisible"
+      :visible="reservationsStore.popoverVisible"
+      :virtual-ref="buttonRef"
+      :show-arrow="false"
+      :teleported="false"
+      :offset="-2"
+      transition="''"
+      trigger="click"
+      virtual-triggering>
+      <Suspense>
+        <!-- component with nested async dependencies -->
+        <ReservationsPoppover />
+
+        <!-- loading state via #fallback slot -->
+        <template #fallback>Loading...</template>
+      </Suspense>
+    </el-popover>
   </el-header>
 </template>
 

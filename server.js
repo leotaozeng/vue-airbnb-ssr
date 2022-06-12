@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 // 该文件为 Node 运行入口
@@ -6,34 +7,41 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
-const serveStatic = require('serve-static');
-const { createServer: createViteServer } = require('vite');
-const isProd = process.env.NODE_ENV === 'production';
+
+const isTest = process.env.NODE_ENV === 'test' || !!process.env.VITE_TEST_BUILD;
+const isProduction = process.env.NODE_ENV === 'production';
 
 async function createServer() {
   const resolve = (p) => path.resolve(__dirname, p);
 
-  const indexProd = isProd
+  const indexProd = isProduction
     ? fs.readFileSync(resolve('dist/client/index.html'), 'utf-8')
     : '';
 
-  const manifest = isProd ? require('./dist/client/ssr-manifest.json') : {};
+  // @ts-ignore
+  const manifest = isProduction
+    ? require('./dist/client/ssr-manifest.json')
+    : {};
 
   const app = express();
   const port = 9000;
 
   let viteServer;
-  if (!isProd) {
+  if (!isProduction) {
     // Create Vite server in middleware mode. This disables Vite's own HTML
     // serving logic and let the parent server take control.
     //
     // In middleware mode, if you want to use Vite's own HTML serving logic
     // use `'html'` as the `middlewareMode` (ref https://vitejs.dev/config/#server-middlewaremode)
-    viteServer = await createViteServer({
+    viteServer = await require('vite').createServer({
       root: process.cwd(),
-      logLevel: 'error',
+      logLevel: isTest ? 'error' : 'info',
       server: {
-        middlewareMode: 'ssr'
+        middlewareMode: 'ssr',
+        watch: {
+          usePolling: true,
+          interval: 100
+        }
       }
     });
 
@@ -41,7 +49,11 @@ async function createServer() {
     app.use(viteServer.middlewares);
   } else {
     app.use(require('compression')());
-    app.use(serveStatic(resolve('dist/client')));
+    app.use(
+      require('serve-static')(resolve('dist/client'), {
+        index: false
+      })
+    );
   }
 
   app.use('*', async (req, res) => {
@@ -49,7 +61,7 @@ async function createServer() {
       const url = req.originalUrl;
 
       let template, render;
-      if (!isProd) {
+      if (!isProduction) {
         // 1. Read index.html
         template = fs.readFileSync(resolve('index.html'), 'utf-8');
         // 2. Apply Vite HTML transforms. This injects the Vite HMR client, and also applies HTML transforms from Vite plugins, e.g. global preambles from @vitejs/plugin-react
@@ -64,13 +76,13 @@ async function createServer() {
       }
 
       // 4. render the app HTML. This assumes entry-server.js's exported `render` function calls appropriate framework SSR APIs, ReactDOMServer.renderToString()
-      const [renderedHTML, preloadLinks, state] = await render(url, manifest);
+      const [renderedHTML, state, preloadLinks] = await render(url, manifest);
 
       // 5. Inject the app-rendered HTML into the template.
       const html = template
         .replace(`<!--preload-links-->`, preloadLinks)
-        .replace(`<!--app-html-->`, renderedHTML)
-        .replace('<!--pinia-state-->', state);
+        .replace('<!--pinia-state-->', state)
+        .replace(`<!--app-html-->`, renderedHTML);
 
       // 6. Send the rendered HTML back.
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
@@ -87,7 +99,7 @@ async function createServer() {
   app.listen(port, () => {
     console.log(
       `⚡️[server]: Server is running on ${
-        isProd ? 'production' : 'development'
+        isProduction ? 'production' : 'development'
       } at http://localhost:${port}`
     );
   });
