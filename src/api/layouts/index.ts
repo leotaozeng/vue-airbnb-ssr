@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { airbnbDB } from '@/db';
 import languagesObjectStore from '@/db/objectStores/languages';
-import i18n from '@/i18n';
 import { ElLoading, ElMessage } from 'element-plus';
 
 interface Result {
@@ -17,7 +16,6 @@ const storeName = Object.keys(languagesObjectStore)[0];
 export const saveLanguageAPI = async (locale: any) => {
   const loading = ElLoading.service({
     lock: true,
-    text: i18n.global.t('loading'),
     background: 'rgba(0, 0, 0, 0.2)'
   });
 
@@ -48,9 +46,9 @@ export const saveLanguageAPI = async (locale: any) => {
   } catch (error) {
     console.error(error);
     ElMessage({
-      showClose: true,
+      type: 'error',
       message: `数据库查询出现异常: ${error}`,
-      type: 'error'
+      showClose: true
     });
   } finally {
     setTimeout(() => {
@@ -73,9 +71,9 @@ export const fetchLanguageAPI = async () => {
   } catch (error) {
     console.error(error);
     ElMessage({
-      showClose: true,
+      type: 'error',
       message: `数据库查询出现异常: ${error}`,
-      type: 'error'
+      showClose: true
     });
   }
 };

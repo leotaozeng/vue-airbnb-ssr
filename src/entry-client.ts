@@ -29,7 +29,7 @@ router.beforeEach(async (_to, _from, next) => {
 
   // 初始化房屋列表
   const roomsStore = useRoomsStore();
-  roomsStore.getRoomList();
+  roomsStore.getRooms();
 
   next();
 });

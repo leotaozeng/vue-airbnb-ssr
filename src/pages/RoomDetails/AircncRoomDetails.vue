@@ -3,17 +3,6 @@ import ArrowRight from '@/assets/images/arrow-right.svg';
 import useForm from '@/composables/auth/useForm';
 import { useRoomsStore } from '@/stores/rooms';
 
-const roomsStore = useRoomsStore();
-const route = useRoute();
-
-const { t } = useI18n();
-const { ruleFormRef } = useForm();
-
-const ruleForm = reactive({
-  date: '',
-  region: ''
-});
-
 const discounts = [
   {
     title: '春季特惠 8 折',
@@ -40,6 +29,17 @@ const discounts = [
     description: '在 3月1日至5月31日 期间入住，可享受原房费的 8 折优惠。'
   }
 ];
+
+const roomsStore = useRoomsStore();
+const route = useRoute();
+
+const { t } = useI18n();
+const { ruleFormRef } = useForm();
+
+const ruleForm = reactive({
+  date: '',
+  region: ''
+});
 
 onBeforeMount(() => {
   roomsStore.getRoomDetails(route.params.id as string);
@@ -217,7 +217,6 @@ onBeforeMount(() => {
               <el-date-picker
                 v-model="ruleForm.date"
                 type="daterange"
-                range-separator="To"
                 :start-placeholder="t('rooms.startDate')"
                 :end-placeholder="t('rooms.endDate')">
                 <template #range-separator>
@@ -228,7 +227,7 @@ onBeforeMount(() => {
 
             <!-- Guests -->
             <el-form-item class="form-item" :label="t('rooms.guests')">
-              <el-select v-model="ruleForm.region">
+              <el-select class="w-full" v-model="ruleForm.region">
                 <el-option label="Zone one" value="shanghai" />
                 <el-option label="Zone two" value="beijing" />
               </el-select>

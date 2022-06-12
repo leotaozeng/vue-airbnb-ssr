@@ -44,11 +44,7 @@ export const useRoomsStore = defineStore('rooms', {
   }),
   getters: {},
   actions: {
-    async getRoomList(
-      currentPage?: number,
-      pageSize?: number,
-      cityCode?: string
-    ) {
+    async getRooms(currentPage?: number, pageSize?: number, cityCode?: string) {
       try {
         const response = await fetchRoomList({
           pageNo: currentPage || this.currentPage,
