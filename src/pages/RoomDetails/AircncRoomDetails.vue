@@ -1,7 +1,13 @@
 <script lang="ts" setup>
+import { saveReservationAPI } from '@/api/reservations';
 import ArrowRight from '@/assets/images/arrow-right.svg';
 import useForm from '@/composables/auth/useForm';
 import { useRoomsStore } from '@/stores/rooms';
+import { FormInstance, FormRules } from 'element-plus';
+
+const adultsNum = ref(1);
+const childrenNum = ref(0);
+const infantsNum = ref(0);
 
 const discounts = [
   {
@@ -29,17 +35,109 @@ const discounts = [
     description: '在 3月1日至5月31日 期间入住，可享受原房费的 8 折优惠。'
   }
 ];
+const shortcuts = [
+  {
+    text: 'Last week',
+    value: () => {
+      const end = new Date();
+      const start = new Date();
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+      return [start, end];
+    }
+  },
+  {
+    text: 'Last month',
+    value: () => {
+      const end = new Date();
+      const start = new Date();
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+      return [start, end];
+    }
+  },
+  {
+    text: 'Last 3 months',
+    value: () => {
+      const end = new Date();
+      const start = new Date();
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+      return [start, end];
+    }
+  }
+];
+const guestList = [
+  {
+    value: 'adults',
+    label: '成人',
+    model: adultsNum,
+    min: 1
+  },
+  {
+    value: 'children',
+    label: '儿童',
+    model: childrenNum,
+    min: 0
+  },
+  {
+    value: 'infants',
+    label: '婴儿',
+    model: infantsNum,
+    min: 0
+  }
+];
 
-const roomsStore = useRoomsStore();
 const route = useRoute();
+const roomsStore = useRoomsStore();
+const roomDetails = computed(() => roomsStore.roomDetails);
+const dropdownVisible = computed(() => roomsStore.dropdownVisible);
 
 const { t } = useI18n();
 const { ruleFormRef } = useForm();
 
 const ruleForm = reactive({
-  date: '',
-  region: ''
+  date: [],
+  guests: []
 });
+
+const rules = reactive<FormRules>({
+  date: [
+    {
+      type: 'array',
+      required: true,
+      message: t('rooms.dateError'),
+      trigger: 'change'
+    }
+  ],
+  guests: [
+    {
+      required: true,
+      message: t('rooms.guestsError'),
+      trigger: 'change'
+    }
+  ]
+});
+
+async function saveReservation() {
+  const { title, price } = roomDetails.value;
+  const params = {
+    title,
+    price,
+    date: ruleForm.date,
+    guests: ruleForm.guests
+  };
+
+  await saveReservationAPI(params);
+}
+
+async function handleSubmitForm(formEl: FormInstance | undefined) {
+  if (!formEl) return;
+  await formEl.validate((valid, fields) => {
+    if (valid) {
+      saveReservation();
+    } else {
+      console.log('Error submit', fields);
+    }
+  });
+}
 
 onBeforeMount(() => {
   roomsStore.getRoomDetails(route.params.id as string);
@@ -65,7 +163,7 @@ onBeforeMount(() => {
     </div>
 
     <!-- Details -->
-    <div class="details flex">
+    <div class="details mb-80 flex">
       <!-- Room Details -->
       <div class="room-details">
         <section
@@ -176,6 +274,16 @@ onBeforeMount(() => {
             </div>
           </div>
         </section>
+
+        <section>
+          <div></div>
+
+          <div></div>
+
+          <div></div>
+
+          <div></div>
+        </section>
       </div>
 
       <div class="form-container w-1/3">
@@ -197,7 +305,9 @@ onBeforeMount(() => {
               :key="discount.title"
               class="inline-flex items-center mr-2">
               <span class="mr-1">
-                <el-icon color="#bbbbbb"><i-ep-circle-check-filled /></el-icon>
+                <el-icon color="#bbbbbb">
+                  <i-ep-circle-check-filled />
+                </el-icon>
               </span>
               <span class="text-xs text-gray-muted">{{ discount.title }}</span>
             </li>
@@ -208,34 +318,52 @@ onBeforeMount(() => {
           <!-- Form -->
           <el-form
             size="large"
-            ref="ruleFormRef"
             class="mt-5"
             label-position="top"
-            :model="ruleForm">
-            <!-- Date Range -->
-            <el-form-item class="form-item" :label="t('rooms.date')">
+            ref="ruleFormRef"
+            :model="ruleForm"
+            :rules="rules"
+            status-icon
+            hide-required-asterisk>
+            <el-form-item
+              :label="t('rooms.date')"
+              class="form-item"
+              prop="date">
+              <!-- Date Range -->
               <el-date-picker
-                v-model="ruleForm.date"
                 type="daterange"
+                v-model="ruleForm.date"
                 :start-placeholder="t('rooms.startDate')"
-                :end-placeholder="t('rooms.endDate')">
+                :end-placeholder="t('rooms.endDate')"
+                :shortcuts="shortcuts"
+                unlink-panels>
                 <template #range-separator>
                   <arrow-right />
                 </template>
               </el-date-picker>
             </el-form-item>
 
-            <!-- Guests -->
-            <el-form-item class="form-item" :label="t('rooms.guests')">
-              <el-select class="w-full" v-model="ruleForm.region">
-                <el-option label="Zone one" value="shanghai" />
-                <el-option label="Zone two" value="beijing" />
-              </el-select>
+            <el-form-item :label="t('rooms.guests')" class="form-item relative">
+              <!-- Guests -->
+              <el-button
+                class="btn-guests w-full"
+                plain
+                @click="roomsStore.showDropdown">
+                <span>1人</span>
+                <el-icon class="el-icon--right">
+                  <i-ep-arrow-down-bold />
+                </el-icon>
+              </el-button>
+
+              <aircnc-room-details-dropdown v-if="dropdownVisible" />
             </el-form-item>
 
             <!-- Submit Button -->
             <el-form-item class="mt-6">
-              <el-button type="danger" class="w-full">
+              <el-button
+                type="danger"
+                class="w-full"
+                @click="handleSubmitForm(ruleFormRef)">
                 {{ t('rooms.reserve') }}
               </el-button>
             </el-form-item>
@@ -292,6 +420,13 @@ onBeforeMount(() => {
         font-size: 12px;
         font-weight: 600;
         line-height: 1.33333em;
+      }
+    }
+
+    :deep(.btn-guests) {
+      > span {
+        flex: 1;
+        justify-content: space-between;
       }
     }
   }

@@ -40,7 +40,8 @@ export const useRoomsStore = defineStore('rooms', {
     cityCode: 'hz',
     currentPage: 1,
     pageSize: 6,
-    total: 0
+    total: 0,
+    dropdownVisible: false
   }),
   getters: {},
   actions: {
@@ -84,6 +85,12 @@ export const useRoomsStore = defineStore('rooms', {
         });
         console.error(error);
       }
+    },
+    showDropdown() {
+      this.dropdownVisible = true;
+    },
+    hideDropdown() {
+      this.dropdownVisible = false;
     }
   }
 });
