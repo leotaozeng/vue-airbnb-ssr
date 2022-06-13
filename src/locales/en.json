@@ -63,8 +63,24 @@
   "rooms": {
     "reserve": "Reserve",
     "date": "Date",
+    "dateError": "Please pick a date",
     "startDate": "Start date",
     "endDate": "End date",
-    "guests": "Guests"
+    "guests": "Guests",
+    "guestsError": "Please select guests",
+    "guestsDescription": "This place has a maximum of {guestNumber} guests, not including infants. Pets aren't allowed.",
+    "adults": {
+      "title": "Adults",
+      "subtitle": "Age 13+"
+    },
+    "children": {
+      "title": "Children",
+      "subtitle": "Ages 2–12"
+    },
+    "infants": {
+      "title": "Infants",
+      "subtitle": "Under 2"
+    },
+    "close": "Close"
   }
 }

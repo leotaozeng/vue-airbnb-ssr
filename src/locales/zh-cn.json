@@ -63,8 +63,24 @@
   "rooms": {
     "reserve": "预订",
     "date": "日期",
+    "dateError": " 请选择日期",
     "startDate": "入住日期",
     "endDate": "退房日期",
-    "guests": "人数"
+    "guests": "人数",
+    "guestsError": "请选择人数",
+    "guestsDescription": "最多 {guestNumber} 位房客，婴幼儿不计算在内。",
+    "adults": {
+      "title": "成人",
+      "subtitle": "13 岁以上"
+    },
+    "children": {
+      "title": "儿童",
+      "subtitle": "2 - 12 岁"
+    },
+    "infants": {
+      "title": "婴儿",
+      "subtitle": "2 岁以下"
+    },
+    "close": "关闭"
   }
 }
