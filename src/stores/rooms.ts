@@ -7,9 +7,9 @@ export const useRoomsStore = defineStore('rooms', {
     // all these properties will have their type inferred automatically
     rooms: [
       {
+        id: 0,
         cityCode: '',
         detail: {},
-        id: 0,
         pictureUrl: '',
         price: 0,
         title: ''
@@ -41,7 +41,12 @@ export const useRoomsStore = defineStore('rooms', {
     currentPage: 1,
     pageSize: 6,
     total: 0,
-    dropdownVisible: false
+    dropdownVisible: false,
+    form: {
+      adults: 1,
+      children: 0,
+      infants: 0
+    }
   }),
   getters: {},
   actions: {

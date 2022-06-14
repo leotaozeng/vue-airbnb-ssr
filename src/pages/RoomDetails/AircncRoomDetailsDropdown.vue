@@ -1,20 +1,56 @@
 <script lang="ts" setup>
 import { useRoomsStore } from '@/stores/rooms';
 
-const adultsNum = ref(1);
-const childrenNum = ref(0);
-const infantsNum = ref(0);
-
-const roomsStore = useRoomsStore();
-const roomDetails = computed(() => roomsStore.roomDetails);
+const emit = defineEmits<{
+  (e: 'updateGuests', totalGuests: number, totalInfants: number): void;
+}>();
 
 const { t } = useI18n();
+const roomsStore = useRoomsStore();
+const form = computed(() => roomsStore.form);
+const roomDetails = computed(() => roomsStore.roomDetails);
+const { liveNumber } = roomDetails.value.info;
+
+const adultsMax = ref(liveNumber);
+const childrenMax = ref(liveNumber);
+
+function handleAdultsChange(currentValue: number | undefined) {
+  if (!currentValue) return;
+  if (form.value.children === liveNumber) {
+    adultsMax.value = 0;
+    return;
+  }
+
+  adultsMax.value = liveNumber - form.value.children;
+  childrenMax.value = liveNumber - currentValue;
+
+  emit('updateGuests', currentValue + form.value.children, form.value.infants);
+}
+
+function handleChildrenChange(currentValue: number | undefined) {
+  if (!currentValue) return;
+  if (form.value.adults === liveNumber) {
+    childrenMax.value = 0;
+    return;
+  }
+
+  adultsMax.value = liveNumber - currentValue;
+  childrenMax.value = liveNumber - form.value.adults;
+
+  emit('updateGuests', form.value.adults + currentValue, form.value.infants);
+}
+
+function handleInfantsChange(currentValue: number | undefined) {
+  if (!currentValue) return;
+  emit('updateGuests', form.value.adults + form.value.children, currentValue);
+}
 </script>
 
 <template>
   <div
     class="dropdown absolute bg-white w-full mb-4 p-4 z-10 leading-normal rounded shadow-md">
     <ul class="dropdown-menu">
+      <!-- Adults -->
       <li class="dropdown-menu-item mb-6 flex justify-between items-center">
         <div>
           <div class="title text-gray-dark text-base font-semibold">
@@ -24,9 +60,14 @@ const { t } = useI18n();
             {{ t('rooms.adults.subtitle') }}
           </div>
         </div>
-        <el-input-number v-model="adultsNum" :min="1" />
+        <el-input-number
+          v-model="form.adults"
+          :min="1"
+          :max="adultsMax"
+          @change="handleAdultsChange" />
       </li>
 
+      <!-- Children -->
       <li class="dropdown-menu-item mb-6 flex justify-between items-center">
         <div>
           <div class="title text-gray-dark text-base font-semibold">
@@ -36,9 +77,14 @@ const { t } = useI18n();
             {{ t('rooms.children.subtitle') }}
           </div>
         </div>
-        <el-input-number v-model="childrenNum" :min="0" />
+        <el-input-number
+          v-model="form.children"
+          :min="0"
+          :max="childrenMax"
+          @change="handleChildrenChange" />
       </li>
 
+      <!-- Infants -->
       <li class="dropdown-menu-item mb-6 flex justify-between items-center">
         <div>
           <div class="title text-gray-dark text-base font-semibold">
@@ -48,7 +94,11 @@ const { t } = useI18n();
             {{ t('rooms.infants.subtitle') }}
           </div>
         </div>
-        <el-input-number v-model="infantsNum" :min="0" :max="5" />
+        <el-input-number
+          v-model="form.infants"
+          :min="0"
+          :max="5"
+          @change="handleInfantsChange" />
       </li>
     </ul>
 
@@ -60,6 +110,7 @@ const { t } = useI18n();
           })
         }}
       </p>
+
       <button
         type="button"
         class="w-full text-right text-base font-semibold"

@@ -63,6 +63,7 @@ const shortcuts = [
 
 const route = useRoute();
 const roomsStore = useRoomsStore();
+const form = computed(() => roomsStore.form);
 const roomDetails = computed(() => roomsStore.roomDetails);
 const dropdownVisible = computed(() => roomsStore.dropdownVisible);
 
@@ -70,8 +71,8 @@ const { t } = useI18n();
 const { ruleFormRef } = useForm();
 
 const ruleForm = reactive({
-  date: [],
-  guests: []
+  date: '',
+  guests: 1
 });
 
 const rules = reactive<FormRules>({
@@ -80,13 +81,6 @@ const rules = reactive<FormRules>({
       type: 'array',
       required: true,
       message: t('rooms.dateError'),
-      trigger: 'change'
-    }
-  ],
-  guests: [
-    {
-      required: true,
-      message: t('rooms.guestsError'),
       trigger: 'change'
     }
   ]
@@ -117,6 +111,13 @@ async function handleSubmitForm(formEl: FormInstance | undefined) {
 
 function handleToggleDropdown() {
   dropdownVisible.value ? roomsStore.hideDropdown() : roomsStore.showDropdown();
+}
+
+function handleUpdateGuests(totalGuests: number, totalInfants: number) {
+  console.log(totalInfants);
+
+  ruleForm.guests = totalGuests;
+  ruleForm.infants = totalInfants;
 }
 
 onBeforeMount(() => {
@@ -329,7 +330,12 @@ onBeforeMount(() => {
                 class="btn-guests w-full"
                 plain
                 @click="handleToggleDropdown">
-                <span>1人</span>
+                <div class="text-base text-gray-dark">
+                  <span>{{ ruleForm.guests }} 人</span>
+                  <span v-if="form.infants > 0">
+                    , {{ form.infants }}名婴幼儿
+                  </span>
+                </div>
 
                 <el-icon class="el-icon--right" v-if="!dropdownVisible">
                   <i-ep-arrow-down-bold />
@@ -340,7 +346,9 @@ onBeforeMount(() => {
                 </el-icon>
               </el-button>
 
-              <aircnc-room-details-dropdown v-if="dropdownVisible" />
+              <aircnc-room-details-dropdown
+                v-if="dropdownVisible"
+                @update-guests="handleUpdateGuests" />
             </el-form-item>
 
             <!-- Submit Button -->
