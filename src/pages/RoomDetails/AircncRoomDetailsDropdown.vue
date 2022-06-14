@@ -48,7 +48,7 @@ const { t } = useI18n();
             {{ t('rooms.infants.subtitle') }}
           </div>
         </div>
-        <el-input-number v-model="infantsNum" :min="0" />
+        <el-input-number v-model="infantsNum" :min="0" :max="5" />
       </li>
     </ul>
 
