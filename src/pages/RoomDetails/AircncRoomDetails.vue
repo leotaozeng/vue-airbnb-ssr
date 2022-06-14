@@ -139,6 +139,10 @@ async function handleSubmitForm(formEl: FormInstance | undefined) {
   });
 }
 
+function handleToggleDropdown() {
+  dropdownVisible.value ? roomsStore.hideDropdown() : roomsStore.showDropdown();
+}
+
 onBeforeMount(() => {
   roomsStore.getRoomDetails(route.params.id as string);
 });
@@ -348,7 +352,7 @@ onBeforeMount(() => {
               <el-button
                 class="btn-guests w-full"
                 plain
-                @click="roomsStore.showDropdown">
+                @click="handleToggleDropdown">
                 <span>1人</span>
                 <el-icon class="el-icon--right">
                   <i-ep-arrow-down-bold />
@@ -424,6 +428,12 @@ onBeforeMount(() => {
     }
 
     :deep(.btn-guests) {
+      &:hover,
+      &:focus {
+        border-color: #c0c4cc;
+        color: #606266;
+      }
+
       > span {
         flex: 1;
         justify-content: space-between;
