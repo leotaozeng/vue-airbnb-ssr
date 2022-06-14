@@ -3,7 +3,11 @@ import { saveReservationAPI } from '@/api/reservations';
 import ArrowRight from '@/assets/images/arrow-right.svg';
 import useForm from '@/composables/auth/useForm';
 import { useRoomsStore } from '@/stores/rooms';
-import { FormInstance, FormRules } from 'element-plus';
+import {
+  ClickOutside as vClickOutside,
+  FormInstance,
+  FormRules
+} from 'element-plus';
 
 const discounts = [
   {
@@ -348,7 +352,8 @@ onBeforeMount(() => {
 
               <aircnc-room-details-dropdown
                 v-if="dropdownVisible"
-                @update-guests="handleUpdateGuests" />
+                @update-guests="handleUpdateGuests"
+                v-click-outside="roomsStore.hideDropdown" />
             </el-form-item>
 
             <!-- Submit Button -->

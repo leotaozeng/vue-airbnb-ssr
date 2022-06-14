@@ -111,12 +111,14 @@ function handleInfantsChange(currentValue: number | undefined) {
         }}
       </p>
 
-      <button
-        type="button"
-        class="w-full text-right text-base font-semibold"
-        @click="roomsStore.hideDropdown">
-        {{ t('rooms.close') }}
-      </button>
+      <div class="w-full text-right">
+        <button
+          type="button"
+          class="text-base font-semibold"
+          @click="roomsStore.hideDropdown">
+          {{ t('rooms.close') }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
