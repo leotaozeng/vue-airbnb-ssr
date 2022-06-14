@@ -5,10 +5,6 @@ import useForm from '@/composables/auth/useForm';
 import { useRoomsStore } from '@/stores/rooms';
 import { FormInstance, FormRules } from 'element-plus';
 
-const adultsNum = ref(1);
-const childrenNum = ref(0);
-const infantsNum = ref(0);
-
 const discounts = [
   {
     title: '春季特惠 8 折',
@@ -62,26 +58,6 @@ const shortcuts = [
       start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
       return [start, end];
     }
-  }
-];
-const guestList = [
-  {
-    value: 'adults',
-    label: '成人',
-    model: adultsNum,
-    min: 1
-  },
-  {
-    value: 'children',
-    label: '儿童',
-    model: childrenNum,
-    min: 0
-  },
-  {
-    value: 'infants',
-    label: '婴儿',
-    model: infantsNum,
-    min: 0
   }
 ];
 
@@ -354,8 +330,13 @@ onBeforeMount(() => {
                 plain
                 @click="handleToggleDropdown">
                 <span>1人</span>
-                <el-icon class="el-icon--right">
+
+                <el-icon class="el-icon--right" v-if="!dropdownVisible">
                   <i-ep-arrow-down-bold />
+                </el-icon>
+
+                <el-icon class="el-icon--right" v-else>
+                  <i-ep-arrow-up-bold />
                 </el-icon>
               </el-button>
 
