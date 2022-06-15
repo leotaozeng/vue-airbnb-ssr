@@ -91,15 +91,19 @@ const rules = reactive<FormRules>({
 });
 
 async function saveReservation() {
-  const { title, price } = roomDetails.value;
+  const { title, price, imgs } = roomDetails.value;
   const params = {
+    reservationId: +route.params.id,
     title,
     price,
-    date: ruleForm.date,
-    guests: ruleForm.guests
+    pictureURL: imgs[0],
+    date: JSON.stringify(ruleForm.date),
+    guests: ruleForm.guests,
+    infants: form.value.infants
   };
 
-  await saveReservationAPI(params);
+  const response = await saveReservationAPI(params);
+  console.log(response);
 }
 
 async function handleSubmitForm(formEl: FormInstance | undefined) {
