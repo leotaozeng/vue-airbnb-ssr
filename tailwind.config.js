@@ -10,6 +10,9 @@ module.exports = {
         airmoji: 'Airmoji'
       },
       colors: {
+        cyan: {
+          dark: '#008489'
+        },
         green: {
           dark: '#2a6e00'
         },

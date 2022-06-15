@@ -114,7 +114,7 @@ function handleInfantsChange(currentValue: number | undefined) {
       <div class="w-full text-right">
         <button
           type="button"
-          class="text-base font-semibold"
+          class="text-base text-cyan-dark font-semibold"
           @click="roomsStore.hideDropdown">
           {{ t('rooms.close') }}
         </button>
