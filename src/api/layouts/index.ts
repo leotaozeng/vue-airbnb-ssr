@@ -40,8 +40,8 @@ export const saveLanguageAPI = async (locale: any) => {
     return {
       code: '000000',
       message: '操作成功',
-      result: null,
-      success: true
+      success: true,
+      result: null
     };
   } catch (error) {
     console.error(error);
@@ -65,8 +65,8 @@ export const fetchLanguageAPI = async () => {
     return {
       code: '000000',
       message: '操作成功',
-      result: result || null,
-      success: true
+      success: true,
+      result: result || null
     };
   } catch (error) {
     console.error(error);

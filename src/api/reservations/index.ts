@@ -9,6 +9,7 @@
 import { airbnbDB } from '@/db';
 import reservationsObjectStore from '@/db/objectStores/reservations';
 import { ElLoading, ElMessage } from 'element-plus';
+
 const storeName = Object.keys(reservationsObjectStore)[0];
 
 // Mock接口：预订
@@ -19,8 +20,30 @@ export const saveReservationAPI = async (params: any) => {
   });
 
   try {
-    const reservations = (await airbnbDB.getList(storeName)) as any[];
-    console.log('All reservations', reservations);
+    const allReservations = (await airbnbDB.getList(storeName)) as any[];
+    const result = allReservations.find((item) => {
+      return item.reservationId === params.reservationId;
+    });
+
+    if (!result) {
+      // 数据不存在，新增一条订单数据
+      await airbnbDB.addItem(storeName, params);
+
+      return {
+        code: '000000',
+        message: '操作成功',
+        success: true,
+        result: null
+      };
+    } else {
+      // 存在相同订单数据
+      return {
+        code: '000001',
+        message: '订单已存在',
+        success: false,
+        result: null
+      };
+    }
   } catch (error) {
     console.error(error);
     ElMessage({
