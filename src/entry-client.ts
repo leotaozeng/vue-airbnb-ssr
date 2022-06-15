@@ -18,8 +18,8 @@ if (window.__INITIAL_STATE__) {
 router.beforeEach(async (_to, _from, next) => {
   // 初始化所有对象仓库
   await airbnbDB.open([
-    languagesObjectStore,
     usersObjectStore,
+    languagesObjectStore,
     reservationsObjectStore
   ]);
 
