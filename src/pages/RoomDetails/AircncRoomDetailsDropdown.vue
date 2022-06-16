@@ -1,10 +1,6 @@
 <script lang="ts" setup>
 import { useRoomsStore } from '@/stores/rooms';
 
-const emit = defineEmits<{
-  (e: 'updateGuests', totalGuests: number, totalInfants: number): void;
-}>();
-
 const { t } = useI18n();
 const roomsStore = useRoomsStore();
 const form = computed(() => roomsStore.form);
@@ -15,34 +11,17 @@ const adultsMax = ref(liveNumber);
 const childrenMax = ref(liveNumber);
 
 function handleAdultsChange(currentValue: number | undefined) {
-  if (!currentValue) return;
-  if (form.value.children === liveNumber) {
-    adultsMax.value = 0;
-    return;
-  }
+  if (typeof currentValue !== 'number') return;
 
   adultsMax.value = liveNumber - form.value.children;
   childrenMax.value = liveNumber - currentValue;
-
-  emit('updateGuests', currentValue + form.value.children, form.value.infants);
 }
 
 function handleChildrenChange(currentValue: number | undefined) {
-  if (!currentValue) return;
-  if (form.value.adults === liveNumber) {
-    childrenMax.value = 0;
-    return;
-  }
+  if (typeof currentValue !== 'number') return;
 
   adultsMax.value = liveNumber - currentValue;
   childrenMax.value = liveNumber - form.value.adults;
-
-  emit('updateGuests', form.value.adults + currentValue, form.value.infants);
-}
-
-function handleInfantsChange(currentValue: number | undefined) {
-  if (!currentValue) return;
-  emit('updateGuests', form.value.adults + form.value.children, currentValue);
 }
 </script>
 
@@ -94,11 +73,7 @@ function handleInfantsChange(currentValue: number | undefined) {
             {{ t('rooms.infants.subtitle') }}
           </div>
         </div>
-        <el-input-number
-          v-model="form.infants"
-          :min="0"
-          :max="5"
-          @change="handleInfantsChange" />
+        <el-input-number v-model="form.infants" :min="0" :max="5" />
       </li>
     </ul>
 

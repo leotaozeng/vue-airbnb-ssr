@@ -75,8 +75,7 @@ const { t } = useI18n();
 const { ruleFormRef } = useForm();
 
 const ruleForm = reactive({
-  date: '',
-  guests: 1
+  date: ''
 });
 
 const rules = reactive<FormRules>({
@@ -98,7 +97,7 @@ async function saveReservation() {
     price,
     pictureURL: imgs[0],
     date: JSON.stringify(ruleForm.date),
-    guests: ruleForm.guests,
+    guests: form.value.adults + form.value.children,
     infants: form.value.infants
   };
 
@@ -119,13 +118,6 @@ async function handleSubmitForm(formEl: FormInstance | undefined) {
 
 function handleToggleDropdown() {
   dropdownVisible.value ? roomsStore.hideDropdown() : roomsStore.showDropdown();
-}
-
-function handleUpdateGuests(totalGuests: number, totalInfants: number) {
-  console.log(totalInfants);
-
-  ruleForm.guests = totalGuests;
-  ruleForm.infants = totalInfants;
 }
 
 onBeforeMount(() => {
@@ -314,11 +306,11 @@ onBeforeMount(() => {
             :rules="rules"
             status-icon
             hide-required-asterisk>
+            <!-- Date Range -->
             <el-form-item
               :label="t('rooms.date')"
               class="form-item"
               prop="date">
-              <!-- Date Range -->
               <el-date-picker
                 type="daterange"
                 v-model="ruleForm.date"
@@ -332,17 +324,17 @@ onBeforeMount(() => {
               </el-date-picker>
             </el-form-item>
 
+            <!-- Guests -->
             <el-form-item :label="t('rooms.guests')" class="form-item relative">
-              <!-- Guests -->
               <el-button
                 class="btn-guests w-full"
                 plain
                 @click="handleToggleDropdown">
                 <div class="text-base text-gray-dark">
-                  <span>{{ ruleForm.guests }} 人</span>
-                  <span v-if="form.infants > 0">
-                    , {{ form.infants }}名婴幼儿
-                  </span>
+                  <span>{{ form.adults + form.children }} 人</span>
+                  <span v-if="form.infants > 0"
+                    >, {{ form.infants }}名婴幼儿</span
+                  >
                 </div>
 
                 <el-icon class="el-icon--right" v-if="!dropdownVisible">
@@ -356,7 +348,6 @@ onBeforeMount(() => {
 
               <aircnc-room-details-dropdown
                 v-if="dropdownVisible"
-                @update-guests="handleUpdateGuests"
                 v-click-outside="roomsStore.hideDropdown" />
             </el-form-item>
 
