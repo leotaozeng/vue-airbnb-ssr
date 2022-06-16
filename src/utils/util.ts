@@ -14,3 +14,8 @@ export function getCookie(cname: string) {
   }
   return '';
 }
+
+// Get the days in the month of the year
+export function daysInMonth(month: number, year: number) {
+  return new Date(year, month, 0).getDate();
+}
