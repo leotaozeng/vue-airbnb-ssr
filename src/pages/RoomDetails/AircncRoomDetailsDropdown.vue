@@ -8,18 +8,16 @@ const roomDetails = computed(() => roomsStore.roomDetails);
 const { liveNumber } = roomDetails.value.info;
 
 const adultsMax = ref(liveNumber);
-const childrenMax = ref(liveNumber);
+const childrenMax = ref(adultsMax.value === 1 ? 0 : liveNumber);
 
 function handleAdultsChange(currentValue: number | undefined) {
   if (typeof currentValue !== 'number') return;
-
   adultsMax.value = liveNumber - form.value.children;
   childrenMax.value = liveNumber - currentValue;
 }
 
 function handleChildrenChange(currentValue: number | undefined) {
   if (typeof currentValue !== 'number') return;
-
   adultsMax.value = liveNumber - currentValue;
   childrenMax.value = liveNumber - form.value.adults;
 }

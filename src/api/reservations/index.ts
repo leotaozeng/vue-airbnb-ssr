@@ -9,11 +9,14 @@
 import { airbnbDB } from '@/db';
 import reservationsObjectStore from '@/db/objectStores/reservations';
 import { ElLoading, ElMessage } from 'element-plus';
+import { IResult } from '../interface';
 
 const storeName = Object.keys(reservationsObjectStore)[0];
 
 // Mock接口：预订
-export const saveReservationAPI = async (params: any) => {
+export async function saveReservationAPI(
+  params: any
+): Promise<IResult | undefined> {
   const loading = ElLoading.service({
     lock: true,
     background: 'rgba(0, 0, 0, 0.2)'
@@ -56,19 +59,16 @@ export const saveReservationAPI = async (params: any) => {
       loading.close();
     }, 300);
   }
-};
+}
 
 // Mock接口：房源订单列表
-export const fetchReservationListAPI = async () => {
-  try {
-    const reservations = (await airbnbDB.getList(storeName)) as any[];
-    console.log('All reservations', reservations);
-  } catch (error) {
-    console.error(error);
-    ElMessage({
-      type: 'error',
-      message: `数据库查询出现异常: ${error}`,
-      showClose: true
-    });
-  }
-};
+export async function fetchReservationList(): Promise<IResult> {
+  const result = (await airbnbDB.getList(storeName)) as any[];
+
+  return {
+    code: '000000',
+    message: '操作成功',
+    success: true,
+    result: result || null
+  };
+}

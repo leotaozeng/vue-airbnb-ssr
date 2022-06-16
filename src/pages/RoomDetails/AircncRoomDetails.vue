@@ -8,6 +8,7 @@ import {
   FormInstance,
   FormRules
 } from 'element-plus';
+import { dateDiff, parseDate } from '@/utils/util';
 
 const discounts = [
   {
@@ -97,6 +98,10 @@ async function saveReservation() {
     price,
     pictureURL: imgs[0],
     date: JSON.stringify(ruleForm.date),
+    nights: dateDiff(
+      parseDate(ruleForm.date[0]) as Date,
+      parseDate(ruleForm.date[1]) as Date
+    ),
     guests: form.value.adults + form.value.children,
     infants: form.value.infants
   };
@@ -320,7 +325,7 @@ onBeforeMount(() => {
               <el-date-picker
                 type="daterange"
                 v-model="ruleForm.date"
-                value-format="YYYY-MM-DD"
+                value-format="YYYY/MM/DD"
                 :start-placeholder="t('rooms.startDate')"
                 :end-placeholder="t('rooms.endDate')"
                 :shortcuts="shortcuts"

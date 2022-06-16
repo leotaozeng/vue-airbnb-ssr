@@ -109,7 +109,7 @@ async function handleSelect(key: string, keyPath: string[]) {
         </router-link>
       </el-menu-item>
 
-      <div class="flex-grow" />
+      <div class="flex-grow"></div>
 
       <!-- Reservation Center -->
       <el-menu-item
@@ -186,6 +186,7 @@ async function handleSelect(key: string, keyPath: string[]) {
       :show-arrow="false"
       :teleported="false"
       :offset="-2"
+      :width="380"
       transition=""
       trigger="click"
       virtual-triggering>
