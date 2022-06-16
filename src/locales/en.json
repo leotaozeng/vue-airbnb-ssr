@@ -82,5 +82,8 @@
       "subtitle": "Under 2"
     },
     "close": "Close"
+  },
+  "reservation": {
+    "message": "Send a message to the host"
   }
 }

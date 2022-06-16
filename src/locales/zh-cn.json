@@ -82,5 +82,8 @@
       "subtitle": "2 岁以下"
     },
     "close": "关闭"
+  },
+  "reservation": {
+    "message": "给房东发消息"
   }
 }
