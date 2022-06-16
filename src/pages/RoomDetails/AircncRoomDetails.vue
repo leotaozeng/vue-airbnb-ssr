@@ -120,6 +120,12 @@ function handleToggleDropdown() {
   dropdownVisible.value ? roomsStore.hideDropdown() : roomsStore.showDropdown();
 }
 
+function disabledDate(time: Date) {
+  return time.getFullYear() < new Date().getFullYear()
+    ? true
+    : time.getTime() < Date.now() - 3600 * 1000 * 24;
+}
+
 onBeforeMount(() => {
   roomsStore.getRoomDetails(route.params.id as string);
 });
@@ -314,9 +320,11 @@ onBeforeMount(() => {
               <el-date-picker
                 type="daterange"
                 v-model="ruleForm.date"
+                value-format="YYYY-MM-DD"
                 :start-placeholder="t('rooms.startDate')"
                 :end-placeholder="t('rooms.endDate')"
                 :shortcuts="shortcuts"
+                :disabled-date="disabledDate"
                 unlink-panels>
                 <template #range-separator>
                   <arrow-right />
