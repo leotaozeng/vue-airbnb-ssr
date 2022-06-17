@@ -4,7 +4,19 @@ import { defineStore } from 'pinia';
 export const useReservationsStore = defineStore('reservations', {
   state: () => ({
     popoverVisible: false,
-    reservations: []
+    reservations: [
+      {
+        created: null,
+        date: '[]',
+        guests: 0,
+        infants: 0,
+        nights: 0,
+        pictureURL: '',
+        price: 0,
+        reservationId: null,
+        title: ''
+      }
+    ]
   }),
   actions: {
     async getReservations() {
