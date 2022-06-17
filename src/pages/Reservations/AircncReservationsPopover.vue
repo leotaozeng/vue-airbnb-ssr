@@ -8,8 +8,15 @@ const router = useRouter();
 const reservationsStore = useReservationsStore();
 const reservations = computed(() => reservationsStore.reservations);
 
-function handleNavigateToRoomDetails(id: number) {
+function handleNavigateToRoomDetails(id: number | null) {
+  if (!id) return;
   router.push({ name: 'RoomDetails', params: { id } });
+  reservationsStore.hideReservationsPopover();
+}
+
+function handleNavigateToReservations() {
+  router.push({ name: 'Reservations' });
+  reservationsStore.hideReservationsPopover();
 }
 
 onBeforeMount(() => {
@@ -27,22 +34,25 @@ onBeforeMount(() => {
 
     <ul>
       <li
-        v-for="reservation in reservations"
-        :key="reservation.reservationId"
+        v-for="(reservation, index) in reservations"
+        :key="reservation.reservationId ? reservation.reservationId : index"
         class="cursor-pointer"
         @click="handleNavigateToRoomDetails(reservation.reservationId)">
         <div class="reservation py-4 flex justify-between items-center">
-          <!-- Left -->
           <div class="content">
             <div>
               <p class="title text-sm font-semibold text-gray-darkest">
                 吉林的整套房子/公寓
               </p>
-              <div class="text-gray-dark">
+
+              <div
+                v-if="JSON.parse(reservation.date).length === 2"
+                class="text-gray-dark">
                 {{ JSON.parse(reservation.date)[0] }} -
                 {{ JSON.parse(reservation.date)[1].slice(5) }} ·
                 {{ reservation.nights }}晚
               </div>
+
               <div class="text-gray-dark">
                 <span class="inline-block mr-1">行程已完成</span>
                 <span> · ￥{{ reservation.price * reservation.nights }}</span>
@@ -54,7 +64,6 @@ onBeforeMount(() => {
             </div>
           </div>
 
-          <!-- Right -->
           <div class="thumbnail ml-4">
             <el-image :src="reservation.pictureURL">
               <template #error>
@@ -68,7 +77,9 @@ onBeforeMount(() => {
       </li>
     </ul>
 
-    <div class="pt-4 pb-1 font-semibold text-cyan-dark">
+    <div
+      class="pt-4 pb-1 font-semibold text-cyan-dark hover:underline cursor-pointer"
+      @click="handleNavigateToReservations">
       {{ t('reservation.more') }}
     </div>
   </div>
