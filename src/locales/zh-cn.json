@@ -84,6 +84,7 @@
     "close": "关闭"
   },
   "reservation": {
-    "message": "给房东发消息"
+    "message": "给房东发消息",
+    "more": "查看更多订单"
   }
 }

@@ -84,6 +84,7 @@
     "close": "Close"
   },
   "reservation": {
-    "message": "Send a message to the host"
+    "message": "Send a message to the host",
+    "more": "View more reservations"
   }
 }
