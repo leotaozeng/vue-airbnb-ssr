@@ -18,8 +18,10 @@ module.exports = {
         },
         gray: {
           muted: '#767676',
-          dark: '#484848',
-          lightest: '#f8f8f8'
+          light: 'f2f2f2',
+          lightest: '#f8f8f8',
+          dark: '#717171',
+          darkest: '#484848'
         },
         neutral: {
           150: 'rgb(235 235 235)'
