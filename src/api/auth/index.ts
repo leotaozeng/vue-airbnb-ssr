@@ -9,7 +9,7 @@
 import { airbnbDB } from '@/db';
 import usersObjectStore from '@/db/objectStores/users';
 import i18n from '@/i18n';
-import { getCookie } from '@/utils/util';
+import { deleteCookie, getCookie } from '@/utils/util';
 import { ElLoading, ElMessage } from 'element-plus';
 
 const storeName = Object.keys(usersObjectStore)[0];
@@ -142,6 +142,8 @@ export const userSignOutAPI = async () => {
     const result = users.find((user) => user.token.includes(token));
 
     if (result) {
+      deleteCookie('token');
+
       await airbnbDB.updateItem(storeName, {
         ...result,
         status: 0,

@@ -7,7 +7,6 @@ import { createApp } from './main';
 import { useAuthStore } from './stores/auth';
 import { useLocaleStore } from './stores/locale';
 import { useRoomsStore } from './stores/rooms';
-import { getCookie } from './utils/util';
 
 const { app, router, pinia } = createApp();
 

@@ -1,18 +1,43 @@
-export function getCookie(cname: string) {
-  const name = cname + '=';
-  const decodedCookie = decodeURIComponent(document.cookie);
-  const ca = decodedCookie.split(';');
+// returns the cookie with the given name,
+// or undefined if not found
+export function getCookie(name: string) {
+  const matches = document.cookie.match(
+    new RegExp(
+      '(?:^|; )' +
+        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') +
+        '=([^;]*)'
+    )
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
 
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
+export function setCookie(name, value, options = {}) {
+  options = {
+    path: '/',
+    // add other defaults here if necessary
+    ...options
+  };
+
+  if (options.expires instanceof Date) {
+    options.expires = options.expires.toUTCString();
+  }
+
+  let updatedCookie =
+    encodeURIComponent(name) + '=' + encodeURIComponent(value);
+
+  for (const optionKey in options) {
+    updatedCookie += '; ' + optionKey;
+    const optionValue = options[optionKey];
+    if (optionValue !== true) {
+      updatedCookie += '=' + optionValue;
     }
   }
-  return '';
+
+  document.cookie = updatedCookie;
+}
+
+export function deleteCookie(name: string) {
+  setCookie(name, '', { 'max-age': -1 });
 }
 
 // Get the days in the month of the year
