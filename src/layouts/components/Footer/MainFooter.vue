@@ -90,13 +90,13 @@ const footerMenu = reactive([
 
 <template>
   <el-footer
-    class="w-full h-fit bg-white text-gray-dark p-0 border-t border-neutral-150">
+    class="w-full h-fit bg-white text-gray-darkest p-0 border-t border-neutral-150">
     <div class="content px-6 py-12">
       <!-- Menu -->
       <el-row>
         <el-col :span="6" v-for="menuItem in footerMenu" :key="menuItem.title">
           <!-- Title -->
-          <h4 class="text-sm text-gray-dark font-extrabold">
+          <h4 class="text-sm text-gray-darkest font-extrabold">
             {{ t(menuItem.title) }}
           </h4>
 

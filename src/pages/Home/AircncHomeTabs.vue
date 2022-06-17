@@ -75,7 +75,7 @@ function handleClickCity(tab: TabsPaneContext) {
 
             <div
               v-show="item.title && item.price"
-              class="info pt-2 text-gray-dark font-heiti">
+              class="info pt-2 text-gray-darkest font-heiti">
               <router-link
                 :to="{ name: 'RoomDetails', params: { id: item.id } }">
                 <p class="title line-clamp-2 font-extrabold">

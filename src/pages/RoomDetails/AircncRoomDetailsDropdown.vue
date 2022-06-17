@@ -30,7 +30,7 @@ function handleChildrenChange(currentValue: number | undefined) {
       <!-- Adults -->
       <li class="dropdown-menu-item mb-6 flex justify-between items-center">
         <div>
-          <div class="title text-gray-dark text-base font-semibold">
+          <div class="title text-gray-darkest text-base font-semibold">
             {{ t('rooms.adults.title') }}
           </div>
           <div class="subtitle pt-1">
@@ -47,7 +47,7 @@ function handleChildrenChange(currentValue: number | undefined) {
       <!-- Children -->
       <li class="dropdown-menu-item mb-6 flex justify-between items-center">
         <div>
-          <div class="title text-gray-dark text-base font-semibold">
+          <div class="title text-gray-darkest text-base font-semibold">
             {{ t('rooms.children.title') }}
           </div>
           <div class="subtitle pt-1">
@@ -64,7 +64,7 @@ function handleChildrenChange(currentValue: number | undefined) {
       <!-- Infants -->
       <li class="dropdown-menu-item mb-6 flex justify-between items-center">
         <div>
-          <div class="title text-gray-dark text-base font-semibold">
+          <div class="title text-gray-darkest text-base font-semibold">
             {{ t('rooms.infants.title') }}
           </div>
           <div class="subtitle pt-1">
@@ -76,7 +76,7 @@ function handleChildrenChange(currentValue: number | undefined) {
     </ul>
 
     <div>
-      <p class="mb-4 text-sm text-gray-dark font-normal">
+      <p class="mb-4 text-sm text-gray-darkest font-normal">
         {{
           t('rooms.guestsDescription', {
             guestNumber: roomDetails.info.liveNumber

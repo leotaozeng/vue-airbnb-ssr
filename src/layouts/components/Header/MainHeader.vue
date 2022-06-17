@@ -99,9 +99,7 @@ async function handleSelect(key: string, keyPath: string[]) {
             <el-image :src="logoUrl" alt="logo" class="logo-container z-10">
               <template #error>
                 <div class="image-slot">
-                  <el-icon>
-                    <i-ep-picture />
-                  </el-icon>
+                  <el-icon><i-ep-picture /></el-icon>
                 </div>
               </template>
             </el-image>
@@ -112,11 +110,7 @@ async function handleSelect(key: string, keyPath: string[]) {
       <div class="flex-grow"></div>
 
       <!-- Reservation Center -->
-      <el-menu-item
-        index="reservationCenter"
-        class="menu-item"
-        ref="buttonRef"
-        v-click-outside="reservationsStore.hideReservationsPopover">
+      <el-menu-item index="reservationCenter" class="menu-item" ref="buttonRef">
         {{ t('header.menu.reservationCenter') }}
       </el-menu-item>
 

@@ -161,7 +161,8 @@ onBeforeMount(() => {
         <section
           v-if="roomsStore.roomDetails.info && roomsStore.roomDetails.title">
           <!-- Title -->
-          <h1 class="title mb-2 py-1.5 font-extrabold text-gray-dark font-sans">
+          <h1
+            class="title mb-2 py-1.5 font-extrabold text-gray-darkest font-sans">
             {{ roomsStore.roomDetails.title }}
           </h1>
 
@@ -206,19 +207,19 @@ onBeforeMount(() => {
             </el-tag>
             <el-tag
               v-if="roomsStore.roomDetails.info.luggage"
-              class="mb-2 mr-1 rounded-2xl text-gray-dark font-extrabold"
+              class="mb-2 mr-1 rounded-2xl text-gray-darkest font-extrabold"
               type="info">
               行李寄存
             </el-tag>
             <el-tag
               v-if="roomsStore.roomDetails.info.parking"
-              class="mb-2 mr-1 rounded-2xl text-gray-dark font-extrabold"
+              class="mb-2 mr-1 rounded-2xl text-gray-darkest font-extrabold"
               type="info">
               免费停车
             </el-tag>
             <el-tag
               v-if="roomsStore.roomDetails.info.metro"
-              class="mb-2 mr-1 rounded-2xl text-gray-dark font-extrabold"
+              class="mb-2 mr-1 rounded-2xl text-gray-darkest font-extrabold"
               type="info">
               近地铁站
             </el-tag>
@@ -242,11 +243,11 @@ onBeforeMount(() => {
             <div class="ml-4 py-2">
               <p
                 v-if="roomsStore.roomDetails.owner.name"
-                class="mb-2 font-extrabold text-base text-gray-dark">
+                class="mb-2 font-extrabold text-base text-gray-darkest">
                 房东：{{ roomsStore.roomDetails.owner.name }}
               </p>
 
-              <p class="font-semibold text-sm text-gray-dark">
+              <p class="font-semibold text-sm text-gray-darkest">
                 <span v-if="roomsStore.roomDetails.owner.certify">
                   已验证身份
                 </span>
@@ -260,7 +261,7 @@ onBeforeMount(() => {
           <!-- * Room Introduction -->
           <div class="room-introduction mt-4 mb-8">
             <div class="p-4 bg-gray-lightest rounded">
-              <p class="font-normal text-base text-gray-dark">
+              <p class="font-normal text-base text-gray-darkest">
                 {{ roomsStore.roomDetails.owner.introduce }}
               </p>
             </div>
@@ -283,11 +284,11 @@ onBeforeMount(() => {
           <!-- Price -->
           <div>
             <span class="price">
-              <span class="text-gray-dark font-extrabold"
+              <span class="text-gray-darkest font-extrabold"
                 >￥{{ roomsStore.roomDetails.price }}</span
               >
             </span>
-            <span class="text-gray-dark text-xs font-semibold">/晚</span>
+            <span class="text-gray-darkest text-xs font-semibold">/晚</span>
           </div>
 
           <!-- Discounts -->
@@ -343,7 +344,7 @@ onBeforeMount(() => {
                 class="btn-guests w-full"
                 plain
                 @click="handleToggleDropdown">
-                <div class="text-base text-gray-dark">
+                <div class="text-base text-gray-darkest">
                   <span>{{ form.adults + form.children }} 人</span>
                   <span v-if="form.infants > 0"
                     >, {{ form.infants }}名婴幼儿</span
