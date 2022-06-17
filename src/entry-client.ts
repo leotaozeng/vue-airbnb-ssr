@@ -4,8 +4,10 @@ import languagesObjectStore from './db/objectStores/languages';
 import reservationsObjectStore from './db/objectStores/reservations';
 import usersObjectStore from './db/objectStores/users';
 import { createApp } from './main';
+import { useAuthStore } from './stores/auth';
 import { useLocaleStore } from './stores/locale';
 import { useRoomsStore } from './stores/rooms';
+import { getCookie } from './utils/util';
 
 const { app, router, pinia } = createApp();
 
@@ -16,6 +18,8 @@ if (window.__INITIAL_STATE__) {
 }
 
 router.beforeEach(async (_to, _from, next) => {
+  console.log(1);
+
   // 初始化所有对象仓库
   await airbnbDB.open([
     usersObjectStore,
@@ -30,6 +34,10 @@ router.beforeEach(async (_to, _from, next) => {
   // 初始化房屋列表
   const roomsStore = useRoomsStore();
   roomsStore.getRooms();
+
+  // 初始化用户
+  const authStore = useAuthStore();
+  authStore.initAuthentication();
 
   next();
 });
