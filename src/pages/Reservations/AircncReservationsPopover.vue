@@ -4,8 +4,13 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 const { t } = useI18n();
 
+const router = useRouter();
 const reservationsStore = useReservationsStore();
 const reservations = computed(() => reservationsStore.reservations);
+
+function handleNavigateToRoomDetails(id: number) {
+  router.push({ name: 'RoomDetails', params: { id } });
+}
 
 onBeforeMount(() => {
   reservationsStore.getReservations();
@@ -21,49 +26,51 @@ onBeforeMount(() => {
     </h3>
 
     <ul>
-      <li v-for="reservation in reservations" :key="reservation.reservationId">
-        <router-link
-          :to="{
-            name: 'RoomDetails',
-            params: { id: reservation.reservationId }
-          }">
-          <div class="reservation py-4 flex justify-between items-center">
-            <!-- Left -->
-            <div class="content">
-              <div>
-                <p class="title text-sm font-semibold text-gray-darkest">
-                  吉林的整套房子/公寓
-                </p>
-                <div class="text-gray-dark">
-                  {{ JSON.parse(reservation.date)[0] }} -
-                  {{ JSON.parse(reservation.date)[1].slice(5) }} ·
-                  {{ reservation.nights }}晚
-                </div>
-                <div class="text-gray-dark">
-                  <span class="inline-block mr-1">行程已完成</span>
-                  <span> · ￥{{ reservation.price * reservation.nights }}</span>
-                </div>
+      <li
+        v-for="reservation in reservations"
+        :key="reservation.reservationId"
+        class="cursor-pointer"
+        @click="handleNavigateToRoomDetails(reservation.reservationId)">
+        <div class="reservation py-4 flex justify-between items-center">
+          <!-- Left -->
+          <div class="content">
+            <div>
+              <p class="title text-sm font-semibold text-gray-darkest">
+                吉林的整套房子/公寓
+              </p>
+              <div class="text-gray-dark">
+                {{ JSON.parse(reservation.date)[0] }} -
+                {{ JSON.parse(reservation.date)[1].slice(5) }} ·
+                {{ reservation.nights }}晚
               </div>
-
-              <div class="mt-2">
-                <el-button plain>{{ t('reservation.message') }}</el-button>
+              <div class="text-gray-dark">
+                <span class="inline-block mr-1">行程已完成</span>
+                <span> · ￥{{ reservation.price * reservation.nights }}</span>
               </div>
             </div>
 
-            <!-- Right -->
-            <div class="thumbnail ml-4">
-              <el-image :src="reservation.pictureURL">
-                <template #error>
-                  <div class="image-slot">
-                    <el-icon><i-ep-picture /></el-icon>
-                  </div>
-                </template>
-              </el-image>
+            <div class="mt-2">
+              <el-button plain>{{ t('reservation.message') }}</el-button>
             </div>
           </div>
-        </router-link>
+
+          <!-- Right -->
+          <div class="thumbnail ml-4">
+            <el-image :src="reservation.pictureURL">
+              <template #error>
+                <div class="image-slot">
+                  <el-icon><i-ep-picture /></el-icon>
+                </div>
+              </template>
+            </el-image>
+          </div>
+        </div>
       </li>
     </ul>
+
+    <div class="pt-4 pb-1 font-semibold text-cyan-dark">
+      {{ t('reservation.more') }}
+    </div>
   </div>
 </template>
 
@@ -74,7 +81,11 @@ onBeforeMount(() => {
   }
 
   .reservation {
-    border-bottom: 1px solid #f2f2f2 !important;
+    border-bottom: 1px solid #f2f2f2;
+
+    &:hover {
+      border-bottom-color: #767676;
+    }
 
     .content {
       .title {
