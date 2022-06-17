@@ -70,8 +70,8 @@ const shortcuts = [
 const route = useRoute();
 const router = useRouter();
 
+const authStore = useAuthStore();
 const roomsStore = useRoomsStore();
-const authstore = useAuthStore();
 
 const form = computed(() => roomsStore.form);
 const roomDetails = computed(() => roomsStore.roomDetails);
@@ -119,7 +119,9 @@ async function handleSubmitForm(formEl: FormInstance | undefined) {
   if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
-      authstore.loggedIn ? saveReservation() : router.push({ name: 'Login' });
+      authStore.loggedIn
+        ? saveReservation()
+        : router.replace({ name: 'Login', query: { redirect: route.path } }); // It navigates without pushing a new history entry
     } else {
       console.log('Error submit', fields);
     }

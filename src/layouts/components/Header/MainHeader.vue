@@ -5,7 +5,7 @@ import logoUrl from '@/assets/images/logo.png';
 import { useAuthStore } from '@/stores/auth';
 import { useLocaleStore } from '@/stores/locale';
 import { useReservationsStore } from '@/stores/reservations';
-import { ClickOutside as vClickOutside, ElMessage } from 'element-plus';
+import { ElMessage } from 'element-plus';
 import en from 'element-plus/lib/locale/lang/en';
 import zhCN from 'element-plus/lib/locale/lang/zh-CN';
 
@@ -74,7 +74,9 @@ async function handleSelect(key: string, keyPath: string[]) {
       }
     }
   } else if (keyPath[0] === 'reservationCenter') {
-    reservationsStore.showReservationsPopover();
+    authStore.loggedIn
+      ? reservationsStore.showReservationsPopover()
+      : router.replace({ name: 'Login', query: { redirect: route.path } });
   }
 }
 </script>

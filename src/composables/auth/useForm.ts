@@ -21,6 +21,8 @@ interface IResult {
 export default function useForm(): IResult {
   const { t } = useI18n();
   const authStore = useAuthStore();
+
+  const route = useRoute();
   const router = useRouter();
 
   const activeName = ref<string>('signin');
@@ -69,7 +71,7 @@ export default function useForm(): IResult {
             showClose: true
           });
 
-          router.push({ name: 'Home' });
+          router.push({ path: (route.query.redirect as string) || '/' });
           return;
         }
 
