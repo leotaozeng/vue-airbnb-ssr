@@ -61,7 +61,7 @@
     }
   },
   "rooms": {
-    "reserve": "预订",
+    "reserve": "立即预订",
     "date": "日期",
     "dateError": " 请选择日期",
     "startDate": "入住日期",
