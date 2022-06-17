@@ -9,6 +9,7 @@ import {
   FormRules
 } from 'element-plus';
 import { dateDiff, parseDate } from '@/utils/util';
+import { useAuthStore } from '@/stores/auth';
 
 const discounts = [
   {
@@ -67,7 +68,11 @@ const shortcuts = [
 ];
 
 const route = useRoute();
+const router = useRouter();
+
 const roomsStore = useRoomsStore();
+const authstore = useAuthStore();
+
 const form = computed(() => roomsStore.form);
 const roomDetails = computed(() => roomsStore.roomDetails);
 const dropdownVisible = computed(() => roomsStore.dropdownVisible);
@@ -114,7 +119,7 @@ async function handleSubmitForm(formEl: FormInstance | undefined) {
   if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
-      saveReservation();
+      authstore.loggedIn ? saveReservation() : router.push({ name: 'Login' });
     } else {
       console.log('Error submit', fields);
     }
