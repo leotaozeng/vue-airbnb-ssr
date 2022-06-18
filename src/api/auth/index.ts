@@ -41,7 +41,8 @@ export const userSignUpAPI = async (params: any) => {
         message: '注册成功',
         success: true,
         result: {
-          status: 1
+          status: 1,
+          userId: result.userId
         }
       };
     } else {
@@ -110,7 +111,8 @@ export const userSignInAPI = async (params: any) => {
         message: '登录成功',
         success: true,
         result: {
-          status: 1
+          status: 1,
+          userId: result.userId
         }
       };
     }

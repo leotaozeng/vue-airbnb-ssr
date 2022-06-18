@@ -62,8 +62,9 @@ export default function useForm(): IResult {
 
         if (response && response.success && response.result) {
           const { message, result } = response;
-          const { status } = result;
+          const { status, userId } = result;
 
+          localStorage.setItem('userId', userId);
           authStore.setLoggedIn(status);
           ElMessage({
             message,
