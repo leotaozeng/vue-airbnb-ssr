@@ -6,7 +6,8 @@ import { useRoomsStore } from '@/stores/rooms';
 import {
   ClickOutside as vClickOutside,
   FormInstance,
-  FormRules
+  FormRules,
+  ElMessage
 } from 'element-plus';
 import { dateDiff, parseDate } from '@/utils/util';
 import { useAuthStore } from '@/stores/auth';
@@ -112,7 +113,16 @@ async function saveReservation() {
   };
 
   const response = await saveReservationAPI(params);
-  console.log(response);
+  if (response && response.success) {
+    const { message } = response;
+    setTimeout(() => {
+      ElMessage({
+        message,
+        type: 'success',
+        showClose: true
+      });
+    }, 300);
+  }
 }
 
 async function handleSubmitForm(formEl: FormInstance | undefined) {

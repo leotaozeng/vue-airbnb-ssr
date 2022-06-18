@@ -31,10 +31,9 @@ export async function saveReservationAPI(
     if (!result) {
       // 数据不存在，新增一条订单数据
       await airbnbDB.addItem(storeName, params);
-
       return {
         code: '000000',
-        message: '操作成功',
+        message: '预定成功',
         success: true,
         result: null
       };
