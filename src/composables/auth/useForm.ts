@@ -93,7 +93,6 @@ export default function useForm(): IResult {
   function handleResetForm(formEl: FormInstance | undefined) {
     if (!formEl) return;
     formEl.resetFields();
-    console.log('reset!');
   }
 
   return {
