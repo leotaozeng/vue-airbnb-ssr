@@ -113,15 +113,11 @@ async function saveReservation() {
   };
 
   const response = await saveReservationAPI(params);
-  if (response && response.success) {
+  if (response) {
     const { message } = response;
-    setTimeout(() => {
-      ElMessage({
-        message,
-        type: 'success',
-        showClose: true
-      });
-    }, 300);
+    response.success
+      ? ElMessage({ message, type: 'success', showClose: true })
+      : ElMessage({ message, type: 'error', showClose: true });
   }
 }
 

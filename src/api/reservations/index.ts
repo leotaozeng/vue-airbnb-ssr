@@ -47,16 +47,13 @@ export async function saveReservationAPI(
       };
     }
   } catch (error) {
-    console.error(error);
     ElMessage({
       type: 'error',
       message: `数据库查询出现异常: ${error}`,
       showClose: true
     });
   } finally {
-    setTimeout(() => {
-      loading.close();
-    }, 300);
+    loading.close();
   }
 }
 
