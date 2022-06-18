@@ -77,10 +77,11 @@ export default function useForm(): IResult {
         }
 
         if (response && !response.success) {
+          const { message } = response;
           ElMessage({
-            showClose: true,
-            message: response.message,
-            type: 'error'
+            message,
+            type: 'error',
+            showClose: true
           });
         }
       } else {
