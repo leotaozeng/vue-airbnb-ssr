@@ -139,7 +139,9 @@ export const userSignOutAPI = async () => {
   try {
     const users = (await airbnbDB.getList(storeName)) as any[];
     const token = getCookie('token');
-    const result = users.find((user) => user.token.includes(token));
+    const result = users.find((user) => {
+      return user.token && user.token.includes(token);
+    });
 
     if (result) {
       deleteCookie('token');
