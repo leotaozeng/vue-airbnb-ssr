@@ -40,7 +40,7 @@ export const useRoomsStore = defineStore('rooms', {
     cityCode: 'hz',
     currentPage: 1,
     pageSize: 6,
-    total: 0,
+    total: 100,
     dropdownVisible: false,
     form: {
       adults: 1,
@@ -66,29 +66,19 @@ export const useRoomsStore = defineStore('rooms', {
           this.total = total;
         }
       } catch (error) {
-        ElMessage({
-          showClose: true,
-          message: '获取 room list 出现异常',
-          type: 'error'
-        });
-        console.error(error);
+        const message = `获取 room list 出现异常: ${error}`;
+        ElMessage({ message, type: 'error', showClose: true });
       }
     },
     async getRoomDetails(id: string) {
       try {
         const response = await fetchRoomDetails({ id });
-
         if (response.success && response.result) {
-          console.log(response.result);
           this.roomDetails = response.result;
         }
       } catch (error) {
-        ElMessage({
-          showClose: true,
-          message: '获取 room details 出现异常',
-          type: 'error'
-        });
-        console.error(error);
+        const message = `获取 room details 出现异常: ${error}`;
+        ElMessage({ message, type: 'error', showClose: true });
       }
     },
     showDropdown() {
