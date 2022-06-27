@@ -53,6 +53,7 @@ export default function useForm(): IResult {
 
   async function handleSubmitForm(formEl: FormInstance | undefined) {
     if (!formEl) return;
+
     await formEl.validate(async (valid, fields) => {
       if (valid) {
         const response =
@@ -64,25 +65,16 @@ export default function useForm(): IResult {
           const { message, result } = response;
           const { status, userId } = result;
 
-          localStorage.setItem('userId', userId);
+          userId && localStorage.setItem('userId', userId);
           authStore.setLoggedIn(status);
-          ElMessage({
-            message,
-            type: 'success',
-            showClose: true
-          });
-
+          ElMessage({ message, type: 'success', showClose: true });
           router.push({ path: (route.query.redirect as string) || '/' });
           return;
         }
 
         if (response && !response.success) {
           const { message } = response;
-          ElMessage({
-            message,
-            type: 'error',
-            showClose: true
-          });
+          ElMessage({ message, type: 'error', showClose: true });
         }
       } else {
         console.error('Error submit', fields);

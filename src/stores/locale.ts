@@ -11,6 +11,7 @@ export const useLocaleStore = defineStore('locale', {
   getters: {},
   actions: {
     async getLanguage() {
+      console.log('Start getting Language');
       const response = await fetchLanguageAPI();
       if (response && response.result) {
         const { locale, name } = response.result;

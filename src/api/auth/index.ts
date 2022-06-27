@@ -11,11 +11,14 @@ import usersObjectStore from '@/db/objectStores/users';
 import i18n from '@/i18n';
 import { deleteCookie, getCookie } from '@/utils/util';
 import { ElLoading, ElMessage } from 'element-plus';
+import { IResult } from '../interface';
 
 const storeName = Object.keys(usersObjectStore)[0];
 
 // Mock接口：用户注册
-export const userSignUpAPI = async (params: any) => {
+export const userSignUpAPI = async (
+  params: any
+): Promise<IResult | undefined> => {
   const loading = ElLoading.service({
     lock: true,
     text: i18n.global.t('loading'),
@@ -30,20 +33,13 @@ export const userSignUpAPI = async (params: any) => {
       const token = new Date().getTime().toString();
       document.cookie = `token=${token}`;
 
-      await airbnbDB.addItem(storeName, {
-        ...params,
-        status: 1,
-        token
-      });
+      await airbnbDB.addItem(storeName, { ...params, status: 1, token });
 
       return {
         code: '000000',
         message: '注册成功',
         success: true,
-        result: {
-          status: 1,
-          userId: result.userId
-        }
+        result: { status: 1 }
       };
     } else {
       // 存在相同手机号
@@ -55,7 +51,6 @@ export const userSignUpAPI = async (params: any) => {
       };
     }
   } catch (error) {
-    console.error(error);
     ElMessage({
       showClose: true,
       message: `数据库查询出现异常: ${error}`,
@@ -69,7 +64,9 @@ export const userSignUpAPI = async (params: any) => {
 };
 
 // Mock接口：用户登录
-export const userSignInAPI = async (params: any) => {
+export const userSignInAPI = async (
+  params: any
+): Promise<IResult | undefined> => {
   const loading = ElLoading.service({
     lock: true,
     text: i18n.global.t('loading'),
@@ -99,21 +96,13 @@ export const userSignInAPI = async (params: any) => {
     } else {
       const token = new Date().getTime().toString();
       document.cookie = `token=${token}`;
-
-      await airbnbDB.updateItem(storeName, {
-        ...result,
-        status: 1,
-        token
-      });
+      await airbnbDB.updateItem(storeName, { ...result, status: 1, token });
 
       return {
         code: '000000',
         message: '登录成功',
         success: true,
-        result: {
-          status: 1,
-          userId: result.userId
-        }
+        result: { status: 1, userId: result.userId }
       };
     }
   } catch (error) {
@@ -158,9 +147,7 @@ export const userSignOutAPI = async () => {
         code: '000000',
         message: '退出成功',
         success: true,
-        result: {
-          status: 0
-        }
+        result: { status: 0 }
       };
     }
   } catch (error) {
