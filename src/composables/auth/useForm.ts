@@ -65,9 +65,9 @@ export default function useForm(): IResult {
           const { message, result } = response;
           const { status, userId } = result;
 
+          ElMessage({ message, type: 'success', showClose: true });
           userId && localStorage.setItem('userId', userId);
           authStore.setLoggedIn(status);
-          ElMessage({ message, type: 'success', showClose: true });
           router.push({ path: (route.query.redirect as string) || '/' });
           return;
         }
