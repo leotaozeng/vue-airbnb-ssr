@@ -11,6 +11,7 @@ import {
 } from 'element-plus';
 import { dateDiff, parseDate } from '@/utils/util';
 import { useAuthStore } from '@/stores/auth';
+import { v4 as uuidv4 } from 'uuid';
 
 const discounts = [
   {
@@ -99,7 +100,7 @@ const rules = reactive<FormRules>({
 async function saveReservation() {
   const { title, price, imgs } = roomDetails.value;
   const params = {
-    reservationId: +route.params.id,
+    reservationId: route.params.id + uuidv4(),
     title,
     price,
     pictureURL: imgs[0],
