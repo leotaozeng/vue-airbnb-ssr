@@ -26,11 +26,14 @@ export async function saveReservationAPI(
     const userId = Number(localStorage.getItem('userId')) as number;
     const allReservations = (await airbnbDB.getList(storeName)) as any[];
     const hasReservationId = allReservations.find((item) => {
-      return item.reservationId === params.reservationId;
+      return (
+        item.userId === userId && item.reservationId === params.reservationId
+      );
     });
 
     if (!hasReservationId) {
       Object.assign(params, { userId });
+      console.log(params);
       // 数据不存在，新增一条订单数据
       await airbnbDB.addItem(storeName, params);
       return {
