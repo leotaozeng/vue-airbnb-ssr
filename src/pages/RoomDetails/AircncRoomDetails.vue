@@ -109,7 +109,8 @@ async function saveReservation() {
       parseDate(ruleForm.date[1]) as Date
     ),
     guests: form.value.adults + form.value.children,
-    infants: form.value.infants
+    infants: form.value.infants,
+    city: roomsStore.cityCode
   };
 
   const response = await saveReservationAPI(params);

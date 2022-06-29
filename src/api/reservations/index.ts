@@ -13,7 +13,7 @@ import { IResult } from '../interface';
 
 const storeName = Object.keys(reservationsObjectStore)[0];
 
-// Mock接口：预订
+// Mock接口：保存房源订单
 export async function saveReservationAPI(
   params: any
 ): Promise<IResult | undefined> {
@@ -24,7 +24,6 @@ export async function saveReservationAPI(
 
   try {
     const userId = Number(localStorage.getItem('userId')) as number;
-
     const allReservations = (await airbnbDB.getList(storeName)) as any[];
     const hasReservationId = allReservations.find((item) => {
       return item.reservationId === params.reservationId;
@@ -50,21 +49,19 @@ export async function saveReservationAPI(
       };
     }
   } catch (error) {
-    ElMessage({
-      type: 'error',
-      message: `数据库查询出现异常: ${error}`,
-      showClose: true
-    });
+    const message = `数据库操作出现异常: ${error}`;
+    ElMessage({ message, type: 'error', showClose: true });
   } finally {
-    loading.close();
+    setTimeout(() => {
+      loading.close();
+    }, 300);
   }
 }
 
-// Mock接口：房源订单列表
+// Mock接口：获取房源订单
 export async function fetchReservationList(): Promise<IResult | undefined> {
   try {
     const userId = Number(localStorage.getItem('userId')) as number;
-
     const allReservations = (await airbnbDB.getList(storeName)) as any[];
     const reservations = allReservations.filter((item) => {
       return item.userId === userId;
@@ -77,10 +74,7 @@ export async function fetchReservationList(): Promise<IResult | undefined> {
       result: reservations || null
     };
   } catch (error) {
-    ElMessage({
-      type: 'error',
-      message: `数据库查询出现异常: ${error}`,
-      showClose: true
-    });
+    const message = `数据库操作出现异常: ${error}`;
+    ElMessage({ message, type: 'error', showClose: true });
   }
 }

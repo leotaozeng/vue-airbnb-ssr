@@ -6,32 +6,24 @@ export const useReservationsStore = defineStore('reservations', {
     popoverVisible: false,
     reservations: [
       {
-        created: null,
         date: '[]',
         guests: 0,
         infants: 0,
         nights: 0,
-        pictureURL: '',
         price: 0,
+        pictureURL: '',
         reservationId: null,
-        title: ''
+        title: null,
+        city: null,
+        created: null
       }
     ]
   }),
   actions: {
     async getReservations() {
-      try {
-        const response = await fetchReservationList();
-        if (response.success && response.result) {
-          this.reservations = response.result;
-        }
-      } catch (error) {
-        ElMessage({
-          showClose: true,
-          message: '获取 reservation list 出现异常',
-          type: 'error'
-        });
-        console.error(error);
+      const response = await fetchReservationList();
+      if (response && response.success && response.result) {
+        this.reservations = response.result;
       }
     },
     showReservationsPopover() {

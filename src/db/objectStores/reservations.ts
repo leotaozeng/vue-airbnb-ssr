@@ -9,7 +9,8 @@ const webReservation = {
     'date',
     'nights',
     'guests',
-    'infants'
+    'infants',
+    'city'
   ]
 };
 
