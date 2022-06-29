@@ -61,7 +61,7 @@ async function handleSelect(key: string, keyPath: string[]) {
         const { message, result } = response;
         const { status } = result;
 
-        localStorage.setItem('userId', null);
+        localStorage.removeItem('userId');
         authStore.setLoggedIn(status);
         ElMessage({ message, type: 'success', showClose: true });
         route.name !== 'Home' && router.push({ name: 'Home' });
