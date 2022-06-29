@@ -90,6 +90,7 @@ onBeforeMount(() => {
         {{ t('reservation.more') }}
       </button>
     </div>
+    <div v-else>空空如也～</div>
   </div>
 </template>
 
