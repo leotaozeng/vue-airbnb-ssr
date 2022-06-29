@@ -54,8 +54,6 @@ async function handleSelect(key: string, keyPath: string[]) {
       localeLanguage.value = 'en';
       localeStore.setLanguage(en);
     }
-  } else if (keyPath[0] === 'auth') {
-    router.push({ name: 'Login' });
   } else if (keyPath[0] === 'avatar') {
     if (key === 'signout') {
       const response = await userSignOutAPI();
@@ -63,20 +61,18 @@ async function handleSelect(key: string, keyPath: string[]) {
         const { message, result } = response;
         const { status } = result;
 
+        localStorage.setItem('userId', null);
         authStore.setLoggedIn(status);
-        ElMessage({
-          message,
-          type: 'success',
-          showClose: true
-        });
-
-        router.push({ name: 'Home' });
+        ElMessage({ message, type: 'success', showClose: true });
+        route.name !== 'Home' && router.push({ name: 'Home' });
       }
     }
-  } else if (keyPath[0] === 'reservationCenter') {
+  } else if (key === 'reservationCenter') {
     authStore.loggedIn
       ? reservationsStore.showReservationsPopover()
       : router.replace({ name: 'Login', query: { redirect: route.path } });
+  } else if (key === 'auth') {
+    router.push({ name: 'Login' });
   }
 }
 </script>
