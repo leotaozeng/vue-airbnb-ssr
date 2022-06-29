@@ -23,12 +23,15 @@ export async function saveReservationAPI(
   });
 
   try {
+    const userId = localStorage.getItem('userId') as string;
+
     const allReservations = (await airbnbDB.getList(storeName)) as any[];
-    const result = allReservations.find((item) => {
+    const hasReservationId = allReservations.find((item) => {
       return item.reservationId === params.reservationId;
     });
 
-    if (!result) {
+    if (!hasReservationId) {
+      Object.assign(params, { userId });
       // 数据不存在，新增一条订单数据
       await airbnbDB.addItem(storeName, params);
       return {
@@ -58,13 +61,26 @@ export async function saveReservationAPI(
 }
 
 // Mock接口：房源订单列表
-export async function fetchReservationList(): Promise<IResult> {
-  const result = (await airbnbDB.getList(storeName)) as any[];
+export async function fetchReservationList(): Promise<IResult | undefined> {
+  try {
+    const userId = localStorage.getItem('userId') as string;
 
-  return {
-    code: '000000',
-    message: '操作成功',
-    success: true,
-    result: result || null
-  };
+    const allReservations = (await airbnbDB.getList(storeName)) as any[];
+    const reservations = allReservations.filter((item) => {
+      return item.userId === userId;
+    });
+
+    return {
+      code: '000000',
+      message: '操作成功',
+      success: true,
+      result: reservations || null
+    };
+  } catch (error) {
+    ElMessage({
+      type: 'error',
+      message: `数据库查询出现异常: ${error}`,
+      showClose: true
+    });
+  }
 }
