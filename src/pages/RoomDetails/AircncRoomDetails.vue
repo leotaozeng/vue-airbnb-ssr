@@ -292,6 +292,7 @@ onBeforeMount(() => {
         </section>
       </div>
 
+      <!-- Sidebar -->
       <div class="form-container w-1/3">
         <div class="border border-solid border-zinc-200 pt-4 px-6">
           <!-- Price -->

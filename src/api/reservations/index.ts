@@ -23,7 +23,7 @@ export async function saveReservationAPI(
   });
 
   try {
-    const userId = localStorage.getItem('userId') as string;
+    const userId = Number(localStorage.getItem('userId')) as number;
 
     const allReservations = (await airbnbDB.getList(storeName)) as any[];
     const hasReservationId = allReservations.find((item) => {
@@ -63,7 +63,7 @@ export async function saveReservationAPI(
 // Mock接口：房源订单列表
 export async function fetchReservationList(): Promise<IResult | undefined> {
   try {
-    const userId = localStorage.getItem('userId') as string;
+    const userId = Number(localStorage.getItem('userId')) as number;
 
     const allReservations = (await airbnbDB.getList(storeName)) as any[];
     const reservations = allReservations.filter((item) => {

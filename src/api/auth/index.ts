@@ -26,20 +26,25 @@ export const userSignUpAPI = async (
   });
 
   try {
-    const users = (await airbnbDB.getList(storeName)) as any[];
-    const result = users.find((user) => user.phone === params.phone);
+    const allUsers = (await airbnbDB.getList(storeName)) as any[];
+    const user = allUsers.find((item) => {
+      return item.phone === params.phone;
+    });
 
-    if (!result) {
+    if (!user) {
       const token = new Date().getTime().toString();
       document.cookie = `token=${token}`;
-
-      await airbnbDB.addItem(storeName, { ...params, status: 1, token });
+      const userId = await airbnbDB.addItem(storeName, {
+        ...params,
+        status: 1,
+        token
+      });
 
       return {
         code: '000000',
         message: '注册成功',
         success: true,
-        result: { status: 1 }
+        result: { status: 1, userId }
       };
     } else {
       // 存在相同手机号
@@ -74,10 +79,12 @@ export const userSignInAPI = async (
   });
 
   try {
-    const users = (await airbnbDB.getList(storeName)) as any[];
-    const result = users.find((user) => user.phone === params.phone);
+    const allUsers = (await airbnbDB.getList(storeName)) as any[];
+    const user = allUsers.find((item) => {
+      return item.phone === params.phone;
+    });
 
-    if (!result) {
+    if (!user) {
       // 用户输入的手机号不存在
       return {
         code: '000002',
@@ -85,7 +92,7 @@ export const userSignInAPI = async (
         success: false,
         result: null
       };
-    } else if (result.password !== params.password) {
+    } else if (user.password !== params.password) {
       // 用户输入的密码不正确
       return {
         code: '000003',
@@ -96,17 +103,20 @@ export const userSignInAPI = async (
     } else {
       const token = new Date().getTime().toString();
       document.cookie = `token=${token}`;
-      await airbnbDB.updateItem(storeName, { ...result, status: 1, token });
+      const userId = await airbnbDB.updateItem(storeName, {
+        ...user,
+        status: 1,
+        token
+      });
 
       return {
         code: '000000',
         message: '登录成功',
         success: true,
-        result: { status: 1, userId: result.userId }
+        result: { status: 1, userId }
       };
     }
   } catch (error) {
-    console.error(error);
     ElMessage({
       showClose: true,
       message: `数据库查询出现异常: ${error}`,
@@ -120,7 +130,7 @@ export const userSignInAPI = async (
 };
 
 // Mock接口：用户登出
-export const userSignOutAPI = async () => {
+export const userSignOutAPI = async (): Promise<IResult | undefined> => {
   const loading = ElLoading.service({
     lock: true,
     text: i18n.global.t('loading'),
@@ -128,20 +138,15 @@ export const userSignOutAPI = async () => {
   });
 
   try {
-    const users = (await airbnbDB.getList(storeName)) as any[];
     const token = getCookie('token');
-    const result = users.find((user) => {
-      return user.token && user.token.includes(token);
+    const allUsers = (await airbnbDB.getList(storeName)) as any[];
+    const user = allUsers.find((item) => {
+      return item.token && item.token.includes(token);
     });
 
-    if (result) {
+    if (user) {
       deleteCookie('token');
-
-      await airbnbDB.updateItem(storeName, {
-        ...result,
-        status: 0,
-        token: null
-      });
+      await airbnbDB.updateItem(storeName, { ...user, status: 0, token: null });
 
       return {
         code: '000000',
@@ -151,7 +156,6 @@ export const userSignOutAPI = async () => {
       };
     }
   } catch (error) {
-    console.error(error);
     ElMessage({
       showClose: true,
       message: `数据库查询出现异常: ${error}`,
