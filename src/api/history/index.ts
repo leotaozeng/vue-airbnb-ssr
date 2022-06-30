@@ -21,7 +21,7 @@ export async function saveHistoryAPI(
     const userId = Number(localStorage.getItem('userId')) as number;
     const allHistory = (await airbnbDB.getList(storeName)) as any[];
     const hasHistoryId = allHistory.find((item) => {
-      return item.userId === userId && item.historyId === params.historyId;
+      return item.userId === userId && item.title === params.title;
     });
 
     if (!hasHistoryId) {
