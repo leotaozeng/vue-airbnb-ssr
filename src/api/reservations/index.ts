@@ -28,7 +28,7 @@ export async function saveReservationAPI(
 
     if (!hasReservationId) {
       Object.assign(params, { userId });
-      // 数据不存在，新增一条订单数据
+      // 数据不存在，新增一条订单
       await airbnbDB.addItem(storeName, params);
       return {
         code: '000000',
@@ -37,7 +37,7 @@ export async function saveReservationAPI(
         result: null
       };
     } else {
-      // 存在相同订单数据
+      // 存在相同订单
       return {
         code: '000001',
         message: '订单已存在',

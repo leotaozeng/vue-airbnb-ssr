@@ -26,7 +26,7 @@ export async function saveHistoryAPI(
 
     if (!hasHistoryId) {
       Object.assign(params, { userId });
-      // 数据不存在，新增一条浏览记录数据
+      // 数据不存在，新增一条浏览记录
       await airbnbDB.addItem(storeName, params);
       return {
         code: '000000',
@@ -35,7 +35,7 @@ export async function saveHistoryAPI(
         result: null
       };
     } else {
-      // 存在相同浏览记录数据
+      // 存在相同浏览记录
       return {
         code: '000001',
         message: '浏览记录已存在',
