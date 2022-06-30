@@ -19,6 +19,12 @@ const routes: RouteRecordRaw[] = [
         path: 'reservation-center',
         name: 'Reservations',
         component: () => import('@/pages/Reservations/AircncReservations.vue')
+      },
+      {
+        path: 'browsing-history',
+        name: 'BrowsingHistory',
+        component: () =>
+          import('@/pages/BrowsingHistory/AircncBrowsingHistory.vue')
       }
     ]
   },
