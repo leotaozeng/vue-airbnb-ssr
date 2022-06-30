@@ -3,14 +3,14 @@ import TypeObjectStore from '../type';
 const webReservation = {
   keyPath: 'reservationId',
   indexs: [
+    'pictureURL',
+    'city',
     'title',
     'price',
-    'pictureURL',
     'date',
     'nights',
     'guests',
-    'infants',
-    'city'
+    'infants'
   ]
 };
 

@@ -1,8 +1,11 @@
 // mounts the app to a DOM element
-import { airbnbDB } from './db';
-import languagesObjectStore from './db/objectStores/languages';
-import reservationsObjectStore from './db/objectStores/reservations';
-import usersObjectStore from './db/objectStores/users';
+import {
+  airbnbDB,
+  historyObjectStore,
+  languagesObjectStore,
+  reservationsObjectStore,
+  usersObjectStore
+} from './db';
 import { createApp } from './main';
 import { useAuthStore } from './stores/auth';
 import { useLocaleStore } from './stores/locale';
@@ -20,6 +23,7 @@ router.beforeEach(async (_to, _from, next) => {
   // 初始化所有对象仓库
   await airbnbDB.open([
     usersObjectStore,
+    historyObjectStore,
     languagesObjectStore,
     reservationsObjectStore
   ]);
