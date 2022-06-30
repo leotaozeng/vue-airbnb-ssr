@@ -55,11 +55,8 @@ export const userSignUpAPI = async (
       };
     }
   } catch (error) {
-    ElMessage({
-      showClose: true,
-      message: `数据库查询出现异常: ${error}`,
-      type: 'error'
-    });
+    const message = `数据库操作出现异常: ${error}`;
+    ElMessage({ message, type: 'error', showClose: true });
   } finally {
     setTimeout(() => {
       loading.close();
@@ -116,11 +113,8 @@ export const userSignInAPI = async (
       };
     }
   } catch (error) {
-    ElMessage({
-      showClose: true,
-      message: `数据库查询出现异常: ${error}`,
-      type: 'error'
-    });
+    const message = `数据库操作出现异常: ${error}`;
+    ElMessage({ message, type: 'error', showClose: true });
   } finally {
     setTimeout(() => {
       loading.close();
@@ -155,11 +149,8 @@ export const userSignOutAPI = async (): Promise<IResult | undefined> => {
       };
     }
   } catch (error) {
-    ElMessage({
-      showClose: true,
-      message: `数据库查询出现异常: ${error}`,
-      type: 'error'
-    });
+    const message = `数据库操作出现异常: ${error}`;
+    ElMessage({ message, type: 'error', showClose: true });
   } finally {
     setTimeout(() => {
       loading.close();
