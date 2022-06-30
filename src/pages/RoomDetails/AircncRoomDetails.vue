@@ -12,6 +12,7 @@ import {
 import { dateDiff, parseDate } from '@/utils/util';
 import { useAuthStore } from '@/stores/auth';
 import { v4 as uuidv4 } from 'uuid';
+import { saveHistoryAPI } from '@/api/history';
 
 const discounts = [
   {
@@ -97,30 +98,16 @@ const rules = reactive<FormRules>({
   ]
 });
 
-async function saveHistory() {
-  const { title, price, imgs } = roomDetails.value;
+async function saveHistory(data: any) {
+  const { title, price, imgs } = data;
   const params = {
-    reservationId: route.params.id + uuidv4(),
     title,
     price,
     pictureURL: imgs[0],
-    date: JSON.stringify(ruleForm.date),
-    nights: dateDiff(
-      parseDate(ruleForm.date[0]) as Date,
-      parseDate(ruleForm.date[1]) as Date
-    ),
-    guests: form.value.adults + form.value.children,
-    infants: form.value.infants,
-    city: roomsStore.cityCode
+    city: roomsStore.cityCode,
+    historyId: route.params.id + uuidv4()
   };
-
-  const response = await saveReservationAPI(params);
-  if (response) {
-    const { message } = response;
-    response.success
-      ? ElMessage({ message, type: 'success', showClose: true })
-      : ElMessage({ message, type: 'error', showClose: true });
-  }
+  await saveHistoryAPI(params);
 }
 
 async function saveReservation() {
@@ -173,8 +160,16 @@ function disabledDate(time: Date) {
 }
 
 onBeforeMount(() => {
+  // authStore.loggedIn && saveHistory();
   roomsStore.getRoomDetails(route.params.id as string);
 });
+
+watch(
+  () => roomsStore.roomDetails,
+  (roomDetails) => {
+    authStore.loggedIn && saveHistory(roomDetails);
+  }
+);
 </script>
 
 <template>
