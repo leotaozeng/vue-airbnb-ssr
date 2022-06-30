@@ -73,6 +73,10 @@ async function handleSelect(key: string, keyPath: string[]) {
       : router.replace({ name: 'Login', query: { redirect: route.path } });
   } else if (key === 'auth') {
     router.push({ name: 'Login' });
+  } else if (key === 'history') {
+    authStore.loggedIn
+      ? router.push({ name: 'BrowsingHistory' })
+      : router.replace({ name: 'Login', query: { redirect: route.path } });
   }
 }
 </script>

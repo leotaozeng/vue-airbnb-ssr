@@ -160,7 +160,6 @@ function disabledDate(time: Date) {
 }
 
 onBeforeMount(() => {
-  // authStore.loggedIn && saveHistory();
   roomsStore.getRoomDetails(route.params.id as string);
 });
 
