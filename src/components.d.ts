@@ -5,6 +5,7 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AircncBrowsingHistory: typeof import('./pages/BrowsingHistory/AircncBrowsingHistory.vue')['default']
     AircncHome: typeof import('./pages/Home/AircncHome.vue')['default']
     AircncHomeList: typeof import('./pages/Home/AircncHomeList.vue')['default']
     AircncHomeTabs: typeof import('./pages/Home/AircncHomeTabs.vue')['default']
