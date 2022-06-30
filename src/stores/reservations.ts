@@ -1,4 +1,4 @@
-import { fetchReservationList } from '@/api/reservations';
+import { fetchReservationListAPI } from '@/api/reservations';
 import { defineStore } from 'pinia';
 
 export const useReservationsStore = defineStore('reservations', {
@@ -21,7 +21,7 @@ export const useReservationsStore = defineStore('reservations', {
   }),
   actions: {
     async getReservations() {
-      const response = await fetchReservationList();
+      const response = await fetchReservationListAPI();
       if (response && response.success && response.result) {
         this.reservations = response.result;
       }

@@ -1,4 +1,4 @@
-import { fetchRoomDetails, fetchRoomList } from '@/api/rooms';
+import { fetchRoomDetailsAPI, fetchRoomListAPI } from '@/api/rooms';
 import { ElMessage } from 'element-plus';
 import { defineStore } from 'pinia';
 
@@ -52,7 +52,7 @@ export const useRoomsStore = defineStore('rooms', {
   actions: {
     async getRooms(currentPage?: number, pageSize?: number, cityCode?: string) {
       try {
-        const response = await fetchRoomList({
+        const response = await fetchRoomListAPI({
           pageNo: currentPage || this.currentPage,
           pageSize: pageSize || this.pageSize,
           cityCode: cityCode || this.cityCode
@@ -72,7 +72,7 @@ export const useRoomsStore = defineStore('rooms', {
     },
     async getRoomDetails(id: string) {
       try {
-        const response = await fetchRoomDetails({ id });
+        const response = await fetchRoomDetailsAPI({ id });
         if (response.success && response.result) {
           this.roomDetails = response.result;
         }

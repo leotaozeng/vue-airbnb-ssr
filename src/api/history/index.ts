@@ -12,8 +12,8 @@ import { IResult } from '../interface';
 
 const storeName = Object.keys(reservationsObjectStore)[0];
 
-// Mock接口：保存房源订单
-export async function saveReservationAPI(
+// Mock接口：保存历史足迹
+export async function saveHistoryAPI(
   params: any
 ): Promise<IResult | undefined> {
   const loading = ElLoading.service({
@@ -60,8 +60,8 @@ export async function saveReservationAPI(
   }
 }
 
-// Mock接口：获取房源订单
-export async function fetchReservationListAPI(): Promise<IResult | undefined> {
+// Mock接口：获取历史足迹
+export async function fetchHistoryListAPI(): Promise<IResult | undefined> {
   try {
     const userId = Number(localStorage.getItem('userId')) as number;
     const allReservations = (await airbnbDB.getList(storeName)) as any[];

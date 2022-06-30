@@ -97,6 +97,32 @@ const rules = reactive<FormRules>({
   ]
 });
 
+async function saveHistory() {
+  const { title, price, imgs } = roomDetails.value;
+  const params = {
+    reservationId: route.params.id + uuidv4(),
+    title,
+    price,
+    pictureURL: imgs[0],
+    date: JSON.stringify(ruleForm.date),
+    nights: dateDiff(
+      parseDate(ruleForm.date[0]) as Date,
+      parseDate(ruleForm.date[1]) as Date
+    ),
+    guests: form.value.adults + form.value.children,
+    infants: form.value.infants,
+    city: roomsStore.cityCode
+  };
+
+  const response = await saveReservationAPI(params);
+  if (response) {
+    const { message } = response;
+    response.success
+      ? ElMessage({ message, type: 'success', showClose: true })
+      : ElMessage({ message, type: 'error', showClose: true });
+  }
+}
+
 async function saveReservation() {
   const { title, price, imgs } = roomDetails.value;
   const params = {
