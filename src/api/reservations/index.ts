@@ -21,9 +21,7 @@ export async function saveReservationAPI(
     const userId = Number(localStorage.getItem('userId')) as number;
     const allReservations = (await airbnbDB.getList(storeName)) as any[];
     const hasReservationId = allReservations.find((item) => {
-      return (
-        item.userId === userId && item.reservationId === params.reservationId
-      );
+      return item.userId === userId && item.date === params.date;
     });
 
     if (!hasReservationId) {
