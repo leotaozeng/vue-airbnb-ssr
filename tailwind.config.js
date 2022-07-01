@@ -9,7 +9,13 @@ module.exports = {
           'Circular, PingFang-SC, "Hiragino Sans GB", 微软雅黑, "Microsoft YaHei", "Heiti SC"',
         airmoji: 'Airmoji'
       },
+      fontSize: {
+        none: '0'
+      },
       colors: {
+        blue: {
+          dark: '#223b92'
+        },
         cyan: {
           dark: '#008489'
         },
