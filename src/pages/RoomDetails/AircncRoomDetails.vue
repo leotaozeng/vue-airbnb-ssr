@@ -171,6 +171,13 @@ watch(
     authStore.loggedIn && saveHistory(roomDetails);
   }
 );
+
+watch(
+  () => route.params.id,
+  (newId) => {
+    roomsStore.getRoomDetails(newId as string);
+  }
+);
 </script>
 
 <template>
