@@ -40,7 +40,7 @@ onBeforeMount(() => {
           v-for="(reservation, index) in reservations"
           :key="reservation.reservationId ? reservation.reservationId : index"
           class="cursor-pointer"
-          @click="handleNavigateToRoomDetails(reservation.reservationId)">
+          @click="handleNavigateToRoomDetails(reservation.roomId)">
           <div class="reservation py-4 flex justify-between items-center">
             <div class="content">
               <div>

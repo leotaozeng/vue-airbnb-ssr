@@ -12,6 +12,7 @@ export const useReservationsStore = defineStore('reservations', {
         nights: 0,
         price: 0,
         pictureURL: '',
+        roomId: null,
         reservationId: null,
         title: null,
         city: null,

@@ -10,7 +10,8 @@ const webReservation = {
     'date',
     'nights',
     'guests',
-    'infants'
+    'infants',
+    'roomId'
   ]
 };
 

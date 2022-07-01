@@ -23,13 +23,13 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <!-- {{ historyList }} -->
   <div
     class="browsing-history masonry h-full p-5 columns-3 lg:columns-4 xl:columns-5">
     <div
       v-for="item in historyList"
       :key="item.historyId"
       class="item inline-block mb-5 leading-none text-none">
+      <!-- Link -->
       <router-link :to="{ name: 'RoomDetails', params: { id: item.roomId } }">
         <el-image :src="item.pictureURL" :alt="item.title" fit="cover" />
         <div class="content">
@@ -42,6 +42,8 @@ onBeforeMount(() => {
           </p>
         </div>
       </router-link>
+
+      <!-- Price -->
       <div class="price text-gray-darkest">
         <span class="text-base font-semibold">￥{{ item.price }}</span>
         <span class="text-sm font-light ml-1">每晚</span>

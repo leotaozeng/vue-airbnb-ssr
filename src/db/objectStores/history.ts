@@ -2,7 +2,7 @@ import TypeObjectStore from '../type';
 
 const webHistory = {
   keyPath: 'historyId',
-  indexs: ['pictureURL', 'city', 'title', 'price']
+  indexs: ['pictureURL', 'city', 'title', 'price', 'roomId']
 };
 
 const historyObjectStore: TypeObjectStore = {

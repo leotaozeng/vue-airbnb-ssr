@@ -114,6 +114,7 @@ async function saveHistory(data: any) {
 async function saveReservation() {
   const { title, price, imgs } = roomDetails.value;
   const params = {
+    roomId: route.params.id,
     reservationId: route.params.id + uuidv4(),
     title,
     price,
