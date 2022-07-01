@@ -15,3 +15,14 @@ export interface IRoomListParams {
 export interface IRoomDetailsParams {
   id: string;
 }
+
+export interface IHistory {
+  historyId: string;
+  roomId: string;
+  userId: number;
+  pictureURL: string;
+  title: string;
+  city: string;
+  price: number;
+  created: number;
+}

@@ -6,10 +6,10 @@ const localeStore = useLocaleStore();
 <template>
   <div>
     <el-config-provider :locale="localeStore.locale">
-      <el-container direction="vertical" class="h-full">
+      <el-container direction="vertical">
         <main-header />
 
-        <el-main class="p-0 flex-none">
+        <el-main class="p-0">
           <router-view />
         </el-main>
 

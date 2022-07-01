@@ -105,7 +105,8 @@ async function saveHistory(data: any) {
     price,
     pictureURL: imgs[0],
     city: roomsStore.cityCode,
-    historyId: route.params.id + uuidv4()
+    historyId: route.params.id + uuidv4(),
+    roomId: route.params.id
   };
   await saveHistoryAPI(params);
 }
