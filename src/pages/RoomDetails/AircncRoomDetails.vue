@@ -13,6 +13,7 @@ import { dateDiff, parseDate } from '@/utils/util';
 import { useAuthStore } from '@/stores/auth';
 import { v4 as uuidv4 } from 'uuid';
 import { saveHistoryAPI } from '@/api/history';
+import { useHead } from '@vueuse/head';
 
 const discounts = [
   {
@@ -83,10 +84,13 @@ const dropdownVisible = computed(() => roomsStore.dropdownVisible);
 const { t } = useI18n();
 const { ruleFormRef } = useForm();
 
+const siteData = reactive({
+  title: 'Aircnc爱此迎 - 全球民宿_公寓_短租_住宿_预订平台',
+  description: 'My beautiful website'
+});
 const ruleForm = reactive({
   date: ''
 });
-
 const rules = reactive<FormRules>({
   date: [
     {
@@ -178,6 +182,10 @@ watch(
     roomsStore.getRoomDetails(newId as string);
   }
 );
+
+useHead({
+  title: computed(() => roomsStore.roomDetails.title)
+});
 </script>
 
 <template>

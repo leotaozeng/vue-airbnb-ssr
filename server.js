@@ -80,9 +80,9 @@ async function createServer() {
 
       // 5. Inject the app-rendered HTML into the template.
       const html = template
-        .replace(`<!--preload-links-->`, preloadLinks)
+        .replace('<!--preload-links-->', preloadLinks)
         .replace('<!--pinia-state-->', state)
-        .replace(`<!--app-html-->`, renderedHTML);
+        .replace('<!--app-html-->', renderedHTML);
 
       // 6. Send the rendered HTML back.
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
