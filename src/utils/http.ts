@@ -1,7 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const defaultsConfig = {
-  baseURL: import.meta.env.DEV ? 'http://localhost:9000' : '',
+  baseURL: import.meta.env.DEV
+    ? 'http://localhost:9000/proxy'
+    : 'http://110.42.184.111',
   timeout: 5000
 };
 
