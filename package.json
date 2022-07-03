@@ -14,8 +14,8 @@
     "generate": "vite build --ssrManifest --outDir dist/static && yarn build:server && node prerender",
     "preview": "vite preview --host",
     "debug": "node --inspect-brk server",
-    "lint": "eslint --ext .ts,.js,.vue,.json --ignore-path .gitignore --fix src",
-    "format": "prettier --write .",
+    "eslint": "eslint --ext .ts,.js,.vue,.json --ignore-path .gitignore --fix src",
+    "prettier": "prettier --write .",
     "commit": "cz"
   },
   "dependencies": {
