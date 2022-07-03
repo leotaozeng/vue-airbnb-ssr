@@ -1,5 +1,11 @@
 <script lang="ts" setup>
+import { useHead } from '@vueuse/head';
+
 const { t } = useI18n();
+
+useHead({
+  title: 'Aircnc爱此迎 - 全球民宿_公寓_短租_住宿_预订平台'
+});
 </script>
 
 <template>
