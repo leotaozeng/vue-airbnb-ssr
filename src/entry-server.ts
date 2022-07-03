@@ -1,5 +1,4 @@
 // renders the app using the framework's SSR API
-import { renderHeadToString } from '@vueuse/head';
 import { ID_INJECTION_KEY } from 'element-plus';
 import { basename } from 'path';
 import { renderToString } from 'vue/server-renderer';
@@ -9,7 +8,7 @@ export async function render(
   url: string,
   manifest: Record<string, string[]>
 ): Promise<string[]> {
-  const { app, pinia, head, router } = createApp();
+  const { app, pinia, router } = createApp();
   const state = JSON.stringify(pinia.state.value);
 
   app.provide(ID_INJECTION_KEY, {

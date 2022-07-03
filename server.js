@@ -49,18 +49,14 @@ async function createServer() {
     app.use(viteServer.middlewares);
   } else {
     app.use(require('compression')());
-    app.use(
-      require('serve-static')(resolve('dist/client'), {
-        index: false
-      })
-    );
+    app.use(require('serve-static')(resolve('dist/client'), { index: false }));
   }
 
   app.use('*', async (req, res) => {
     try {
       const url = req.originalUrl;
 
-      let template, render;
+      let template, render, html;
       if (!isProduction) {
         // 1. Read index.html
         template = fs.readFileSync(resolve('index.html'), 'utf-8');
@@ -70,19 +66,25 @@ async function createServer() {
         // There is no bundling required, and provides efficient invalidation similar to HMR.
         render = (await viteServer.ssrLoadModule('/src/entry-server.ts'))
           .render;
+
+        // 4. render the app HTML. This assumes entry-server.js's exported `render` function calls appropriate framework SSR APIs, ReactDOMServer.renderToString()
+        const [renderedHTML, state] = await render(url, manifest);
+
+        // 5. Inject the app-rendered HTML into the template.
+        html = template
+          .replace('<!--pinia-state-->', state)
+          .replace('<!--app-html-->', renderedHTML);
       } else {
         template = indexProd;
         render = require('./dist/server/entry-server.js').render;
+
+        const [renderedHTML, state, preloadLinks] = await render(url, manifest);
+
+        html = template
+          .replace('<!--preload-links-->', preloadLinks)
+          .replace('<!--pinia-state-->', state)
+          .replace('<!--app-html-->', renderedHTML);
       }
-
-      // 4. render the app HTML. This assumes entry-server.js's exported `render` function calls appropriate framework SSR APIs, ReactDOMServer.renderToString()
-      const [renderedHTML, state, preloadLinks] = await render(url, manifest);
-
-      // 5. Inject the app-rendered HTML into the template.
-      const html = template
-        .replace('<!--preload-links-->', preloadLinks)
-        .replace('<!--pinia-state-->', state)
-        .replace('<!--app-html-->', renderedHTML);
 
       // 6. Send the rendered HTML back.
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
