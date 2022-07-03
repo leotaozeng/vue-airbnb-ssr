@@ -84,10 +84,6 @@ const dropdownVisible = computed(() => roomsStore.dropdownVisible);
 const { t } = useI18n();
 const { ruleFormRef } = useForm();
 
-const siteData = reactive({
-  title: 'Aircnc爱此迎 - 全球民宿_公寓_短租_住宿_预订平台',
-  description: 'My beautiful website'
-});
 const ruleForm = reactive({
   date: ''
 });

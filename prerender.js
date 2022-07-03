@@ -21,11 +21,11 @@ const routesToPrerender = fs
 (async () => {
   // pre-render each route...
   for (const url of routesToPrerender) {
-    const [finalHTML, preloadLinks, state] = await render(url, manifest);
+    const [renderedHTML, preloadLinks, state] = await render(url, manifest);
 
     const html = template
       .replace(`<!--preload-links-->`, preloadLinks)
-      .replace(`<!--app-html-->`, finalHTML)
+      .replace(`<!--app-html-->`, renderedHTML)
       .replace('<!--pinia-state-->', state);
 
     const filePath = `dist/static${url === '/' ? '/index' : url}.html`;
