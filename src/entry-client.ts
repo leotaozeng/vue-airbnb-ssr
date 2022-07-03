@@ -6,12 +6,18 @@ import {
   reservationsObjectStore,
   usersObjectStore
 } from './db';
-import { buildApp } from './main';
+import { createApp } from './main';
 import { useAuthStore } from './stores/auth';
 import { useLocaleStore } from './stores/locale';
 import { useRoomsStore } from './stores/rooms';
 
-const { app, router, pinia } = buildApp();
+const { app, pinia, router } = createApp();
+
+// 初始化 Pinia
+// 注意：__INITIAL_STATE__需要在 src/types/shims-global.d.ts中定义
+if (window.__INITIAL_STATE__) {
+  pinia.state.value = JSON.parse(window.__INITIAL_STATE__);
+}
 
 router.beforeEach(async (_to, _from, next) => {
   // 初始化所有对象仓库
@@ -36,12 +42,6 @@ router.beforeEach(async (_to, _from, next) => {
 
   next();
 });
-
-// 初始化 Pinia
-// 注意：__INITIAL_STATE__需要在 src/types/shims-global.d.ts中定义
-if (window.__INITIAL_STATE__) {
-  pinia.state.value = JSON.parse(window.__INITIAL_STATE__);
-}
 
 // wait until router is ready before mounting to ensure hydration match
 router.isReady().then(() => {

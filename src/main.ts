@@ -10,17 +10,17 @@ import { createSSRRouter } from './router';
 // SSR requires a fresh app instance per request, therefore we export a function that creates a fresh app instance
 // If using Vuex, we'd also be creating a fresh store here
 // exports env-agnostic (universal) app code
-export function buildApp() {
-  const app = import.meta.env.VITE_SSR ? createSSRApp(App) : createApp(App);
+export function createApp() {
+  const app = createSSRApp(App);
 
   const pinia = createPinia();
-  const router = createSSRRouter();
   const head = createHead();
+  const router = createSSRRouter();
 
   app.use(i18n);
-  app.use(router);
   app.use(pinia);
   app.use(head);
+  app.use(router);
 
-  return { app, router, pinia, head };
+  return { app, pinia, head, router };
 }

@@ -3,13 +3,13 @@ import { renderHeadToString } from '@vueuse/head';
 import { ID_INJECTION_KEY } from 'element-plus';
 import { basename } from 'path';
 import { renderToString } from 'vue/server-renderer';
-import { buildApp } from './main';
+import { createApp } from './main';
 
 export async function render(
   url: string,
   manifest: Record<string, string[]>
 ): Promise<string[]> {
-  const { app, router, pinia, head } = buildApp();
+  const { app, pinia, head, router } = createApp();
   const state = JSON.stringify(pinia.state.value);
 
   app.provide(ID_INJECTION_KEY, {

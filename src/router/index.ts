@@ -7,9 +7,7 @@ import routes from './routes';
 
 export function createSSRRouter() {
   return createRouter({
-    history: import.meta.env.VITE_SSR
-      ? createMemoryHistory()
-      : createWebHistory(),
+    history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
     routes
   });
 }
