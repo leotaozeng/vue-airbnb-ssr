@@ -1,12 +1,7 @@
 <template>
   <router-view v-slot="{ Component: activeComponent }">
     <keep-alive>
-      <suspense>
-        <template #default>
-          <component :is="activeComponent" />
-        </template>
-        <template #fallback>Loading...</template>
-      </suspense>
+      <component :is="activeComponent" />
     </keep-alive>
   </router-view>
 </template>

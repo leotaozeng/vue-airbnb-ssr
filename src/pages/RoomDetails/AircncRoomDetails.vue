@@ -13,6 +13,7 @@ import { dateDiff, parseDate } from '@/utils/util';
 import { useAuthStore } from '@/stores/auth';
 import { v4 as uuidv4 } from 'uuid';
 import { saveHistoryAPI } from '@/api/history';
+import { useHead } from '@vueuse/head';
 
 const discounts = [
   {
@@ -86,7 +87,6 @@ const { ruleFormRef } = useForm();
 const ruleForm = reactive({
   date: ''
 });
-
 const rules = reactive<FormRules>({
   date: [
     {
@@ -178,6 +178,10 @@ watch(
     roomsStore.getRoomDetails(newId as string);
   }
 );
+
+useHead({
+  title: computed(() => roomsStore.roomDetails.title)
+});
 </script>
 
 <template>

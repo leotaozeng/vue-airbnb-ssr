@@ -11,7 +11,7 @@ import { useAuthStore } from './stores/auth';
 import { useLocaleStore } from './stores/locale';
 import { useRoomsStore } from './stores/rooms';
 
-const { app, router, pinia } = createApp();
+const { app, pinia, router } = createApp();
 
 // 初始化 Pinia
 // 注意：__INITIAL_STATE__需要在 src/types/shims-global.d.ts中定义
@@ -45,5 +45,5 @@ router.beforeEach(async (_to, _from, next) => {
 
 // wait until router is ready before mounting to ensure hydration match
 router.isReady().then(() => {
-  app.mount('#app');
+  app.mount('#app', true);
 });
