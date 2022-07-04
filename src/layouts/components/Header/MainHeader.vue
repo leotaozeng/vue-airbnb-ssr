@@ -7,6 +7,7 @@ import { useLocaleStore } from '@/stores/locale';
 import { useReservationsStore } from '@/stores/reservations';
 import { ElMessage } from 'element-plus';
 import en from 'element-plus/lib/locale/lang/en';
+import es from 'element-plus/lib/locale/lang/es';
 import zhCN from 'element-plus/lib/locale/lang/zh-CN';
 
 // Pinia
@@ -53,6 +54,9 @@ async function handleSelect(key: string, keyPath: string[]) {
     } else if (key === 'en') {
       localeLanguage.value = 'en';
       localeStore.setLanguage(en);
+    } else if (key === 'es') {
+      localeLanguage.value = 'es';
+      localeStore.setLanguage(es);
     }
   } else if (keyPath[0] === 'avatar') {
     if (key === 'signout') {
@@ -140,7 +144,7 @@ async function handleSelect(key: string, keyPath: string[]) {
         </el-menu-item>
 
         <!-- Spanish -->
-        <el-menu-item index="spanish" v-show="localeLanguage !== 'spanish'">
+        <el-menu-item index="es" v-show="localeLanguage !== 'es'">
           {{ t('header.menu.spanish') }}
         </el-menu-item>
       </el-sub-menu>

@@ -1,0 +1,90 @@
+{
+  "loading": "Cargando",
+  "require": "{name} es requerido",
+  "header": {
+    "menu": {
+      "reservationCenter": "Centro de reservas",
+      "history": "Historial de navegación",
+      "language": "Lenguaje",
+      "chinese": "简体中文",
+      "english": "English",
+      "spanish": "Español"
+    }
+  },
+  "footer": {
+    "menu": {
+      "support": "Support",
+      "hosting": "Hosting",
+      "about": "About",
+      "discover": "Discovery"
+    },
+    "submenu": {
+      "careers": "Careers",
+      "news": "News",
+      "policy": "Policy",
+      "accessibility": "Accessibility",
+      "trustAndSafe": "Trust And Safe",
+      "invite": "Invite Friends",
+      "evection": "Evection",
+      "magzine": "Airbnb Magzine",
+      "airbnborg": "Airbnb.org",
+      "tryHosting": "Try hosting",
+      "hospitality": "Hospitality",
+      "responsibility": "How to host responsibly",
+      "experiences": "Experiences",
+      "resources": "Explore hosting resources",
+      "help": "Help Center",
+      "neighbors": "Report a neighborhood concern"
+    }
+  },
+  "auth": {
+    "signinBtn": "Sign in",
+    "signupBtn": "Sign up",
+    "signoutBtn": "Sign out",
+    "signinTab": "Sign in",
+    "signupTab": "Sign up",
+    "phone": "Phone number",
+    "password": "Password"
+  },
+  "home": {
+    "title": "Spring Discounts Housing Resource",
+    "subtitle": "Quality housing resource, Under 5 fold",
+    "city": {
+      "hz": "Hangzhou",
+      "sh": "Shanghai",
+      "nj": "Nanjing",
+      "cd": "Chengdu",
+      "cq": "Chongqing",
+      "bj": "Beijing",
+      "sz": "Suzhou",
+      "gz": "Guangzhou"
+    }
+  },
+  "rooms": {
+    "reserve": "Reserve",
+    "date": "Date",
+    "dateError": "Please pick a date",
+    "startDate": "Start date",
+    "endDate": "End date",
+    "guests": "Guests",
+    "guestsError": "Please select guests",
+    "guestsDescription": "This place has a maximum of {guestNumber} guests, not including infants. Pets aren't allowed.",
+    "adults": {
+      "title": "Adults",
+      "subtitle": "Age 13+"
+    },
+    "children": {
+      "title": "Children",
+      "subtitle": "Ages 2–12"
+    },
+    "infants": {
+      "title": "Infants",
+      "subtitle": "Under 2"
+    },
+    "close": "Close"
+  },
+  "reservation": {
+    "message": "Send a message to the host",
+    "more": "View more reservations"
+  }
+}
