@@ -13,14 +13,14 @@
   },
   "footer": {
     "menu": {
-      "support": "Support",
-      "hosting": "Hosting",
-      "about": "About",
+      "support": "Asistencia",
+      "hosting": "Cómo ser anfitrión",
+      "about": "Acerca de",
       "discover": "Discovery"
     },
     "submenu": {
-      "careers": "Careers",
-      "news": "News",
+      "careers": "Empleo",
+      "news": "Sala de prensa",
       "policy": "Policy",
       "accessibility": "Accessibility",
       "trustAndSafe": "Trust And Safe",
@@ -33,8 +33,8 @@
       "responsibility": "How to host responsibly",
       "experiences": "Experiences",
       "resources": "Explore hosting resources",
-      "help": "Help Center",
-      "neighbors": "Report a neighborhood concern"
+      "help": "Centro de Ayuda",
+      "neighbors": "¿Problemas en tu colonia?"
     }
   },
   "auth": {
