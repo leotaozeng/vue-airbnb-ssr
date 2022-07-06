@@ -23,8 +23,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div
-    class="browsing-history masonry h-full p-5 columns-3 lg:columns-4 xl:columns-5">
+  <div class="browsing-history masonry h-full py-5 columns-2 lg:columns-3">
     <div
       v-for="item in historyList"
       :key="item.historyId"
@@ -53,7 +52,13 @@ onBeforeMount(() => {
 </template>
 
 <style lang="scss" scoped>
-.masonry {
-  column-gap: 20px;
+@import '@/assets/scss/abstracts/mixins.scss';
+
+.browsing-history {
+  @include secondary-wrapper;
+
+  &.masonry {
+    column-gap: 20px;
+  }
 }
 </style>
