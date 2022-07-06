@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IResult } from '@/api/interface';
-import TypeObjectStore from '@/db/type';
+import TypeObjectStore from '@/database/type';
 
 export default class Database {
   private databaseName: string; // 数据库名称

@@ -6,7 +6,7 @@
 // code: '000004' 表示 '其他异常'
 // code: '000005' 表示 '登录过期'
 
-import { airbnbDB, usersObjectStore } from '@/db';
+import { airbnbDB, usersObjectStore } from '@/database';
 import i18n from '@/i18n';
 import { deleteCookie, getCookie } from '@/utils/util';
 import { ElLoading, ElMessage } from 'element-plus';

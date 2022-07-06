@@ -2,7 +2,7 @@
 // code: '000000' 表示 '操作成功'
 // code: '000001' 表示 '浏览记录已存在'
 
-import { airbnbDB, historyObjectStore } from '@/db';
+import { airbnbDB, historyObjectStore } from '@/database';
 import { ElLoading, ElMessage } from 'element-plus';
 import { IResult } from '../interface';
 

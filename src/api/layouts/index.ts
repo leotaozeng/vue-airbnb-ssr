@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { airbnbDB, languagesObjectStore } from '@/db';
+import { airbnbDB, languagesObjectStore } from '@/database';
 import { ElLoading, ElMessage } from 'element-plus';
 
 interface Language {

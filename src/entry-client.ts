@@ -5,7 +5,7 @@ import {
   languagesObjectStore,
   reservationsObjectStore,
   usersObjectStore
-} from './db';
+} from './database';
 import { createApp } from './main';
 import { useAuthStore } from './stores/auth';
 import { useLocaleStore } from './stores/locale';
