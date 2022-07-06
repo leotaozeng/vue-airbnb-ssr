@@ -48,7 +48,7 @@ onBeforeMount(() => {
       </template>
 
       <template #default>
-        <div class="columns-2 lg:columns-3" v-if="historyList.length > 0">
+        <div class="columns-2 lg:columns-3 gap-4" v-if="historyList.length > 0">
           <div
             v-for="item in historyList"
             :key="item.historyId"
@@ -90,9 +90,5 @@ onBeforeMount(() => {
 
 .browsing-history {
   @include secondary-wrapper;
-
-  &.masonry {
-    /* column-gap: 20px; */
-  }
 }
 </style>
