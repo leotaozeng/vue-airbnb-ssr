@@ -1,6 +1,7 @@
 // renders the app using the framework's SSR API
 import { ID_INJECTION_KEY } from 'element-plus';
 import { basename } from 'path';
+// Vue's server-rendering API is exposed under `vue/server-renderer`.
 import { renderToString } from 'vue/server-renderer';
 import { createApp } from './main';
 

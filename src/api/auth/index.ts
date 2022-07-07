@@ -7,7 +7,6 @@
 // code: '000005' 表示 '登录过期'
 
 import { airbnbDB, usersObjectStore } from '@/database';
-import i18n from '@/i18n';
 import { deleteCookie, getCookie } from '@/utils/util';
 import { ElLoading, ElMessage } from 'element-plus';
 import { IResult } from '../interface';
@@ -20,7 +19,6 @@ export const userSignUpAPI = async (
 ): Promise<IResult | undefined> => {
   const loading = ElLoading.service({
     lock: true,
-    text: i18n.global.t('loading'),
     background: 'rgba(0, 0, 0, 0.2)'
   });
 
@@ -70,7 +68,6 @@ export const userSignInAPI = async (
 ): Promise<IResult | undefined> => {
   const loading = ElLoading.service({
     lock: true,
-    text: i18n.global.t('loading'),
     background: 'rgba(0, 0, 0, 0.2)'
   });
 
@@ -126,7 +123,6 @@ export const userSignInAPI = async (
 export const userSignOutAPI = async (): Promise<IResult | undefined> => {
   const loading = ElLoading.service({
     lock: true,
-    text: i18n.global.t('loading'),
     background: 'rgba(0, 0, 0, 0.2)'
   });
 

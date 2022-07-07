@@ -1,8 +1,10 @@
+// main.ts 作为 universal code 的入口
 import '@/assets/scss/index.scss';
 import { createHead } from '@vueuse/head';
 import 'element-plus/theme-chalk/index.css';
 import { createPinia } from 'pinia';
-import { createSSRApp } from 'vue'; // this runs in Node.js on the server
+// this runs in Node.js on the server
+import { createSSRApp } from 'vue';
 import App from './App.vue';
 import i18n from './i18n';
 import { createSSRRouter } from './router';
