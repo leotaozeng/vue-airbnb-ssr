@@ -61,6 +61,7 @@
     }
   },
   "rooms": {
+    "share": "分享",
     "reserve": "立即预订",
     "date": "日期",
     "dateError": " 请选择日期",
