@@ -151,8 +151,17 @@ async function handleSubmitForm(formEl: FormInstance | undefined) {
   });
 }
 
+function handleClickOutside(event: MouseEvent) {
+  const target = event.target as Element;
+  const parentNode = target.parentNode as Element;
+  if (parentNode.classList.contains('btn-guests')) return;
+  roomsStore.hideDropdown();
+}
+
 function handleToggleDropdown() {
-  dropdownVisible.value ? roomsStore.hideDropdown() : roomsStore.showDropdown();
+  !dropdownVisible.value
+    ? roomsStore.showDropdown()
+    : roomsStore.hideDropdown();
 }
 
 function disabledDate(time: Date) {
@@ -279,7 +288,7 @@ useHead({
               <el-icon class="mr-2">
                 <i-ep-share />
               </el-icon>
-              {{ t('rooms.share') }}
+              {{ t('rooms.share.text') }}
             </el-button>
           </div>
 
@@ -421,7 +430,7 @@ useHead({
 
               <aircnc-room-details-dropdown
                 v-if="dropdownVisible"
-                v-click-outside="roomsStore.hideDropdown" />
+                v-click-outside="handleClickOutside" />
             </el-form-item>
 
             <!-- Submit Button -->

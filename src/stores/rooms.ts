@@ -41,12 +41,12 @@ export const useRoomsStore = defineStore('rooms', {
     currentPage: 1,
     pageSize: 6,
     total: 100,
-    dropdownVisible: false,
     form: {
       adults: 1,
       children: 0,
       infants: 0
-    }
+    },
+    dropdownVisible: false
   }),
   getters: {},
   actions: {
