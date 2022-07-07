@@ -4,8 +4,8 @@
   "version": "0.0.1",
   "author": "Leo Zeng",
   "scripts": {
-    "dev:ssr": "cross-env NODE_ENV=development npx node-dev server",
-    "prod:ssr": "cross-env NODE_ENV=production npx node-dev server",
+    "dev:ssr": "cross-env NODE_ENV=development npx node-dev server.js",
+    "prod:ssr": "cross-env NODE_ENV=production npx node-dev server.js",
     "build": "pnpm build:client && pnpm build:server",
     "build:client": "vite build --ssrManifest --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.ts --outDir dist/server",
