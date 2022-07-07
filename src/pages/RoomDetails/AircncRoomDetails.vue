@@ -245,32 +245,42 @@ useHead({
             </div>
           </div>
 
-          <!-- Tags -->
-          <div class="tags mb-6">
-            <el-tag
-              v-if="roomsStore.roomDetails.info.remarks > 0"
-              class="mb-2 mr-1 rounded-2xl text-green-dark font-extrabold"
-              type="success">
-              {{ roomsStore.roomDetails.info.remarks }}条评论
-            </el-tag>
-            <el-tag
-              v-if="roomsStore.roomDetails.info.luggage"
-              class="mb-2 mr-1 rounded-2xl text-gray-darkest font-extrabold"
-              type="info">
-              行李寄存
-            </el-tag>
-            <el-tag
-              v-if="roomsStore.roomDetails.info.parking"
-              class="mb-2 mr-1 rounded-2xl text-gray-darkest font-extrabold"
-              type="info">
-              免费停车
-            </el-tag>
-            <el-tag
-              v-if="roomsStore.roomDetails.info.metro"
-              class="mb-2 mr-1 rounded-2xl text-gray-darkest font-extrabold"
-              type="info">
-              近地铁站
-            </el-tag>
+          <div class="flex items-center justify-between mb-8">
+            <!-- Tags -->
+            <div class="tags">
+              <el-tag
+                v-if="roomsStore.roomDetails.info.remarks > 0"
+                class="mr-1 rounded-2xl text-green-dark font-extrabold"
+                type="success">
+                {{ roomsStore.roomDetails.info.remarks }}条评论
+              </el-tag>
+              <el-tag
+                v-if="roomsStore.roomDetails.info.luggage"
+                class="mr-1 rounded-2xl text-gray-darkest font-extrabold"
+                type="info">
+                行李寄存
+              </el-tag>
+              <el-tag
+                v-if="roomsStore.roomDetails.info.parking"
+                class="mr-1 rounded-2xl text-gray-darkest font-extrabold"
+                type="info">
+                免费停车
+              </el-tag>
+              <el-tag
+                v-if="roomsStore.roomDetails.info.metro"
+                class="mr-1 rounded-2xl text-gray-darkest font-extrabold"
+                type="info">
+                近地铁站
+              </el-tag>
+            </div>
+
+            <!-- Share Button -->
+            <el-button text class="underline">
+              <el-icon class="mr-2">
+                <i-ep-share />
+              </el-icon>
+              {{ t('rooms.share') }}
+            </el-button>
           </div>
 
           <div class="line my-4"></div>
