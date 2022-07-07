@@ -1,3 +1,4 @@
+// 服务端入口
 // renders the app using the framework's SSR API
 import { ID_INJECTION_KEY } from 'element-plus';
 import { basename } from 'path';

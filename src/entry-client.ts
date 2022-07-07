@@ -1,3 +1,4 @@
+// 客户端入口
 // mounts the app to a DOM element
 import {
   airbnbDB,
