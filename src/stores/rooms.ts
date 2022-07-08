@@ -46,7 +46,8 @@ export const useRoomsStore = defineStore('rooms', {
       children: 0,
       infants: 0
     },
-    dropdownVisible: false
+    dropdownVisible: false,
+    sharePopupVisible: false
   }),
   getters: {},
   actions: {
@@ -86,6 +87,12 @@ export const useRoomsStore = defineStore('rooms', {
     },
     hideDropdown() {
       this.dropdownVisible = false;
+    },
+    showSharePopup() {
+      this.sharePopupVisible = true;
+    },
+    hideSharePopup() {
+      this.sharePopupVisible = false;
     }
   }
 });

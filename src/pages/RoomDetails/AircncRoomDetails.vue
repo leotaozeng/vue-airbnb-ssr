@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { saveReservationAPI } from '@/api/reservations';
-import ArrowRight from '@/assets/images/arrow-right.svg';
+import ArrowRight from '@/assets/images/roomDetails/arrow-right.svg';
 import useForm from '@/composables/auth/useForm';
 import { useRoomsStore } from '@/stores/rooms';
 import {
@@ -80,13 +80,12 @@ const roomsStore = useRoomsStore();
 const form = computed(() => roomsStore.form);
 const roomDetails = computed(() => roomsStore.roomDetails);
 const dropdownVisible = computed(() => roomsStore.dropdownVisible);
+const sharePopupVisible = computed(() => roomsStore.sharePopupVisible);
 
 const { t } = useI18n();
 const { ruleFormRef } = useForm();
 
-const ruleForm = reactive({
-  date: ''
-});
+const ruleForm = reactive({ date: '' });
 const rules = reactive<FormRules>({
   date: [
     {
@@ -284,7 +283,10 @@ useHead({
             </div>
 
             <!-- Share Button -->
-            <el-button text class="underline">
+            <el-button
+              text
+              class="underline"
+              @click="roomsStore.showSharePopup">
               <el-icon class="mr-2">
                 <i-ep-share />
               </el-icon>
@@ -447,6 +449,8 @@ useHead({
       </div>
     </div>
   </div>
+
+  <aircnc-room-details-share-popup v-if="sharePopupVisible" />
 </template>
 
 <style lang="scss" scoped>

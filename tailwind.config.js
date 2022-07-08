@@ -32,6 +32,12 @@ module.exports = {
         neutral: {
           150: 'rgb(235 235 235)'
         }
+      },
+      zIndex: {
+        100: '100'
+      },
+      spacing: {
+        5.5: '22px'
       }
     }
   },
