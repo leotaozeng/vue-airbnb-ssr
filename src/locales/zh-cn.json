@@ -61,7 +61,10 @@
     }
   },
   "rooms": {
-    "share": "分享",
+    "share": {
+      "text": "分享",
+      "title": "与亲朋好友分享此房源"
+    },
     "reserve": "立即预订",
     "date": "日期",
     "dateError": " 请选择日期",

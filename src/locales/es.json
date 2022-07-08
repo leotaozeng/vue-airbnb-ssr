@@ -61,7 +61,10 @@
     }
   },
   "rooms": {
-    "share": "Cuota",
+    "share": {
+      "text": "Cuota",
+      "title": "Comparte este lugar con amigos y familiares"
+    },
     "reserve": "Reserve",
     "date": "Date",
     "dateError": "Please pick a date",

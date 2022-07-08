@@ -61,7 +61,18 @@
     }
   },
   "rooms": {
-    "share": "Share",
+    "share": {
+      "text": "Share",
+      "title": "Share this place with friends and family",
+      "copy": "Copy Link",
+      "email": "Email",
+      "sms": "Messages",
+      "whatsapp": "WhatsApp",
+      "messenger": "Messenger",
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "wechat": "WeChat"
+    },
     "reserve": "Reserve",
     "date": "Date",
     "dateError": "Please pick a date",
