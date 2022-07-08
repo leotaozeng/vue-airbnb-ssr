@@ -57,7 +57,7 @@ const roomDetails = computed(() => roomsStore.roomDetails);
           <ul class="social-media-list flex flex-wrap -mx-2">
             <li class="social-media w-2/4 px-2 mb-4 cursor-pointer">
               <div
-                class="h-full flex border border-solid border-neutral-200 rounded-xl items-center">
+                class="w-full h-full flex border border-solid border-neutral-200 rounded-xl items-center">
                 <div class="mx-5.5 rounded overflow-hidden">
                   <icon-copy />
                 </div>
@@ -68,7 +68,7 @@ const roomDetails = computed(() => roomsStore.roomDetails);
             </li>
             <li class="social-media w-2/4 px-2 mb-4 cursor-pointer">
               <div
-                class="h-full flex border border-solid border-neutral-200 rounded-xl items-center">
+                class="w-full h-full flex border border-solid border-neutral-200 rounded-xl items-center">
                 <div class="mx-5.5 rounded overflow-hidden">
                   <icon-email />
                 </div>
@@ -79,7 +79,7 @@ const roomDetails = computed(() => roomsStore.roomDetails);
             </li>
             <li class="social-media w-2/4 px-2 mb-4 cursor-pointer">
               <div
-                class="h-full flex border border-solid border-neutral-200 rounded-xl items-center">
+                class="w-full h-full flex border border-solid border-neutral-200 rounded-xl items-center">
                 <div class="mx-5.5 rounded overflow-hidden">
                   <icon-messages />
                 </div>
@@ -90,7 +90,7 @@ const roomDetails = computed(() => roomsStore.roomDetails);
             </li>
             <li class="social-media w-2/4 px-2 mb-4 cursor-pointer">
               <div
-                class="h-full flex border border-solid border-neutral-200 rounded-xl items-center">
+                class="w-full h-full flex border border-solid border-neutral-200 rounded-xl items-center">
                 <div class="mx-5.5 rounded overflow-hidden">
                   <icon-whatsapp />
                 </div>
@@ -101,7 +101,7 @@ const roomDetails = computed(() => roomsStore.roomDetails);
             </li>
             <li class="social-media w-2/4 px-2 mb-4 cursor-pointer">
               <div
-                class="h-full flex border border-solid border-neutral-200 rounded-xl items-center">
+                class="w-full h-full flex border border-solid border-neutral-200 rounded-xl items-center">
                 <div class="mx-5.5 rounded overflow-hidden">
                   <svg
                     viewBox="0 0 32 32"
@@ -141,7 +141,7 @@ const roomDetails = computed(() => roomsStore.roomDetails);
             </li>
             <li class="social-media w-2/4 px-2 mb-4 cursor-pointer">
               <div
-                class="h-full flex border border-solid border-neutral-200 rounded-xl items-center">
+                class="w-full h-full flex border border-solid border-neutral-200 rounded-xl items-center">
                 <div class="mx-5.5 rounded overflow-hidden">
                   <icon-facebook />
                 </div>
@@ -152,7 +152,7 @@ const roomDetails = computed(() => roomsStore.roomDetails);
             </li>
             <li class="social-media w-2/4 px-2 mb-4 cursor-pointer">
               <div
-                class="h-full flex border border-solid border-neutral-200 rounded-xl items-center">
+                class="w-full h-full flex border border-solid border-neutral-200 rounded-xl items-center">
                 <div class="mx-5.5 rounded overflow-hidden">
                   <icon-twitter />
                 </div>
@@ -163,7 +163,7 @@ const roomDetails = computed(() => roomsStore.roomDetails);
             </li>
             <li class="social-media w-2/4 px-2 mb-4 cursor-pointer">
               <div
-                class="h-full flex border border-solid border-neutral-200 rounded-xl items-center">
+                class="w-full h-full flex border border-solid border-neutral-200 rounded-xl items-center">
                 <div class="mx-5.5 rounded overflow-hidden">
                   <icon-wechat />
                 </div>
@@ -213,8 +213,10 @@ const roomDetails = computed(() => roomsStore.roomDetails);
   .social-media {
     height: 76px;
 
-    &:hover {
-      background-color: #f7f7f7;
+    > div {
+      &:hover {
+        background-color: #f7f7f7;
+      }
     }
   }
 }
