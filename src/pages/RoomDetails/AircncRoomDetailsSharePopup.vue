@@ -193,7 +193,19 @@ const roomDetails = computed(() => roomsStore.roomDetails);
 }
 
 .share-popup-container {
-  background-color: rgba(34, 34, 34, 0.6);
+  &::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(34, 34, 34);
+    animation: 0.4s ease 0s 1 both fade;
+    z-index: -1;
+  }
 
   .share-popup {
     box-shadow: rgb(0 0 0 / 28%) 0px 8px 28px;
@@ -218,6 +230,16 @@ const roomDetails = computed(() => roomsStore.roomDetails);
         background-color: #f7f7f7;
       }
     }
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.6;
   }
 }
 </style>
