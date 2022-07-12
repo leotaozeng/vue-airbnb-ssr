@@ -203,12 +203,13 @@ const roomDetails = computed(() => roomsStore.roomDetails);
     width: 100%;
     height: 100%;
     background-color: rgba(34, 34, 34);
-    animation: 0.4s ease 0s 1 both fade;
+    animation: 0.4s ease 0s 1 both fadein;
     z-index: -1;
   }
 
   .share-popup {
     box-shadow: rgb(0 0 0 / 28%) 0px 8px 28px;
+    animation: 0.4s ease 0s 1 both slideup;
   }
 
   .btn-close {
@@ -233,13 +234,25 @@ const roomDetails = computed(() => roomsStore.roomDetails);
   }
 }
 
-@keyframes fade {
+@keyframes fadein {
   from {
     opacity: 0;
   }
 
   to {
     opacity: 0.6;
+  }
+}
+
+@keyframes slideup {
+  from {
+    opacity: 0;
+    transform: translate(0px, 100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 </style>
