@@ -8,6 +8,7 @@ import Icons from 'unplugin-icons/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import Components from 'unplugin-vue-components/vite';
 import { UserConfig } from 'vite';
+import viteCompression from 'vite-plugin-compression';
 import Inspect from 'vite-plugin-inspect';
 import svgLoader from 'vite-svg-loader';
 
@@ -42,10 +43,10 @@ export default ({ command }) => {
     },
     plugins: [
       vue(),
-      vueI18n({
-        include: path.resolve(__dirname, 'src/locales/**')
-      }),
+      vueI18n({ include: path.resolve(__dirname, 'src/locales/**') }),
+      viteCompression(),
       svgLoader(),
+      Inspect(), // only applies in dev mode
       AutoImport({
         imports: ['vue', 'vue-router', 'vue-i18n', 'pinia'],
         resolvers: [
@@ -75,8 +76,7 @@ export default ({ command }) => {
       }),
       Icons({
         autoInstall: true
-      }),
-      Inspect()
+      })
     ]
   };
 
