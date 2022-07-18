@@ -8,7 +8,7 @@ import { useReservationsStore } from '@/stores/reservations';
 import { ElMessage } from 'element-plus';
 import en from 'element-plus/lib/locale/lang/en';
 import es from 'element-plus/lib/locale/lang/es';
-import zhCN from 'element-plus/lib/locale/lang/zh-CN';
+import zhCn from 'element-plus/lib/locale/lang/zh-cn';
 
 // Pinia
 const authStore = useAuthStore();
@@ -50,7 +50,7 @@ async function handleSelect(key: string, keyPath: string[]) {
   if (keyPath[0] === 'language') {
     if (key === 'zh-cn') {
       localeLanguage.value = 'zh-cn';
-      localeStore.setLanguage(zhCN);
+      localeStore.setLanguage(zhCn);
     } else if (key === 'en') {
       localeLanguage.value = 'en';
       localeStore.setLanguage(en);

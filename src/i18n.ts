@@ -1,7 +1,7 @@
 import { createI18n } from 'vue-i18n';
 import en from './locales/en.json';
 import es from './locales/es.json';
-import zhCN from './locales/zh-cn.json';
+import zhCn from './locales/zh-cn.json';
 
 const i18n = createI18n({
   legacy: false,
@@ -11,7 +11,7 @@ const i18n = createI18n({
   messages: {
     en,
     es,
-    'zh-cn': zhCN
+    'zh-cn': zhCn
   }
 });
 
