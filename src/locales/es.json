@@ -41,13 +41,13 @@
     "sitemap": "Mapa del sitio"
   },
   "auth": {
-    "signinBtn": "Sign in",
-    "signupBtn": "Sign up",
-    "signoutBtn": "Sign out",
-    "signinTab": "Sign in",
-    "signupTab": "Sign up",
-    "phone": "Phone number",
-    "password": "Password"
+    "signinBtn": "Iniciar sesión",
+    "signupBtn": "Regístrate",
+    "signoutBtn": "Cerrar sesión",
+    "signinTab": "Iniciar sesión",
+    "signupTab": "Regístrate",
+    "phone": "Número de teléfono",
+    "password": "Clave"
   },
   "home": {
     "title": "Recursos de vivienda con descuentos de primavera",
