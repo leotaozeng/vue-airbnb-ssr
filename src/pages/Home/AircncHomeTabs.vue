@@ -172,7 +172,7 @@ function handleClickCity(tab: TabsPaneContext) {
 
     &.is-active {
       color: #ffffff;
-      background: #00848a;
+      background: #055256;
       box-shadow: 0px 7px 14px rgb(0 132 138 / 15%);
       border: solid 0.5px #00848a;
     }
