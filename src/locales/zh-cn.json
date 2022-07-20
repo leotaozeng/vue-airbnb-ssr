@@ -35,7 +35,10 @@
       "resources": "资源中心",
       "help": "帮助",
       "neighbors": "邻里支持"
-    }
+    },
+    "privacy": "隐私政策",
+    "terms": "条款",
+    "sitemap": "网站地图"
   },
   "auth": {
     "signinBtn": "进入爱此迎",

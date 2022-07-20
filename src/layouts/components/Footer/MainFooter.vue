@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import IconAirbnb from '@/assets/images/airbnb.svg';
+
 const { t } = useI18n();
 const footerMenu = reactive([
   {
@@ -120,32 +122,35 @@ const footerMenu = reactive([
       <!-- Copyright -->
       <div class="mt-4 pt-4 border-t border-neutral-150">
         <div
-          class="copyright text-sm text-gray-muted text-center font-semibold">
-          <p class="inline-block">© 2022 Aircnc, Inc. All rights reserved.</p>
-          <p class="inline-block ml-2">
-            <a
-              href="https://www.airbnb.cn/terms"
-              target="_blank"
-              class="no-underline hover:underline">
-              条款
-            </a>
-            <span> · </span>
-            <a
-              href="https://www.airbnb.cn/terms/privacy_policy"
-              target="_blank"
-              class="no-underline hover:underline">
-              隐私政策
-            </a>
-            <span> · </span>
-            <a
-              href="https://www.airbnb.cn/sitemaps/v2"
-              target="_blank"
-              class="no-underline hover:underline">
-              网站地图
-            </a>
-            <span> · </span>
-            <span>全国旅游投诉渠道 12301</span>
-          </p>
+          class="copyright text-sm text-gray-muted text-center font-semibold flex justify-center items-center">
+          <div class="mr-1.5">
+            <icon-airbnb />
+          </div>
+          <div>
+            <p class="inline-block">© 2022 Airbnb, Inc. All rights reserved.</p>
+            <p class="inline-block ml-2">
+              <a
+                href="https://www.airbnb.cn/terms"
+                target="_blank"
+                class="no-underline hover:underline">
+                {{ t('footer.terms') }}
+              </a>
+              <span> · </span>
+              <a
+                href="https://www.airbnb.cn/terms/privacy_policy"
+                target="_blank"
+                class="no-underline hover:underline">
+                {{ t('footer.privacy') }}
+              </a>
+              <span> · </span>
+              <a
+                href="https://www.airbnb.cn/sitemaps/v2"
+                target="_blank"
+                class="no-underline hover:underline">
+                {{ t('footer.sitemap') }}
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </div>

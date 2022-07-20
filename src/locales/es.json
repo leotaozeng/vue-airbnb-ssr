@@ -35,7 +35,10 @@
       "resources": "Recursos para anfitriones",
       "help": "Centro de Ayuda",
       "neighbors": "¿Problemas en tu colonia?"
-    }
+    },
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "sitemap": "Mapa del sitio"
   },
   "auth": {
     "signinBtn": "Sign in",

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { userSignOutAPI } from '@/api/auth';
 import avatarUrl from '@/assets/images/avatar.jpeg';
-import logoUrl from '@/assets/images/logo.png';
+import logoUrl from '@/assets/images/logo-text.png';
 import { useAuthStore } from '@/stores/auth';
 import { useLocaleStore } from '@/stores/locale';
 import { useReservationsStore } from '@/stores/reservations';
