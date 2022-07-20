@@ -61,7 +61,9 @@
       "bj": "北京",
       "sz": "苏州",
       "gz": "广州"
-    }
+    },
+    "prev": "Prev",
+    "next": "Next"
   },
   "rooms": {
     "share": {

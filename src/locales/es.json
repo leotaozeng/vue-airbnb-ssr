@@ -50,8 +50,8 @@
     "password": "Password"
   },
   "home": {
-    "title": "Spring Discounts Housing Resource",
-    "subtitle": "Quality housing resource, Under 5 fold",
+    "title": "Recursos de vivienda con descuentos de primavera",
+    "subtitle": "Recurso de vivienda de calidad, menos de 5 veces",
     "city": {
       "hz": "Hangzhou",
       "sh": "Shanghai",
@@ -61,7 +61,9 @@
       "bj": "Beijing",
       "sz": "Suzhou",
       "gz": "Guangzhou"
-    }
+    },
+    "prev": "Prev",
+    "next": "Next"
   },
   "rooms": {
     "share": {
