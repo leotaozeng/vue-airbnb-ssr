@@ -18,8 +18,6 @@ const pathSrc = path.resolve(__dirname, 'src');
 export default ({ command }) => {
   const config: UserConfig = {
     server: {
-      host: 'localhost',
-      port: 9000,
       proxy: {
         '/proxy': {
           target: 'http://110.42.184.111',
