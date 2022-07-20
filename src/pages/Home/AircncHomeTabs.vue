@@ -67,9 +67,10 @@ function handleClickCity(tab: TabsPaneContext) {
                 :to="{ name: 'RoomDetails', params: { id: item.id } }"
                 class="rounded overflow-hidden">
                 <el-image
+                  fit="cover"
                   class="picture rounded"
                   :src="item.pictureUrl"
-                  fit="cover" />
+                  :alt="item.title" />
               </router-link>
             </div>
 

@@ -105,7 +105,9 @@ async function handleSelect(key: string, keyPath: string[]) {
             <el-image :src="logoUrl" alt="logo" class="logo-container z-10">
               <template #error>
                 <div class="image-slot">
-                  <el-icon><i-ep-picture /></el-icon>
+                  <el-icon>
+                    <i-ep-picture />
+                  </el-icon>
                 </div>
               </template>
             </el-image>
@@ -165,14 +167,12 @@ async function handleSelect(key: string, keyPath: string[]) {
         popper-class="menu-popup-container"
         :popper-offset="-15">
         <template #title>
-          <el-avatar
-            :size="28"
+          <img
             :src="avatarUrl"
+            class="avatar rounded-full"
             alt="avatar"
-            class="avatar-container">
-            <img
-              src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
-          </el-avatar>
+            width="28"
+            height="28" />
         </template>
 
         <el-menu-item index="signout"> {{ t('auth.signoutBtn') }}</el-menu-item>
@@ -262,8 +262,8 @@ async function handleSelect(key: string, keyPath: string[]) {
       }
     }
 
-    .avatar-container {
-      box-shadow: rgb(235 235 235) 0px 0px 0px 2px !important;
+    .avatar {
+      box-shadow: rgb(235 235 235) 0px 0px 0px 2px;
     }
   }
 }

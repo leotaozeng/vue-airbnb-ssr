@@ -16,6 +16,7 @@ function handleCurrentChange(val: number) {
     background
     class="justify-center"
     layout="prev, pager, next"
+    role="navigation"
     :currentPage="roomsStore.currentPage"
     :page-size="roomsStore.pageSize"
     :total="roomsStore.total"
