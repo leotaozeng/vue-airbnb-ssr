@@ -15,7 +15,6 @@
     "commit": "cz"
   },
   "dependencies": {
-    "@nuxt/devalue": "^2.0.0",
     "@vueuse/core": "^8.9.4",
     "@vueuse/head": "^0.7.6",
     "axios": "^0.27.2",
