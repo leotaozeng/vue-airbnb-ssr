@@ -161,7 +161,7 @@ async function handleSelect(key: string, keyPath: string[]) {
 
       <!-- Avatar -->
       <el-sub-menu
-        v-else
+        v-if="authStore.loggedIn === 1"
         index="avatar"
         class="submenu"
         popper-class="menu-popup-container"
