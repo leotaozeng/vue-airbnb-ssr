@@ -4,19 +4,15 @@ const localeStore = useLocaleStore();
 </script>
 
 <template>
-  <div>
-    <el-config-provider :locale="localeStore.locale">
-      <el-container direction="vertical">
-        <main-header />
+  <el-config-provider :locale="localeStore.locale">
+    <el-container direction="vertical" class="min-h-full">
+      <main-header />
 
-        <el-main class="p-0">
-          <router-view />
-        </el-main>
+      <el-main class="flex p-0">
+        <router-view />
+      </el-main>
 
-        <main-footer />
-      </el-container>
-    </el-config-provider>
-  </div>
+      <main-footer />
+    </el-container>
+  </el-config-provider>
 </template>
-
-<style style="scss" scoped></style>

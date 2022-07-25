@@ -193,7 +193,7 @@ useHead({
 </script>
 
 <template>
-  <div v-if="roomsStore.roomDetails">
+  <div v-if="roomsStore.roomDetails" class="flex-1">
     <!-- Carousel -->
     <div v-if="roomsStore.roomDetails.imgs.length > 0" class="slide-container">
       <el-carousel
@@ -211,7 +211,7 @@ useHead({
     </div>
 
     <!-- Details -->
-    <div class="details mb-80 flex">
+    <div class="details mb-56 flex">
       <!-- Room Details -->
       <div class="room-details">
         <section
