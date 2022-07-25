@@ -115,7 +115,7 @@ async function handleSelect(key: string, keyPath: string[]) {
         </router-link>
       </el-menu-item>
 
-      <div class="flex-grow"></div>
+      <div class="grow"></div>
 
       <!-- Reservation Center -->
       <el-menu-item index="reservationCenter" class="menu-item" ref="buttonRef">
@@ -221,17 +221,14 @@ async function handleSelect(key: string, keyPath: string[]) {
 
     .menu-item {
       padding: 0 12px;
-
-      &:hover,
-      &:focus {
-        background-color: transparent;
-      }
+      background-color: transparent;
+      border-bottom-color: transparent;
 
       &:not(.logo):hover {
         border-bottom: 2px solid white;
       }
 
-      &.logo.is-active {
+      &.logo {
         border: none;
       }
     }
@@ -245,19 +242,20 @@ async function handleSelect(key: string, keyPath: string[]) {
 
     .logo-container {
       width: 162px;
+      height: 36px;
 
       .image-slot {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
-        height: 80px;
+        height: 100%;
         background: var(--el-fill-color-light);
         color: var(--el-text-color-secondary);
-        font-size: 30px;
 
         .el-icon {
-          font-size: 30px;
+          margin: 0;
+          font-size: 20px;
         }
       }
     }
