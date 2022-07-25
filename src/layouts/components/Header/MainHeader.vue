@@ -104,7 +104,7 @@ async function handleSelect(key: string, keyPath: string[]) {
           <h1 class="m-0 text-base">
             <el-image :src="logoUrl" alt="logo" class="logo-container z-10">
               <template #placeholder>
-                <div class="image-slot placeholder">Aircnc 爱彼迎</div>
+                <div class="image-slot placeholder">Aircnc 爱此迎</div>
               </template>
               <template #error>
                 <div class="image-slot error">
