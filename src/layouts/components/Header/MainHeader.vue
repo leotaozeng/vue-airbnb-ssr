@@ -103,8 +103,11 @@ async function handleSelect(key: string, keyPath: string[]) {
         <router-link :to="{ name: 'Home' }">
           <h1 class="m-0 text-base">
             <el-image :src="logoUrl" alt="logo" class="logo-container z-10">
+              <template #placeholder>
+                <div class="image-slot placeholder">Aircnc 爱彼迎</div>
+              </template>
               <template #error>
-                <div class="image-slot">
+                <div class="image-slot error">
                   <el-icon>
                     <i-ep-picture />
                   </el-icon>
@@ -224,6 +227,11 @@ async function handleSelect(key: string, keyPath: string[]) {
       background-color: transparent;
       border-bottom-color: transparent;
 
+      &:hover,
+      &:focus {
+        background-color: transparent;
+      }
+
       &:not(.logo):hover {
         border-bottom: 2px solid white;
       }
@@ -250,8 +258,11 @@ async function handleSelect(key: string, keyPath: string[]) {
         align-items: center;
         width: 100%;
         height: 100%;
-        background: var(--el-fill-color-light);
-        color: var(--el-text-color-secondary);
+
+        &.error {
+          background: var(--el-fill-color-light);
+          color: var(--el-text-color-secondary);
+        }
 
         .el-icon {
           margin: 0;
